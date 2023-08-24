@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+	 <DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="PRESENTACION\VentanaInicio.resx~RF1b6996e.TMP" />
+    <None Remove="PRESENTACION\VentanaInicio.resx~RF1ba7f8a.TMP" />
+    <None Remove="PRESENTACION\VentanaInicio.resx~RF1d584d6.TMP" />
+    <None Remove="PRESENTACION\VentanaInicio.resx~RFb0644f.TMP" />
+    <None Remove="PRESENTACION\VentanaInicio.resx~RFc8d16c.TMP" />
+    <None Remove="PRESENTACION\VerRemates.resx~RF3396573.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\NEGOCIO\NEGOCIO\NEGOCIO.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="PRESENTACION\MantenimientoUsuarios.cs" />
+    <Compile Update="PRESENTACION\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PRESENTACION\InicioSesion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PRESENTACION\RegistroUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

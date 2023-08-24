@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="PRESENTACION\AñadirFotoAlLote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PRESENTACION\HistorialVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PRESENTACION\MantenimientoEmpleados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PRESENTACION\Soporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PRESENTACION\VerLotesProximoRemate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PRESENTACION\PerfilUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PRESENTACION\GestionDeLotesYRemates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PRESENTACION\MantenimientoUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PRESENTACION\LotesAsignadosAlRemate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PRESENTACION\VerRemates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

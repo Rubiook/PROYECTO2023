@@ -1,0 +1,211 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PRESENTACION\\PRESENTACION\\PRESENTACION.csproj": {}
+  },
+  "projects": {
+    "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\NEGOCIO\\NEGOCIO\\NEGOCIO.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\NEGOCIO\\NEGOCIO\\NEGOCIO.csproj",
+        "projectName": "NEGOCIO",
+        "projectPath": "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\NEGOCIO\\NEGOCIO\\NEGOCIO.csproj",
+        "packagesPath": "C:\\Users\\francisco\\.nuget\\packages\\",
+        "outputPath": "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\NEGOCIO\\NEGOCIO\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\francisco\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PERSISTENCIA\\PERSISTENCIA\\PERSISTENCIA.csproj": {
+                "projectPath": "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PERSISTENCIA\\PERSISTENCIA\\PERSISTENCIA.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PERSISTENCIA\\PERSISTENCIA\\PERSISTENCIA.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PERSISTENCIA\\PERSISTENCIA\\PERSISTENCIA.csproj",
+        "projectName": "PERSISTENCIA",
+        "projectPath": "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PERSISTENCIA\\PERSISTENCIA\\PERSISTENCIA.csproj",
+        "packagesPath": "C:\\Users\\francisco\\.nuget\\packages\\",
+        "outputPath": "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PERSISTENCIA\\PERSISTENCIA\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\francisco\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[2.2.7, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PRESENTACION\\PRESENTACION\\PRESENTACION.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PRESENTACION\\PRESENTACION\\PRESENTACION.csproj",
+        "projectName": "PRESENTACION",
+        "projectPath": "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PRESENTACION\\PRESENTACION\\PRESENTACION.csproj",
+        "packagesPath": "C:\\Users\\francisco\\.nuget\\packages\\",
+        "outputPath": "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PRESENTACION\\PRESENTACION\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\francisco\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {
+              "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\NEGOCIO\\NEGOCIO\\NEGOCIO.csproj": {
+                "projectPath": "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\NEGOCIO\\NEGOCIO\\NEGOCIO.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
