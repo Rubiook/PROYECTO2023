@@ -34,6 +34,7 @@ namespace PRESENTACION
             this.Login = loginInstance; // Asignar la instancia de Login al formulario Ventana1
             MostrarRolUsuario(); // Llama al método para mostrar el rol 
             MostrarNombreUsuario();
+            MostrarFechaActual();
             negocioLotesRemates = new NegocioLotesRemates();
 
 
@@ -50,10 +51,10 @@ namespace PRESENTACION
         //FONDO VENTANA --------------------------------------------------------------
         private void Ventana1_Load(object sender, EventArgs e)
         {
-            ActualizarProximoRemateEnLabel();
+            //ActualizarProximoRemateEnLabel();
+            ActualizarProximoRemateEnBoton();
 
-
-            DateTime fechaLimite = DateTime.Today; //.AddDays(-30); // Por ejemplo, consideramos remates antiguos de hace 30 días o más
+            DateTime fechaLimite = DateTime.Today.AddDays(-1); // Por ejemplo, consideramos remates antiguos de hace 30 días o más
             negocioLotesRemates.DesasignarLotesNoVendidosEnRematesAntiguos(fechaLimite);
 
 
@@ -61,41 +62,25 @@ namespace PRESENTACION
             if (rolUsuarioActual == "VENDEDOR" || rolUsuarioActual == "COMPRADOR" || rolUsuarioActual == "REMATADOR")
             {
                 button5.Visible = false;
-                button10.Visible = false;
                 button2.Visible = false;
                 button7.Visible = false;
+                button12.Visible = false;
+
             }
-
-        }
-
-
-
-
-        private void ActualizarProximoRemateEnLabel()
-        {
-            List<Remate> remates = negocioLotesRemates.ObtenerRematesOrdenadosPorFecha();
-            DateTime fechaActual = DateTime.Now;
-
-            foreach (Remate remate in remates)
+            if (rolUsuarioActual == "VENDEDOR" || rolUsuarioActual == "COMPRADOR" || rolUsuarioActual == "REMATADOR" || rolUsuarioActual == "OPERADOR")
             {
-                if (remate.Fecha > fechaActual)
-                {
-                    Console.WriteLine($"Próximo remate encontrado: {remate.Fecha.ToString("dd/MM/yyyy")}");
-
-                    lblRemate.Text = $"Próximo remate: {remate.Fecha.ToString("dd/MM/yyyy")}";
-
-                    // Llamada a la función para cargar los lotes del remate encontrado
-                    //CargarLotesUltimoRemate(remate.Id); // Pasar el ID del remate
-                    return; // Salir del bucle una vez que se encuentra el próximo remate
-                }
+                button10.Visible = false;
             }
 
-            Console.WriteLine("No hay remates programados en el futuro.");
-            lblRemate.Text = "No hay remates programados.";
         }
 
 
 
+
+        private void MostrarFechaActual()
+        {
+            lblFechaActual.Text = $"Fecha de Hoy: {DateTime.Now.ToString("dd/MM/yyyy")}";
+        }
 
 
         //BTN EXIT ------------------------------------------------
@@ -136,7 +121,7 @@ namespace PRESENTACION
                     ventanaRematesYLotes.ShowDialog(); //MODAL
                     this.Show();
                     MostrarRolUsuario();
-                    ActualizarProximoRemateEnLabel();
+                    //  ActualizarProximoRemateEnLabel();
                     MostrarNombreUsuario();
 
                 }
@@ -203,7 +188,7 @@ namespace PRESENTACION
                     cuartoForm.ShowDialog(); //MODAL
                     this.Show();
                     MostrarRolUsuario();
-                    ActualizarProximoRemateEnLabel();
+                    //ActualizarProximoRemateEnLabel();
                     MostrarNombreUsuario();
                 }
                 else
@@ -294,7 +279,7 @@ namespace PRESENTACION
                     cuartoForm.ShowDialog(); //MODAL
 
                     MostrarRolUsuario();
-                    ActualizarProximoRemateEnLabel();
+                    //ActualizarProximoRemateEnLabel();
                     MostrarNombreUsuario();
                 }
                 else
@@ -346,7 +331,7 @@ namespace PRESENTACION
                     ventanaRematesYLotes.ShowDialog(); //MODAL
                     //this.Show();
                     MostrarRolUsuario();
-                    ActualizarProximoRemateEnLabel();
+                    //ActualizarProximoRemateEnLabel();
                     MostrarNombreUsuario();
 
                 }
@@ -576,6 +561,8 @@ namespace PRESENTACION
             soporte.ShowDialog();
         }
 
+
+        //BOTON MANTENIMIENTO EMPLEADOS ----------------------------------------------------------------------
         private void button10_Click(object sender, EventArgs e)
         {
 
@@ -583,7 +570,7 @@ namespace PRESENTACION
             {
                 string rolUsuarioActual = Login.ObtenerRolUsuarioActual();
 
-                if (rolUsuarioActual == "ADMINISTRADOR" || rolUsuarioActual == "OPERADOR")
+                if (rolUsuarioActual == "ADMINISTRADOR")
                 {
                     MantenimientoEmpleados mantenimientoDeEmpleados = new MantenimientoEmpleados();
                     mantenimientoDeEmpleados.ShowDialog();
@@ -654,13 +641,98 @@ namespace PRESENTACION
 
         private void button7_MouseLeave(object sender, EventArgs e)
         {
+
             // Restaurar los colores al salir el mouse del botón
             button7.BackColor = Color.Transparent;
             button7.ForeColor = Color.White;
             button7.FlatAppearance.BorderColor = DefaultForeColor; // Restaurar color del borde
         }
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+            DateTime fechaHoy = DateTime.Today;
+            List<Remate> remates = negocioLotesRemates.ObtenerRematesOrdenadosPorFecha();
 
+            Remate remateHoy = remates.FirstOrDefault(remate => remate.Fecha.Date == fechaHoy);
+
+            if (remateHoy != null)
+            {
+                VerLotesDeHoy ventanaLotesDeHoy = new VerLotesDeHoy(remateHoy.Id);
+                ventanaLotesDeHoy.LoginInstance = Login;
+                ventanaLotesDeHoy.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("No hay remate programado para hoy.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+        }
+
+        private void button11_MouseEnter(object sender, EventArgs e)
+        {
+            // Cambiar los colores al pasar el mouse sobre el botón
+            button11.BackColor = Color.FromArgb(150, 200, 255); // Fondo azul claro con opacidad
+            button11.ForeColor = Color.FromArgb(0, 100, 255);
+            button11.FlatAppearance.BorderColor = Color.FromArgb(0, 20, 255); // Cambiar color del borde
+
+        }
+
+        private void button11_MouseLeave(object sender, EventArgs e)
+        {
+            // Restaurar los colores al salir el mouse del botón
+            button11.BackColor = Color.Transparent;
+            button11.ForeColor = Color.White;
+            button11.FlatAppearance.BorderColor = DefaultForeColor; // Restaurar color del borde
+        }
+
+
+        private void ActualizarProximoRemateEnBoton()
+        {
+            List<Remate> remates = negocioLotesRemates.ObtenerRematesOrdenadosPorFecha();
+            DateTime fechaActual = DateTime.Now;
+
+            foreach (Remate remate in remates)
+            {
+                if (remate.Fecha > fechaActual)
+                {
+                    Console.WriteLine($"Próximo remate encontrado: {remate.Fecha.ToString("dd/MM/yyyy")}");
+
+                    button8.Text = $"Lotes del Próximo Remate: {remate.Fecha.ToString("dd/MM/yyyy")}";
+
+                    // Llamada a la función para cargar los lotes del remate encontrado
+                    //CargarLotesUltimoRemate(remate.Id); // Pasar el ID del remate
+                    MostrarFechaActual(); // Mostrar la fecha actual en otro Label
+                    return; // Salir del bucle una vez que se encuentra el próximo remate
+                }
+            }
+
+            Console.WriteLine("No hay remates programados en el futuro.");
+            button8.Text = "No hay remates programados.";
+            MostrarFechaActual(); // Mostrar la fecha actual incluso si no hay remates programados
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            Preeventas preeventas = new Preeventas();
+            preeventas.ShowDialog();
+        }
+
+        private void button12_MouseEnter(object sender, EventArgs e)
+        {
+            // Cambiar los colores al pasar el mouse sobre el botón
+            button12.BackColor = Color.FromArgb(169, 247, 154); // Rojo claro
+            button12.ForeColor = Color.FromArgb(48, 155, 27);
+            button12.FlatAppearance.BorderColor = Color.FromArgb(55, 238, 18); // Cambiar color del borde
+
+        }
+
+        private void button12_MouseLeave(object sender, EventArgs e)
+        {
+            // Restaurar los colores al salir el mouse del botón
+            button12.BackColor = Color.Transparent;
+            button12.ForeColor = Color.White;
+            button12.FlatAppearance.BorderColor = DefaultForeColor; // Restaurar color del borde
+        }
 
 
 

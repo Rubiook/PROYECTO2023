@@ -58,7 +58,7 @@ namespace PRESENTACION.PRESENTACION
         private void InitializeDataGridView()
         {
             //GRID REMATES----------------------------------------------------------
-            dataGridView1.Columns.Add("id", " ID ");
+            dataGridView1.Columns.Add("id", " N° REMATE ");
             dataGridView1.Columns.Add("fecha", " FECHA ");
             dataGridView1.Columns.Add("hora_inicio", "HORA INICIO");
             dataGridView1.Columns.Add("hora_fin", "HORA FIN");
@@ -72,7 +72,7 @@ namespace PRESENTACION.PRESENTACION
             btnVerLotes.UseColumnTextForButtonValue = true;
             dataGridView1.Columns.Add(btnVerLotes);
 
-            dataGridView1.Columns[0].Width = 50;
+            dataGridView1.Columns[0].Width = 110;
             dataGridView1.Columns[2].Width = 110;
             dataGridView1.Columns[3].Width = 100;
             dataGridView1.DefaultCellStyle.Font = new Font("Arial", 10);
@@ -81,7 +81,7 @@ namespace PRESENTACION.PRESENTACION
 
 
             //GRID LOTES---------------------------------------------------------------
-            dataGridView2.Columns.Add("id", "ID");
+            dataGridView2.Columns.Add("id", "N° LOTE");
             dataGridView2.Columns.Add("proveedor_lote", "PROVEEDOR");
             dataGridView2.Columns.Add("precio_base", " $RESERVA");
             dataGridView2.Columns.Add("tipo_de_lote", "TIPO DE LOTE");
@@ -97,6 +97,8 @@ namespace PRESENTACION.PRESENTACION
             fotoColumn.ImageLayout = DataGridViewImageCellLayout.Zoom; // Ajusta la imagen al tamaño de la celda
             dataGridView2.Columns.Add(fotoColumn);
 
+
+
             DataGridViewButtonColumn btnVerRemate = new DataGridViewButtonColumn(); // Agrega esta línea
             btnVerRemate.Name = "VerRemate"; // Corregido aquí
             btnVerRemate.HeaderText = "REMATE"; // Corregido aquí
@@ -104,7 +106,7 @@ namespace PRESENTACION.PRESENTACION
             btnVerRemate.UseColumnTextForButtonValue = true;
             dataGridView2.Columns.Add(btnVerRemate); // Agrega la columna de botón "Ver Remate"a
 
-            dataGridView2.Columns[0].Width = 50;
+            dataGridView2.Columns[0].Width = 80;
             dataGridView2.Columns[1].Width = 120;
             dataGridView2.Columns[2].Width = 100;
             dataGridView2.Columns[3].Width = 130;
@@ -361,7 +363,7 @@ namespace PRESENTACION.PRESENTACION
                 }
                 else if (lotesAsignados >= 10) // Más de 10 lotes
                 {
-                    e.CellStyle.BackColor = Color.FromArgb(210, 9, 9); // Rojo fuerte
+                    e.CellStyle.BackColor = Color.FromArgb(188, 15, 15); // Rojo fuerte
                     e.CellStyle.ForeColor = Color.White;
                     DataGridViewButtonCell cell = (DataGridViewButtonCell)dataGridView1.Rows[e.RowIndex].Cells["VerLotes"];
                     cell.FlatStyle = FlatStyle.Popup; // 3D style
@@ -495,8 +497,8 @@ namespace PRESENTACION.PRESENTACION
             ActualizarColoresGrillaLotes();
 
             //DESASIGANR LOS LOTES ANTIGUOS QUE NO SE VENDIERON ---------------------------------------------------------------------------
-            DateTime fechaLimite = DateTime.Today; //.AddDays(-30); // Por ejemplo, consideramos remates antiguos de hace 30 días o más
-            negocioLotesRemates.DesasignarLotesNoVendidosEnRematesAntiguos(fechaLimite);
+            // DateTime fechaLimite = DateTime.Today.AddDays(-2); // Obtiene la fecha de ayer
+            //negocioLotesRemates.DesasignarLotesNoVendidosEnRematesAntiguos(fechaLimite);
 
         }
 
@@ -627,15 +629,25 @@ namespace PRESENTACION.PRESENTACION
             if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView1.Columns["VerLotes"].Index)
             {
                 int remateId = ObtenerIdRemateSeleccionado(); // Obten el ID del remate seleccionado
-                DateTime fechaRemate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells["fecha"].Value);
-                string proveedor = ObtenerProveedorDelLoteSeleccionado(); // Obten el proveedor del lote seleccionado
+                int lotesAsignados = negocioLotesRemates.ObtenerCantidadLotesAsignados(remateId);
 
-                GestionDeLotesYRemates gestionRematesYLotes = new GestionDeLotesYRemates(); // Debes crear una instancia aquí
-                LotesAsignadosAlRemate ventanaLotes = new LotesAsignadosAlRemate(remateId, fechaRemate, negocioLotesRemates, dataGridView2, gestionRematesYLotes, proveedor);
-                ventanaLotes.ShowDialog();
-                refresh();
+                if (lotesAsignados > 0)
+                {
+                    DateTime fechaRemate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells["fecha"].Value);
+                    string proveedor = ObtenerProveedorDelLoteSeleccionado(); // Obten el proveedor del lote seleccionado
+
+                    GestionDeLotesYRemates gestionRematesYLotes = new GestionDeLotesYRemates(); // Debes crear una instancia aquí
+                    LotesAsignadosAlRemate ventanaLotes = new LotesAsignadosAlRemate(remateId, fechaRemate, negocioLotesRemates, dataGridView2, gestionRematesYLotes, proveedor);
+                    ventanaLotes.ShowDialog();
+                    refresh();
+                }
+                else
+                {
+                    MessageBox.Show("El remate no tiene lotes asignados.", "Sin lotes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
+
 
 
 
@@ -730,7 +742,7 @@ namespace PRESENTACION.PRESENTACION
 
             int selectedLoteId = Convert.ToInt32(selectedLoteGridRow.Cells["id"].Value);
             bool asignado = negocioLotesRemates.VerificarLoteAsignado(selectedLoteId);
-           
+
 
             DialogResult result = MessageBox.Show("¿Desea eliminar este lote?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
@@ -940,6 +952,14 @@ namespace PRESENTACION.PRESENTACION
             // Obtener el tipo de remate del remate seleccionado
             string tipoRemateSeleccionado = negocioLotesRemates.ObtenerTipoRemate(remateId);
 
+
+            int lotesAsignados = negocioLotesRemates.ObtenerCantidadLotesAsignados(remateId);
+            if (lotesAsignados >= 10)
+            {
+                MessageBox.Show("El remate ya tiene cargados 10 lotes. No se puede cargar más lotes a este remate.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             // Obtener el tipo de lote del lote seleccionado (ya obtenido en el evento de selección de la grilla de lotes)
             string tipoLoteSeleccionado = ObtenerTipoLoteSeleccionado();
             if (negocioLotesRemates.LoteYaAsignado(loteId))
@@ -967,12 +987,7 @@ namespace PRESENTACION.PRESENTACION
 
 
 
-            int lotesAsignados = negocioLotesRemates.ObtenerCantidadLotesAsignados(remateId);
-            if (lotesAsignados >= 10)
-            {
-                MessageBox.Show("El remate ya tiene cargados 10 lotes. No se puede cargar más lotes a este remate.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+
         }
 
 
@@ -1021,17 +1036,21 @@ namespace PRESENTACION.PRESENTACION
 
         private void textBoxProveedorLote_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            // Verificar si el carácter es una letra, un número o una tecla de control
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
-                e.Handled = true; // Cancelar la entrada de la tecla si no es una letra
+                // Cancelar la pulsación del carácter
+                e.Handled = true;
             }
         }
 
         private void textBoxRematador_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            // Verificar si el carácter es una letra, un número o una tecla de control
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
-                e.Handled = true; // Cancelar la entrada de la tecla si no es una letra
+                // Cancelar la pulsación del carácter
+                e.Handled = true;
             }
         }
 

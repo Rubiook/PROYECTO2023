@@ -36,13 +36,8 @@
             btnDesasignarLote = new Button();
             lblRemate = new Label();
             button1 = new Button();
-            buttonVenderLote = new Button();
-            textBoxComprador = new TextBox();
-            labelComprador = new Label();
-            buttonQuitarLoteDeVendidos = new Button();
-            textBoxPrecioDeVenta = new TextBox();
-            labelPrecioDeVenta = new Label();
             toolTip1 = new ToolTip(components);
+            button5 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewLotesAsignados).BeginInit();
             SuspendLayout();
             // 
@@ -73,7 +68,7 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridViewLotesAsignados.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridViewLotesAsignados.Location = new Point(110, 155);
+            dataGridViewLotesAsignados.Location = new Point(108, 141);
             dataGridViewLotesAsignados.MultiSelect = false;
             dataGridViewLotesAsignados.Name = "dataGridViewLotesAsignados";
             dataGridViewLotesAsignados.ReadOnly = true;
@@ -98,9 +93,9 @@
             btnDesasignarLote.FlatStyle = FlatStyle.Flat;
             btnDesasignarLote.Font = new Font("Segoe UI Black", 20F, FontStyle.Regular, GraphicsUnit.Point);
             btnDesasignarLote.ForeColor = Color.White;
-            btnDesasignarLote.Location = new Point(144, 543);
+            btnDesasignarLote.Location = new Point(550, 525);
             btnDesasignarLote.Name = "btnDesasignarLote";
-            btnDesasignarLote.Size = new Size(82, 76);
+            btnDesasignarLote.Size = new Size(104, 95);
             btnDesasignarLote.TabIndex = 53;
             toolTip1.SetToolTip(btnDesasignarLote, "Desasignar Lote");
             btnDesasignarLote.UseVisualStyleBackColor = false;
@@ -113,7 +108,7 @@
             lblRemate.BorderStyle = BorderStyle.Fixed3D;
             lblRemate.Font = new Font("Segoe UI", 30F, FontStyle.Bold, GraphicsUnit.Point);
             lblRemate.ForeColor = Color.White;
-            lblRemate.Location = new Point(244, 61);
+            lblRemate.Location = new Point(244, 41);
             lblRemate.Name = "lblRemate";
             lblRemate.Size = new Size(2, 56);
             lblRemate.TabIndex = 54;
@@ -129,9 +124,9 @@
             button1.FlatStyle = FlatStyle.Popup;
             button1.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(1060, 590);
+            button1.Location = new Point(1065, 590);
             button1.Name = "button1";
-            button1.Size = new Size(130, 50);
+            button1.Size = new Size(125, 50);
             button1.TabIndex = 55;
             button1.Text = "Regresar";
             button1.UseVisualStyleBackColor = false;
@@ -139,98 +134,26 @@
             button1.MouseEnter += button1_MouseEnter;
             button1.MouseLeave += button1_MouseLeave;
             // 
-            // buttonVenderLote
+            // button5
             // 
-            buttonVenderLote.BackColor = Color.Transparent;
-            buttonVenderLote.BackgroundImage = (Image)resources.GetObject("buttonVenderLote.BackgroundImage");
-            buttonVenderLote.BackgroundImageLayout = ImageLayout.Zoom;
-            buttonVenderLote.Cursor = Cursors.Hand;
-            buttonVenderLote.FlatAppearance.BorderColor = Color.FromArgb(0, 5, 25, 255);
-            buttonVenderLote.FlatAppearance.BorderSize = 0;
-            buttonVenderLote.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            buttonVenderLote.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            buttonVenderLote.FlatStyle = FlatStyle.Flat;
-            buttonVenderLote.Font = new Font("Segoe UI Black", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonVenderLote.ForeColor = Color.White;
-            buttonVenderLote.Location = new Point(788, 542);
-            buttonVenderLote.Name = "buttonVenderLote";
-            buttonVenderLote.Size = new Size(81, 80);
-            buttonVenderLote.TabIndex = 56;
-            buttonVenderLote.TextImageRelation = TextImageRelation.ImageAboveText;
-            toolTip1.SetToolTip(buttonVenderLote, "Marcar Lote como Vendido");
-            buttonVenderLote.UseVisualStyleBackColor = false;
-            buttonVenderLote.Click += button2_Click_1;
-            // 
-            // textBoxComprador
-            // 
-            textBoxComprador.BackColor = Color.FromArgb(3, 6, 3);
-            textBoxComprador.BorderStyle = BorderStyle.FixedSingle;
-            textBoxComprador.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxComprador.ForeColor = SystemColors.Window;
-            textBoxComprador.Location = new Point(525, 545);
-            textBoxComprador.Name = "textBoxComprador";
-            textBoxComprador.Size = new Size(230, 32);
-            textBoxComprador.TabIndex = 58;
-            // 
-            // labelComprador
-            // 
-            labelComprador.AutoSize = true;
-            labelComprador.BackColor = Color.Transparent;
-            labelComprador.BorderStyle = BorderStyle.Fixed3D;
-            labelComprador.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            labelComprador.ForeColor = Color.White;
-            labelComprador.Location = new Point(373, 545);
-            labelComprador.Name = "labelComprador";
-            labelComprador.Size = new Size(146, 32);
-            labelComprador.TabIndex = 57;
-            labelComprador.Text = "Comprador: ";
-            // 
-            // buttonQuitarLoteDeVendidos
-            // 
-            buttonQuitarLoteDeVendidos.BackColor = Color.Transparent;
-            buttonQuitarLoteDeVendidos.BackgroundImage = (Image)resources.GetObject("buttonQuitarLoteDeVendidos.BackgroundImage");
-            buttonQuitarLoteDeVendidos.BackgroundImageLayout = ImageLayout.Zoom;
-            buttonQuitarLoteDeVendidos.Cursor = Cursors.Hand;
-            buttonQuitarLoteDeVendidos.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0, 0);
-            buttonQuitarLoteDeVendidos.FlatAppearance.BorderSize = 0;
-            buttonQuitarLoteDeVendidos.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 0, 0, 0);
-            buttonQuitarLoteDeVendidos.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 0, 0, 0);
-            buttonQuitarLoteDeVendidos.FlatStyle = FlatStyle.Flat;
-            buttonQuitarLoteDeVendidos.Font = new Font("Segoe UI Black", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonQuitarLoteDeVendidos.ForeColor = Color.White;
-            buttonQuitarLoteDeVendidos.Location = new Point(894, 551);
-            buttonQuitarLoteDeVendidos.Name = "buttonQuitarLoteDeVendidos";
-            buttonQuitarLoteDeVendidos.Size = new Size(65, 68);
-            buttonQuitarLoteDeVendidos.TabIndex = 59;
-            buttonQuitarLoteDeVendidos.TextImageRelation = TextImageRelation.ImageAboveText;
-            toolTip1.SetToolTip(buttonQuitarLoteDeVendidos, "Quitar lote de Vendido");
-            buttonQuitarLoteDeVendidos.UseVisualStyleBackColor = false;
-            buttonQuitarLoteDeVendidos.Click += button3_Click_1;
-            // 
-            // textBoxPrecioDeVenta
-            // 
-            textBoxPrecioDeVenta.BackColor = Color.FromArgb(3, 6, 3);
-            textBoxPrecioDeVenta.BorderStyle = BorderStyle.FixedSingle;
-            textBoxPrecioDeVenta.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            textBoxPrecioDeVenta.ForeColor = SystemColors.Window;
-            textBoxPrecioDeVenta.Location = new Point(567, 585);
-            textBoxPrecioDeVenta.Name = "textBoxPrecioDeVenta";
-            textBoxPrecioDeVenta.Size = new Size(188, 32);
-            textBoxPrecioDeVenta.TabIndex = 61;
-            textBoxPrecioDeVenta.TextChanged += textBoxPrecioDeVenta_TextChanged;
-            // 
-            // labelPrecioDeVenta
-            // 
-            labelPrecioDeVenta.AutoSize = true;
-            labelPrecioDeVenta.BackColor = Color.Transparent;
-            labelPrecioDeVenta.BorderStyle = BorderStyle.Fixed3D;
-            labelPrecioDeVenta.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            labelPrecioDeVenta.ForeColor = Color.White;
-            labelPrecioDeVenta.Location = new Point(373, 583);
-            labelPrecioDeVenta.Name = "labelPrecioDeVenta";
-            labelPrecioDeVenta.Size = new Size(188, 32);
-            labelPrecioDeVenta.TabIndex = 60;
-            labelPrecioDeVenta.Text = "Precio de venta: ";
+            button5.BackColor = Color.Transparent;
+            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
+            button5.BackgroundImageLayout = ImageLayout.Stretch;
+            button5.Cursor = Cursors.Hand;
+            button5.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0, 0);
+            button5.FlatAppearance.BorderSize = 0;
+            button5.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 0, 0, 0);
+            button5.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 0, 0, 0);
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Font = new Font("Segoe UI Black", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            button5.ForeColor = Color.White;
+            button5.Location = new Point(12, 12);
+            button5.Name = "button5";
+            button5.Size = new Size(49, 47);
+            button5.TabIndex = 56;
+            toolTip1.SetToolTip(button5, "Recargar");
+            button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
             // 
             // LotesAsignadosAlRemate
             // 
@@ -239,12 +162,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1202, 652);
-            Controls.Add(textBoxPrecioDeVenta);
-            Controls.Add(labelPrecioDeVenta);
-            Controls.Add(buttonQuitarLoteDeVendidos);
-            Controls.Add(textBoxComprador);
-            Controls.Add(labelComprador);
-            Controls.Add(buttonVenderLote);
+            Controls.Add(button5);
             Controls.Add(button1);
             Controls.Add(lblRemate);
             Controls.Add(btnDesasignarLote);
@@ -266,12 +184,7 @@
         private Button btnDesasignarLote;
         private Label lblRemate;
         private Button button1;
-        private Button buttonVenderLote;
-        private TextBox textBoxComprador;
-        private Label labelComprador;
-        private Button buttonQuitarLoteDeVendidos;
-        private TextBox textBoxPrecioDeVenta;
-        private Label labelPrecioDeVenta;
         private ToolTip toolTip1;
+        private Button button5;
     }
 }

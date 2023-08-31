@@ -31,21 +31,23 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ventana1));
             label5 = new Label();
-            lblRemate = new Label();
             mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
             button1 = new Button();
             panel1 = new Panel();
+            button12 = new Button();
+            button11 = new Button();
             button10 = new Button();
             button7 = new Button();
             label3 = new Label();
-            button3 = new Button();
-            label2 = new Label();
             button9 = new Button();
             button8 = new Button();
+            button3 = new Button();
             button2 = new Button();
+            label2 = new Label();
             label1 = new Label();
             button6 = new Button();
             button5 = new Button();
+            lblFechaActual = new Label();
             buttonSoporte = new Button();
             timerOpenMenu = new System.Windows.Forms.Timer(components);
             timerCloseMenu = new System.Windows.Forms.Timer(components);
@@ -66,19 +68,6 @@
             label5.TabIndex = 17;
             label5.Text = " ";
             label5.Click += label5_Click;
-            // 
-            // lblRemate
-            // 
-            lblRemate.AutoSize = true;
-            lblRemate.BackColor = Color.Transparent;
-            lblRemate.BorderStyle = BorderStyle.Fixed3D;
-            lblRemate.Font = new Font("Segoe UI", 30F, FontStyle.Bold, GraphicsUnit.Point);
-            lblRemate.ForeColor = Color.White;
-            lblRemate.Location = new Point(348, 23);
-            lblRemate.Name = "lblRemate";
-            lblRemate.Size = new Size(2, 56);
-            lblRemate.TabIndex = 55;
-            lblRemate.Click += lblRemate_Click;
             // 
             // mySqlCommand1
             // 
@@ -112,14 +101,16 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(3, 6, 3);
+            panel1.Controls.Add(button12);
+            panel1.Controls.Add(button11);
             panel1.Controls.Add(button10);
             panel1.Controls.Add(button7);
             panel1.Controls.Add(label3);
+            panel1.Controls.Add(button9);
+            panel1.Controls.Add(button8);
             panel1.Controls.Add(button3);
             panel1.Controls.Add(button2);
             panel1.Controls.Add(label2);
-            panel1.Controls.Add(button9);
-            panel1.Controls.Add(button8);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(button6);
             panel1.Controls.Add(button1);
@@ -131,6 +122,46 @@
             panel1.Size = new Size(312, 828);
             panel1.TabIndex = 58;
             // 
+            // button12
+            // 
+            button12.BackColor = Color.Transparent;
+            button12.Cursor = Cursors.Hand;
+            button12.FlatAppearance.BorderColor = Color.GreenYellow;
+            button12.FlatAppearance.MouseDownBackColor = Color.Red;
+            button12.FlatAppearance.MouseOverBackColor = Color.GreenYellow;
+            button12.FlatStyle = FlatStyle.Popup;
+            button12.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button12.ForeColor = Color.White;
+            button12.Location = new Point(49, 613);
+            button12.Name = "button12";
+            button12.Size = new Size(220, 42);
+            button12.TabIndex = 76;
+            button12.Text = "Preeventas";
+            button12.UseVisualStyleBackColor = false;
+            button12.Click += button12_Click;
+            button12.MouseEnter += button12_MouseEnter;
+            button12.MouseLeave += button12_MouseLeave;
+            // 
+            // button11
+            // 
+            button11.BackColor = Color.Transparent;
+            button11.Cursor = Cursors.Hand;
+            button11.FlatAppearance.BorderColor = Color.GreenYellow;
+            button11.FlatAppearance.MouseDownBackColor = Color.Red;
+            button11.FlatAppearance.MouseOverBackColor = Color.GreenYellow;
+            button11.FlatStyle = FlatStyle.Popup;
+            button11.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button11.ForeColor = Color.White;
+            button11.Location = new Point(49, 222);
+            button11.Name = "button11";
+            button11.Size = new Size(220, 67);
+            button11.TabIndex = 75;
+            button11.Text = "Lotes Remate de Hoy";
+            button11.UseVisualStyleBackColor = false;
+            button11.Click += button11_Click;
+            button11.MouseEnter += button11_MouseEnter;
+            button11.MouseLeave += button11_MouseLeave;
+            // 
             // button10
             // 
             button10.BackColor = Color.Transparent;
@@ -141,11 +172,11 @@
             button10.FlatStyle = FlatStyle.Popup;
             button10.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             button10.ForeColor = Color.White;
-            button10.Location = new Point(49, 525);
+            button10.Location = new Point(49, 709);
             button10.Name = "button10";
-            button10.Size = new Size(220, 67);
+            button10.Size = new Size(220, 42);
             button10.TabIndex = 74;
-            button10.Text = "Mantenimineto de Empleados";
+            button10.Text = "Empleados";
             button10.UseVisualStyleBackColor = false;
             button10.Click += button10_Click;
             button10.MouseEnter += button10_MouseEnter;
@@ -161,7 +192,7 @@
             button7.FlatStyle = FlatStyle.Popup;
             button7.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             button7.ForeColor = Color.White;
-            button7.Location = new Point(49, 671);
+            button7.Location = new Point(49, 661);
             button7.Name = "button7";
             button7.Size = new Size(220, 42);
             button7.TabIndex = 73;
@@ -183,6 +214,45 @@
             label3.TabIndex = 72;
             label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // button9
+            // 
+            button9.BackColor = Color.Transparent;
+            button9.Cursor = Cursors.Hand;
+            button9.FlatAppearance.BorderColor = Color.GreenYellow;
+            button9.FlatAppearance.MouseDownBackColor = Color.Red;
+            button9.FlatAppearance.MouseOverBackColor = Color.GreenYellow;
+            button9.FlatStyle = FlatStyle.Popup;
+            button9.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button9.ForeColor = Color.White;
+            button9.Location = new Point(49, 368);
+            button9.Name = "button9";
+            button9.Size = new Size(220, 67);
+            button9.TabIndex = 69;
+            button9.Text = "Próximos Remates";
+            button9.UseVisualStyleBackColor = false;
+            button9.Click += button9_Click;
+            button9.MouseEnter += button9_MouseEnter;
+            button9.MouseLeave += button9_MouseLeave;
+            // 
+            // button8
+            // 
+            button8.BackColor = Color.Transparent;
+            button8.Cursor = Cursors.Hand;
+            button8.FlatAppearance.BorderColor = Color.GreenYellow;
+            button8.FlatAppearance.MouseDownBackColor = Color.Red;
+            button8.FlatAppearance.MouseOverBackColor = Color.GreenYellow;
+            button8.FlatStyle = FlatStyle.Popup;
+            button8.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button8.ForeColor = Color.White;
+            button8.Location = new Point(49, 295);
+            button8.Name = "button8";
+            button8.Size = new Size(220, 67);
+            button8.TabIndex = 68;
+            button8.UseVisualStyleBackColor = false;
+            button8.Click += button8_Click;
+            button8.MouseEnter += button8_MouseEnter;
+            button8.MouseLeave += button8_MouseLeave;
+            // 
             // button3
             // 
             button3.BackColor = Color.Transparent;
@@ -203,6 +273,26 @@
             button3.MouseEnter += button3_MouseEnter_1;
             button3.MouseLeave += button3_MouseLeave_1;
             // 
+            // button2
+            // 
+            button2.BackColor = Color.Transparent;
+            button2.Cursor = Cursors.Hand;
+            button2.FlatAppearance.BorderColor = Color.GreenYellow;
+            button2.FlatAppearance.MouseDownBackColor = Color.Red;
+            button2.FlatAppearance.MouseOverBackColor = Color.GreenYellow;
+            button2.FlatStyle = FlatStyle.Popup;
+            button2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button2.ForeColor = Color.White;
+            button2.Location = new Point(49, 540);
+            button2.Name = "button2";
+            button2.Size = new Size(220, 67);
+            button2.TabIndex = 64;
+            button2.Text = "Gestión de \r\nLotes y Remates";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click_1;
+            button2.MouseEnter += button2_MouseEnter;
+            button2.MouseLeave += button2_MouseLeave;
+            // 
             // label2
             // 
             label2.BackColor = Color.Transparent;
@@ -214,66 +304,6 @@
             label2.Size = new Size(220, 28);
             label2.TabIndex = 71;
             label2.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // button9
-            // 
-            button9.BackColor = Color.Transparent;
-            button9.Cursor = Cursors.Hand;
-            button9.FlatAppearance.BorderColor = Color.GreenYellow;
-            button9.FlatAppearance.MouseDownBackColor = Color.Red;
-            button9.FlatAppearance.MouseOverBackColor = Color.GreenYellow;
-            button9.FlatStyle = FlatStyle.Popup;
-            button9.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            button9.ForeColor = Color.White;
-            button9.Location = new Point(49, 258);
-            button9.Name = "button9";
-            button9.Size = new Size(220, 67);
-            button9.TabIndex = 69;
-            button9.Text = "Ver Próximos Remates";
-            button9.UseVisualStyleBackColor = false;
-            button9.Click += button9_Click;
-            button9.MouseEnter += button9_MouseEnter;
-            button9.MouseLeave += button9_MouseLeave;
-            // 
-            // button8
-            // 
-            button8.BackColor = Color.Transparent;
-            button8.Cursor = Cursors.Hand;
-            button8.FlatAppearance.BorderColor = Color.GreenYellow;
-            button8.FlatAppearance.MouseDownBackColor = Color.Red;
-            button8.FlatAppearance.MouseOverBackColor = Color.GreenYellow;
-            button8.FlatStyle = FlatStyle.Popup;
-            button8.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            button8.ForeColor = Color.White;
-            button8.Location = new Point(49, 331);
-            button8.Name = "button8";
-            button8.Size = new Size(220, 67);
-            button8.TabIndex = 68;
-            button8.Text = "Lotes del próximo remate";
-            button8.UseVisualStyleBackColor = false;
-            button8.Click += button8_Click;
-            button8.MouseEnter += button8_MouseEnter;
-            button8.MouseLeave += button8_MouseLeave;
-            // 
-            // button2
-            // 
-            button2.BackColor = Color.Transparent;
-            button2.Cursor = Cursors.Hand;
-            button2.FlatAppearance.BorderColor = Color.GreenYellow;
-            button2.FlatAppearance.MouseDownBackColor = Color.Red;
-            button2.FlatAppearance.MouseOverBackColor = Color.GreenYellow;
-            button2.FlatStyle = FlatStyle.Popup;
-            button2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(49, 598);
-            button2.Name = "button2";
-            button2.Size = new Size(220, 67);
-            button2.TabIndex = 64;
-            button2.Text = "Gestión de \r\nLotes y Remates";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click_1;
-            button2.MouseEnter += button2_MouseEnter;
-            button2.MouseLeave += button2_MouseLeave;
             // 
             // label1
             // 
@@ -301,7 +331,7 @@
             button6.FlatStyle = FlatStyle.Flat;
             button6.Font = new Font("Segoe UI Black", 20F, FontStyle.Regular, GraphicsUnit.Point);
             button6.ForeColor = Color.White;
-            button6.Location = new Point(122, 37);
+            button6.Location = new Point(124, 37);
             button6.Name = "button6";
             button6.Size = new Size(75, 75);
             button6.TabIndex = 59;
@@ -323,7 +353,7 @@
             button5.FlatStyle = FlatStyle.Popup;
             button5.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             button5.ForeColor = Color.White;
-            button5.Location = new Point(49, 452);
+            button5.Location = new Point(49, 467);
             button5.Name = "button5";
             button5.Size = new Size(220, 67);
             button5.TabIndex = 62;
@@ -332,6 +362,18 @@
             button5.Click += button5_Click;
             button5.MouseEnter += button5_MouseEnter;
             button5.MouseLeave += button5_MouseLeave;
+            // 
+            // lblFechaActual
+            // 
+            lblFechaActual.AutoSize = true;
+            lblFechaActual.BackColor = Color.Transparent;
+            lblFechaActual.BorderStyle = BorderStyle.Fixed3D;
+            lblFechaActual.Font = new Font("Segoe UI", 30F, FontStyle.Bold, GraphicsUnit.Point);
+            lblFechaActual.ForeColor = Color.White;
+            lblFechaActual.Location = new Point(376, 37);
+            lblFechaActual.Name = "lblFechaActual";
+            lblFechaActual.Size = new Size(2, 56);
+            lblFechaActual.TabIndex = 74;
             // 
             // buttonSoporte
             // 
@@ -392,9 +434,9 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1255, 827);
+            Controls.Add(lblFechaActual);
             Controls.Add(button4);
             Controls.Add(panel1);
-            Controls.Add(lblRemate);
             Controls.Add(buttonSoporte);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -409,7 +451,6 @@
 
         #endregion
         private Label label5;
-        private Label lblRemate;
         private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
         private Button button1;
         private Panel panel1;
@@ -429,5 +470,8 @@
         private Button buttonSoporte;
         private Button button10;
         private Button button7;
+        private Button button11;
+        private Label lblFechaActual;
+        private Button button12;
     }
 }

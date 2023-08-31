@@ -84,6 +84,7 @@
             // 
             PictureBox1.BackColor = Color.Transparent;
             PictureBox1.BackgroundImageLayout = ImageLayout.None;
+            PictureBox1.BorderStyle = BorderStyle.Fixed3D;
             PictureBox1.Location = new Point(80, 59);
             PictureBox1.Name = "PictureBox1";
             PictureBox1.Size = new Size(669, 379);

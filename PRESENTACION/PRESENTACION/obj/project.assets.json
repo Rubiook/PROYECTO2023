@@ -149,19 +149,6 @@
           }
         }
       },
-      "MySqlConnector/2.2.7": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/MySqlConnector.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/MySqlConnector.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "Portable.BouncyCastle/1.9.0": {
         "type": "package",
         "compile": {
@@ -560,27 +547,13 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "MySql.Data": "8.1.0",
-          "PERSISTENCIA": "1.0.0"
+          "MySql.Data": "8.1.0"
         },
         "compile": {
           "bin/placeholder/NEGOCIO.dll": {}
         },
         "runtime": {
           "bin/placeholder/NEGOCIO.dll": {}
-        }
-      },
-      "PERSISTENCIA/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "MySqlConnector": "2.2.7"
-        },
-        "compile": {
-          "bin/placeholder/PERSISTENCIA.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/PERSISTENCIA.dll": {}
         }
       }
     }
@@ -760,33 +733,6 @@
         "runtimes/win-x64/native/k5sprt64.dll",
         "runtimes/win-x64/native/krb5_64.dll",
         "runtimes/win-x64/native/krbcc64.dll"
-      ]
-    },
-    "MySqlConnector/2.2.7": {
-      "sha512": "rwFa71MlOJ142S+BXDvtLRdAIn7l6PTNWu+Xehs2qRehK8dckjKqwvK8azEADCMkQyXS1LXgh9HkSvItpTi6WA==",
-      "type": "package",
-      "path": "mysqlconnector/2.2.7",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "lib/net461/MySqlConnector.dll",
-        "lib/net461/MySqlConnector.xml",
-        "lib/net471/MySqlConnector.dll",
-        "lib/net471/MySqlConnector.xml",
-        "lib/net6.0/MySqlConnector.dll",
-        "lib/net6.0/MySqlConnector.xml",
-        "lib/net7.0/MySqlConnector.dll",
-        "lib/net7.0/MySqlConnector.xml",
-        "lib/netcoreapp3.1/MySqlConnector.dll",
-        "lib/netcoreapp3.1/MySqlConnector.xml",
-        "lib/netstandard2.0/MySqlConnector.dll",
-        "lib/netstandard2.0/MySqlConnector.xml",
-        "lib/netstandard2.1/MySqlConnector.dll",
-        "lib/netstandard2.1/MySqlConnector.xml",
-        "logo.png",
-        "mysqlconnector.2.2.7.nupkg.sha512",
-        "mysqlconnector.nuspec"
       ]
     },
     "Portable.BouncyCastle/1.9.0": {
@@ -1849,11 +1795,6 @@
       "type": "project",
       "path": "../../NEGOCIO/NEGOCIO/NEGOCIO.csproj",
       "msbuildProject": "../../NEGOCIO/NEGOCIO/NEGOCIO.csproj"
-    },
-    "PERSISTENCIA/1.0.0": {
-      "type": "project",
-      "path": "../../PERSISTENCIA/PERSISTENCIA/PERSISTENCIA.csproj",
-      "msbuildProject": "../../PERSISTENCIA/PERSISTENCIA/PERSISTENCIA.csproj"
     }
   },
   "projectFileDependencyGroups": {

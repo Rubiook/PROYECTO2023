@@ -29,6 +29,7 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             lblRemate = new Label();
             button3 = new Button();
+            button5 = new Button();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -74,6 +75,26 @@
             button3.MouseEnter += button3_MouseEnter;
             button3.MouseLeave += button3_MouseLeave;
             // 
+            // button5
+            // 
+            button5.BackColor = Color.Transparent;
+            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
+            button5.BackgroundImageLayout = ImageLayout.Stretch;
+            button5.Cursor = Cursors.Hand;
+            button5.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0, 0);
+            button5.FlatAppearance.BorderSize = 0;
+            button5.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 0, 0, 0);
+            button5.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 0, 0, 0);
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Font = new Font("Segoe UI Black", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            button5.ForeColor = Color.White;
+            button5.Location = new Point(12, 12);
+            button5.Name = "button5";
+            button5.Size = new Size(49, 47);
+            button5.TabIndex = 71;
+            button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
+            // 
             // VerLotesProximoRemate
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -81,6 +102,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1625, 788);
+            Controls.Add(button5);
             Controls.Add(button3);
             Controls.Add(lblRemate);
             Controls.Add(flowLayoutPanel1);
@@ -98,5 +120,6 @@
         private FlowLayoutPanel flowLayoutPanel1;
         private Label lblRemate;
         private Button button3;
+        private Button button5;
     }
 }

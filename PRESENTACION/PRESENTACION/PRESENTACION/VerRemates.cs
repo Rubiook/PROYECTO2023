@@ -30,14 +30,14 @@ namespace PRESENTACION.PRESENTACION
             Panel card = new Panel();
             card.BackColor = Color.FromArgb(0, 3, 6, 3); // Verde oscuro
             card.BorderStyle = BorderStyle.Fixed3D;
-            card.Width = 1050;
-            card.Height = 150;
+            card.Width = 525;
+            card.Height = 200;
 
             Label labelFechaRemate = new Label();
             labelFechaRemate.Text = "FECHA DEL REMATE: " + fechaRemate.ToString("dd/MM/yyyy");
-            labelFechaRemate.Font = new Font("Arial", 16, FontStyle.Bold);
+            labelFechaRemate.Font = new Font("Arial", 22, FontStyle.Bold);
             labelFechaRemate.Width = 500;
-            labelFechaRemate.Height = 25;
+            labelFechaRemate.Height = 40;
             labelFechaRemate.Location = new Point(10, 10);
             labelFechaRemate.ForeColor = Color.White; // Letras en blanco
             card.Controls.Add(labelFechaRemate);
@@ -45,33 +45,33 @@ namespace PRESENTACION.PRESENTACION
 
             Label labelHoraInicio = new Label();
             labelHoraInicio.Text = "HORA DE INICIO: " + horaInicio.ToString(@"hh\:mm");
-            labelHoraInicio.Font = new Font("Arial", 12);
-            labelHoraInicio.Location = new Point(10, 40);
-            labelHoraInicio.Width = 1000;
+            labelHoraInicio.Font = new Font("Arial", 14);
+            labelHoraInicio.Location = new Point(10, 60);
+            labelHoraInicio.Width = 500;
             labelHoraInicio.ForeColor = Color.White; // Letras en blanco
             card.Controls.Add(labelHoraInicio);
 
             Label labelHoraFin = new Label();
-            labelHoraFin.Text = "HARA DE FIN: " + horaFin.ToString(@"hh\:mm");
-            labelHoraFin.Font = new Font("Arial", 12);
-            labelHoraFin.Location = new Point(10, 60);
-            labelHoraFin.Width = 1000;
+            labelHoraFin.Text = "HORA DE FIN: " + horaFin.ToString(@"hh\:mm");
+            labelHoraFin.Font = new Font("Arial", 14);
+            labelHoraFin.Location = new Point(10, 80);
+            labelHoraFin.Width = 500;
             labelHoraFin.ForeColor = Color.White; // Letras en blanco
             card.Controls.Add(labelHoraFin);
 
             Label labelRematador = new Label();
             labelRematador.Text = "RAMATADOR: " + rematador;
-            labelRematador.Font = new Font("Arial", 12);
-            labelRematador.Location = new Point(10, 100);
-            labelRematador.Width = 1000;
+            labelRematador.Font = new Font("Arial", 14);
+            labelRematador.Location = new Point(10, 120);
+            labelRematador.Width = 500;
             labelRematador.ForeColor = Color.White; // Letras en blanco
             card.Controls.Add(labelRematador);
 
             Label labelTipoRemate = new Label();
             labelTipoRemate.Text = "TIPO DE REMATE: " + tipoRemate;
-            labelTipoRemate.Font = new Font("Arial", 12);
-            labelTipoRemate.Location = new Point(10, 120);
-            labelTipoRemate.Width = 1000;
+            labelTipoRemate.Font = new Font("Arial", 14);
+            labelTipoRemate.Location = new Point(10, 140);
+            labelTipoRemate.Width = 500;
             labelTipoRemate.ForeColor = Color.White; // Letras en blanco
             card.Controls.Add(labelTipoRemate);
 
@@ -151,6 +151,11 @@ namespace PRESENTACION.PRESENTACION
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            CargarRemates();
         }
     }
 }

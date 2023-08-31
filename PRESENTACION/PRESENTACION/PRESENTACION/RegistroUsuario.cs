@@ -17,7 +17,7 @@ namespace PRESENTACION
     {
 
         private InicioSesion ventanaLogin; // Variable para almacenar la ventana de inicio de sesión
-        private MantenimientoUsuarios mantenimientoUsuarios;
+
         //FORM VENTANA REGISTRO-----------------------------------------
         public RegistroUsuario()
         {
@@ -59,7 +59,13 @@ namespace PRESENTACION
                 return; // Detener la ejecución del método si algún campo está vacío
             }
 
-            mantenimientoUsuarios.EsCorreoValido(correo);
+            MantenimientoUsuarios mantenimientoUsuarios = new MantenimientoUsuarios();
+            // Verificar si el correo es válido
+            if (!mantenimientoUsuarios.EsCorreoValido(correo))
+            {
+                MessageBox.Show("El correo ingresado no es válido. Por favor, ingrese un correo válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; // Detener la ejecución del método si el correo es inválido
+            }
 
             if (passHash == confirmPasswordHash)
             {
@@ -92,11 +98,11 @@ namespace PRESENTACION
                     if (agregado)
                     {
                         MessageBox.Show("Usuario registrado con éxito", "Agregar Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        InicioSesion ventanaLogin = new InicioSesion();
-                        this.Hide();
-                        ventanaLogin.ShowDialog(); //modal
-                        this.Show();
-                        this.Close();
+                        //nicioSesion ventanaLogin = new InicioSesion();
+                        //his.Hide();
+                        //entanaLogin.ShowDialog(); //modal
+                        //this.Show();
+                        //is.Close();
                     }
                     else
                     {

@@ -53,9 +53,9 @@ namespace PRESENTACION
             dataGridView1.Columns.Add("correo", "CORREO"); // Nueva columna
             dataGridView1.Columns.Add("celular", " CELULAR"); // Nueva columna
 
-            dataGridView1.Columns[0].Width = 50; 
+            dataGridView1.Columns[0].Width = 50;
             dataGridView1.Columns[1].Width = 110;
-            dataGridView1.Columns[2].Width = 140    ;
+            dataGridView1.Columns[2].Width = 140;
             dataGridView1.DefaultCellStyle.Font = new Font("Arial", 10);
             dataGridView1.Columns[0].DefaultCellStyle.Font = new Font("Arial", 10);
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 11, FontStyle.Bold);
@@ -481,9 +481,11 @@ namespace PRESENTACION
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            // Verificar si el carácter es una letra, un número o una tecla de control
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
-                e.Handled = true; // Cancelar la entrada de la tecla si no es una letra
+                // Cancelar la pulsación del carácter
+                e.Handled = true;
             }
         }
 
@@ -607,6 +609,7 @@ namespace PRESENTACION
 
         private void button4_MouseLeave(object sender, EventArgs e)
         {
+
             button4.BackColor = Color.Transparent;
             button4.ForeColor = Color.White;
             button4.FlatAppearance.BorderColor = Color.White; // Restaurar color del borde
@@ -654,6 +657,46 @@ namespace PRESENTACION
             }
 
             return true;
+        }
+
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si el carácter es una letra o una tecla especial 
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                // Cancelar la pulsación del carácter
+                e.Handled = true;
+            }
+        }
+
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si el carácter es una letra o una tecla especial 
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                // Cancelar la pulsación del carácter
+                e.Handled = true;
+            }
+        }
+
+        private void textBox7_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si el carácter es una letra, número o un carácter especial
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsPunctuation(e.KeyChar))
+            {
+                // Cancelar la pulsación del carácter
+                e.Handled = true;
+            }
+        }
+
+        private void textBox8_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si el carácter es un número o una tecla de control
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                // Cancelar la pulsación del carácter
+                e.Handled = true;
+            }
         }
 
 

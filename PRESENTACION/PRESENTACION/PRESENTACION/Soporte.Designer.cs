@@ -40,6 +40,7 @@
             toolTip1 = new ToolTip(components);
             label5 = new Label();
             button3 = new Button();
+            label6 = new Label();
             SuspendLayout();
             // 
             // buttonSoporte
@@ -72,7 +73,7 @@
             button1.FlatStyle = FlatStyle.Popup;
             button1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(113, 479);
+            button1.Location = new Point(111, 502);
             button1.Name = "button1";
             button1.Size = new Size(369, 40);
             button1.TabIndex = 77;
@@ -88,7 +89,7 @@
             textBox2.BorderStyle = BorderStyle.FixedSingle;
             textBox2.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             textBox2.ForeColor = SystemColors.Window;
-            textBox2.Location = new Point(113, 339);
+            textBox2.Location = new Point(111, 362);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.ScrollBars = ScrollBars.Vertical;
@@ -102,7 +103,7 @@
             label4.BorderStyle = BorderStyle.FixedSingle;
             label4.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(113, 304);
+            label4.Location = new Point(111, 327);
             label4.Name = "label4";
             label4.Size = new Size(123, 34);
             label4.TabIndex = 75;
@@ -114,7 +115,7 @@
             label2.BorderStyle = BorderStyle.FixedSingle;
             label2.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(113, 179);
+            label2.Location = new Point(111, 233);
             label2.Name = "label2";
             label2.Size = new Size(369, 32);
             label2.TabIndex = 78;
@@ -126,7 +127,7 @@
             label1.BorderStyle = BorderStyle.FixedSingle;
             label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(113, 141);
+            label1.Location = new Point(111, 201);
             label1.Name = "label1";
             label1.Size = new Size(369, 32);
             label1.TabIndex = 79;
@@ -138,7 +139,7 @@
             label3.BorderStyle = BorderStyle.FixedSingle;
             label3.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(113, 217);
+            label3.Location = new Point(111, 265);
             label3.Name = "label3";
             label3.Size = new Size(369, 32);
             label3.TabIndex = 80;
@@ -148,13 +149,13 @@
             // 
             label5.BackColor = Color.Transparent;
             label5.BorderStyle = BorderStyle.FixedSingle;
-            label5.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(151, 78);
+            label5.Location = new Point(111, 164);
             label5.Name = "label5";
-            label5.Size = new Size(293, 42);
+            label5.Size = new Size(225, 37);
             label5.TabIndex = 81;
-            label5.Text = "DATOS PERSONALES:";
+            label5.Text = "Datos Personales:";
             label5.TextAlign = ContentAlignment.TopCenter;
             // 
             // button3
@@ -167,15 +168,28 @@
             button3.FlatStyle = FlatStyle.Popup;
             button3.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(463, 616);
+            button3.Location = new Point(453, 609);
             button3.Name = "button3";
-            button3.Size = new Size(115, 43);
+            button3.Size = new Size(125, 50);
             button3.TabIndex = 82;
             button3.Text = "Regresar";
             button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
             button3.MouseEnter += button3_MouseEnter;
             button3.MouseLeave += button3_MouseLeave;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.BackColor = Color.Transparent;
+            label6.BorderStyle = BorderStyle.Fixed3D;
+            label6.Font = new Font("Segoe UI", 33F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.ForeColor = Color.White;
+            label6.Location = new Point(86, 43);
+            label6.Name = "label6";
+            label6.Size = new Size(418, 62);
+            label6.TabIndex = 83;
+            label6.Text = "SOPORTE TÉCNICO";
             // 
             // Soporte
             // 
@@ -184,6 +198,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(590, 671);
+            Controls.Add(label6);
             Controls.Add(button3);
             Controls.Add(label5);
             Controls.Add(label3);
@@ -214,5 +229,6 @@
         private ToolTip toolTip1;
         private Label label5;
         private Button button3;
+        private Label label6;
     }
 }

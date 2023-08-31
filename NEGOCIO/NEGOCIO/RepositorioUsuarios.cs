@@ -58,6 +58,40 @@ namespace NEGOCIO
         }
 
 
+        public Usuario ObtenerUsuarioPorId(int id)
+        {
+            Usuario usuario = null;
+
+            using (MySqlConnection connection = Conexion.obtenerConexion())
+            {
+                //connection.Open();
+
+                string query = "SELECT id, nombre, apellido, correo, celular FROM usuarios WHERE id = @Id";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            usuario = new Usuario
+                            {
+                                id = Convert.ToInt32(reader["id"]),
+                                nombre = Convert.ToString(reader["nombre"]),
+                                apellido = Convert.ToString(reader["apellido"]),
+                                correo = Convert.ToString(reader["correo"]),
+                                celular = Convert.ToString(reader["celular"])
+                            };
+                        }
+                    }
+                }
+            }
+
+            return usuario;
+        }
+
+
         public bool borrarUsuario(int idUsuario)
         {
             try
@@ -327,6 +361,8 @@ namespace NEGOCIO
             }
         }
 
+
+        // VERIFICAR USABILIDAD --*******************************************************
         public Lote ObtenerLotePorId(int loteId)
         {
             Lote lote = null;
@@ -365,6 +401,36 @@ namespace NEGOCIO
             }
 
             return lote;
+        }
+
+        public string ObtenerRolUsuarioPorId(int idUsuario)
+        {
+            string rolUsuario = string.Empty;
+
+            using (MySqlConnection connection = Conexion.obtenerConexion())
+            {
+                try
+                {
+                    string query = "SELECT rol FROM usuarios WHERE id = @IdUsuario";
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                        //connection.Open();
+                        object result = command.ExecuteScalar();
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            rolUsuario = Convert.ToString(result);
+                        }
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    throw new Exception("Error al obtener el rol del usuario: " + ex.Message);
+                }
+            }
+
+            return rolUsuario;
         }
 
 

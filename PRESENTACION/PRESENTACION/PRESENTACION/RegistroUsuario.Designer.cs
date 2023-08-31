@@ -266,11 +266,11 @@
             button3.FlatAppearance.MouseDownBackColor = Color.Red;
             button3.FlatAppearance.MouseOverBackColor = Color.GreenYellow;
             button3.FlatStyle = FlatStyle.Popup;
-            button3.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button3.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(518, 749);
+            button3.Location = new Point(510, 741);
             button3.Name = "button3";
-            button3.Size = new Size(117, 42);
+            button3.Size = new Size(125, 50);
             button3.TabIndex = 57;
             button3.Text = "Regresar";
             button3.UseVisualStyleBackColor = false;

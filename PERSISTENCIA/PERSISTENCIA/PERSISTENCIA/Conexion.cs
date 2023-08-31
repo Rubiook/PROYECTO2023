@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySqlConnector;
 
-
+/*
 namespace PERSISTENCIA.PERSISTENCIA
 {
     internal class Conexion
@@ -39,3 +39,4 @@ namespace PERSISTENCIA.PERSISTENCIA
 
     }
 }
+*/

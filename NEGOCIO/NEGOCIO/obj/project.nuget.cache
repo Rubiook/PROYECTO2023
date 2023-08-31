@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+j/BZ+YusH5BSQ2DcF2r9zhRYhZ90QPm56Obzc1q8REi1fb3gez0QhRRRA/C2p/U0a1JqUZ3YTlQXmji4iz1yw==",
+  "dgSpecHash": "U/OtiWkJ1YPrqupnTfEZtN7MOHpHKpIoS1I5KEwOJ3TNqV7l6ov8ASWeWU+MLy6iceH1K1T6Maw0/2VqYiCsGQ==",
   "success": true,
   "projectFilePath": "D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\NEGOCIO\\NEGOCIO\\NEGOCIO.csproj",
   "expectedPackageFiles": [
@@ -12,7 +12,6 @@
     "C:\\Users\\francisco\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\francisco\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\francisco\\.nuget\\packages\\mysql.data\\8.1.0\\mysql.data.8.1.0.nupkg.sha512",
-    "C:\\Users\\francisco\\.nuget\\packages\\mysqlconnector\\2.2.7\\mysqlconnector.2.2.7.nupkg.sha512",
     "C:\\Users\\francisco\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
     "C:\\Users\\francisco\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\francisco\\.nuget\\packages\\system.configuration.configurationmanager\\4.4.1\\system.configuration.configurationmanager.4.4.1.nupkg.sha512",

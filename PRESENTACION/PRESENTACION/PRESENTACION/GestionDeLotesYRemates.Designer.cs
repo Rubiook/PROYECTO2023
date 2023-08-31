@@ -109,7 +109,7 @@
             label3.BorderStyle = BorderStyle.Fixed3D;
             label3.Font = new Font("Segoe UI", 33F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(324, 19);
+            label3.Location = new Point(462, 41);
             label3.Name = "label3";
             label3.Size = new Size(667, 62);
             label3.TabIndex = 26;
@@ -556,9 +556,9 @@
             button1.FlatStyle = FlatStyle.Popup;
             button1.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(1440, 884);
+            button1.Location = new Point(1444, 884);
             button1.Name = "button1";
-            button1.Size = new Size(130, 50);
+            button1.Size = new Size(126, 50);
             button1.TabIndex = 56;
             button1.Text = "Regresar";
             button1.UseVisualStyleBackColor = false;

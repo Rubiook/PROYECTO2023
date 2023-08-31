@@ -8,8 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "NEGOCIO/1.0.0": {
         "dependencies": {
-          "MySql.Data": "8.1.0",
-          "PERSISTENCIA": "1.0.0"
+          "MySql.Data": "8.1.0"
         },
         "runtime": {
           "NEGOCIO.dll": {}
@@ -120,14 +119,6 @@
             "rid": "win-x64",
             "assetType": "native",
             "fileVersion": "4.1.0.0"
-          }
-        }
-      },
-      "MySqlConnector/2.2.7": {
-        "runtime": {
-          "lib/net6.0/MySqlConnector.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.2.7.0"
           }
         }
       },
@@ -347,14 +338,6 @@
             "fileVersion": "0.7.1.0"
           }
         }
-      },
-      "PERSISTENCIA/1.0.0": {
-        "dependencies": {
-          "MySqlConnector": "2.2.7"
-        },
-        "runtime": {
-          "PERSISTENCIA.dll": {}
-        }
       }
     }
   },
@@ -419,13 +402,6 @@
       "sha512": "sha512-7kEJLyty7HcqJD0lnfs+2fdMrvCl0RY5oykvZThbmg6QVLT55dwygI69Eqxl0M6IThP9woyjpsezT6m7gKRrLA==",
       "path": "mysql.data/8.1.0",
       "hashPath": "mysql.data.8.1.0.nupkg.sha512"
-    },
-    "MySqlConnector/2.2.7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-rwFa71MlOJ142S+BXDvtLRdAIn7l6PTNWu+Xehs2qRehK8dckjKqwvK8azEADCMkQyXS1LXgh9HkSvItpTi6WA==",
-      "path": "mysqlconnector/2.2.7",
-      "hashPath": "mysqlconnector.2.2.7.nupkg.sha512"
     },
     "Portable.BouncyCastle/1.9.0": {
       "type": "package",
@@ -594,11 +570,6 @@
       "sha512": "sha512-Idgg+mJEyAujqDPzA3APy9dNoyw0YQcNA65GgYjktDRtJ+nvx/hv+J+m6Eax3JJMGEYGy04oc5YNP6ZvQ3Y1vQ==",
       "path": "zstdsharp.port/0.7.1",
       "hashPath": "zstdsharp.port.0.7.1.nupkg.sha512"
-    },
-    "PERSISTENCIA/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

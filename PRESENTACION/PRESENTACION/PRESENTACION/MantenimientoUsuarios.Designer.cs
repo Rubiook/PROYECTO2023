@@ -305,11 +305,11 @@
             button1.FlatAppearance.MouseDownBackColor = Color.Red;
             button1.FlatAppearance.MouseOverBackColor = Color.GreenYellow;
             button1.FlatStyle = FlatStyle.Popup;
-            button1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(1137, 725);
+            button1.Location = new Point(1142, 725);
             button1.Name = "button1";
-            button1.Size = new Size(130, 50);
+            button1.Size = new Size(125, 50);
             button1.TabIndex = 56;
             button1.Text = "Regresar";
             button1.UseVisualStyleBackColor = false;
@@ -329,6 +329,7 @@
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(286, 29);
             textBox4.TabIndex = 58;
+            textBox4.KeyPress += textBox4_KeyPress;
             // 
             // label5
             // 
@@ -353,6 +354,7 @@
             textBox5.Name = "textBox5";
             textBox5.Size = new Size(286, 29);
             textBox5.TabIndex = 60;
+            textBox5.KeyPress += textBox5_KeyPress;
             // 
             // label7
             // 
@@ -401,6 +403,7 @@
             textBox7.Name = "textBox7";
             textBox7.Size = new Size(298, 29);
             textBox7.TabIndex = 64;
+            textBox7.KeyPress += textBox7_KeyPress;
             // 
             // label9
             // 
@@ -425,6 +428,7 @@
             textBox8.Name = "textBox8";
             textBox8.Size = new Size(270, 29);
             textBox8.TabIndex = 66;
+            textBox8.KeyPress += textBox8_KeyPress;
             // 
             // label10
             // 

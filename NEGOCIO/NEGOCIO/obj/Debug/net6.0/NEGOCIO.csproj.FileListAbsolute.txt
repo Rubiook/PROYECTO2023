@@ -22,6 +22,3 @@ D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\NEGOCIO\NEGOCIO\o
 D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\NEGOCIO\NEGOCIO\obj\Debug\net6.0\refint\NEGOCIO.dll
 D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\NEGOCIO\NEGOCIO\obj\Debug\net6.0\NEGOCIO.pdb
 D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\NEGOCIO\NEGOCIO\obj\Debug\net6.0\ref\NEGOCIO.dll
-D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\NEGOCIO\NEGOCIO\bin\Debug\net6.0\PERSISTENCIA.dll
-D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\NEGOCIO\NEGOCIO\bin\Debug\net6.0\PERSISTENCIA.pdb
-D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\NEGOCIO\NEGOCIO\obj\Debug\net6.0\NEGOCIO.csproj.CopyComplete

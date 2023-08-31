@@ -7,10 +7,16 @@
     <Compile Update="PRESENTACION\HistorialVentas.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="PRESENTACION\Preeventas.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="PRESENTACION\MantenimientoEmpleados.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="PRESENTACION\Soporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PRESENTACION\VerLotesDeHoy.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="PRESENTACION\VerLotesProximoRemate.cs">

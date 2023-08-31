@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using MySql.Data.MySqlClient;
-using PERSISTENCIA.PERSISTENCIA;
+
 
 namespace NEGOCIO
 {

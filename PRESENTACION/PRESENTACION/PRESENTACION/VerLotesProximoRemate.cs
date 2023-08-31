@@ -139,7 +139,7 @@ namespace PRESENTACION.PRESENTACION
         }
 
 
-
+        /*
         private void ActualizarProximoRemateEnLabel()
         {
 
@@ -163,7 +163,7 @@ namespace PRESENTACION.PRESENTACION
             Console.WriteLine("No hay remates programados en el futuro.");
             lblRemate.Text = "No hay remates programados.";
         }
-
+        */
 
         private Remate ObtenerProximoRemate()
         {
@@ -218,6 +218,7 @@ namespace PRESENTACION.PRESENTACION
 
         private void button3_MouseLeave(object sender, EventArgs e)
         {
+
             // Restaurar los colores al salir el mouse del botón
             button3.BackColor = Color.Transparent;
             button3.ForeColor = Color.White;
@@ -227,6 +228,11 @@ namespace PRESENTACION.PRESENTACION
         private void button3_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            CargarDatos();
         }
     }
 }

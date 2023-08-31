@@ -39,7 +39,7 @@ namespace PRESENTACION.PRESENTACION
             this.Proveedor = proveedor; // Almacena el proveedor en un campo de la ventana
             FechaRemate = fechaRemate;
 
-            dataGridViewLotesAsignados.Columns.Add("id", " ID ");
+            dataGridViewLotesAsignados.Columns.Add("id", " N° LOTE ");
             dataGridViewLotesAsignados.Columns.Add("lote", "PROVEEDOR ");
             dataGridViewLotesAsignados.Columns.Add("precio_base", "$ RESERVA");
             dataGridViewLotesAsignados.Columns.Add("tipo_de_lote", "TIPO LOTE");
@@ -48,7 +48,7 @@ namespace PRESENTACION.PRESENTACION
             dataGridViewLotesAsignados.DefaultCellStyle.Font = new Font("Arial", 10);
             dataGridViewLotesAsignados.Columns[0].DefaultCellStyle.Font = new Font("Arial", 10);
             dataGridViewLotesAsignados.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 11, FontStyle.Bold);
-            dataGridViewLotesAsignados.Columns[0].Width = 50;
+            dataGridViewLotesAsignados.Columns[0].Width = 80;
             idRemateSeleccionado = remateId;
 
             _conexion = Conexion.obtenerConexion();
@@ -87,7 +87,7 @@ namespace PRESENTACION.PRESENTACION
                 // Actualiza el lblRemate con la fecha del remate
                 lblRemate.Text = "Lotes para el remate del " + FechaRemate.ToString("dd/MM/yyyy");
                 ActualizarColoresLotesVendidos();
-                limpiarCamposLotesAsignados();
+                //limpiarCamposLotesAsignados();
             }
             catch (Exception ex)
             {
@@ -254,77 +254,78 @@ namespace PRESENTACION.PRESENTACION
         }
 
 
-        //BOTON VENDER LOTE ---------------------------------------------------------------------------
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            // Obtener el comprador en mayúsculas y verificar su existencia y rol
-            string compradorLote = textBoxComprador.Text.ToUpper();
+        /* //BOTON VENDER LOTE ---------------------------------------------------------------------------
+         private void button2_Click_1(object sender, EventArgs e)
+         {
+             // Obtener el comprador en mayúsculas y verificar su existencia y rol
+             string compradorLote = textBoxComprador.Text.ToUpper();
 
-            if (!repositorioUsuarios.ExisteComprador(compradorLote))
-            {
-                MessageBox.Show("El cliente ingresado no existe o no tiene el rol de comprador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            // Verificar que se haya ingresado el precio de venta
-            if (!int.TryParse(textBoxPrecioDeVenta.Text, out int precioVenta))
-            {
-                MessageBox.Show("Ingrese un precio de venta válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+             if (!repositorioUsuarios.ExisteComprador(compradorLote))
+             {
+                 MessageBox.Show("El cliente ingresado no existe o no tiene el rol de comprador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                 return;
+             }
+             // Verificar que se haya ingresado el precio de venta
+             if (!int.TryParse(textBoxPrecioDeVenta.Text, out int precioVenta))
+             {
+                 MessageBox.Show("Ingrese un precio de venta válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                 return;
+             }
 
-            try
-            {
-                int idRemate = remateId;
-                int idLote = ObtenerIdLoteSeleccionado();
+             try
+             {
+                 int idRemate = remateId;
+                 int idLote = ObtenerIdLoteSeleccionado();
 
-                // Aquí obtén la lista de lotes asignados por medio del método
-                List<Lote> lotesAsignados = negocioLotesRemates.ObtenerLotesAsignadosPorRemate(idRemate);
+                 // Aquí obtén la lista de lotes asignados por medio del método
+                 List<Lote> lotesAsignados = negocioLotesRemates.ObtenerLotesAsignadosPorRemate(idRemate);
 
-                // Obtener la información del lote seleccionado de la lista de lotes asignados
-                Lote loteSeleccionado = lotesAsignados.FirstOrDefault(lote => lote.id == idLote);
+                 // Obtener la información del lote seleccionado de la lista de lotes asignados
+                 Lote loteSeleccionado = lotesAsignados.FirstOrDefault(lote => lote.id == idLote);
 
-                if (loteSeleccionado == null)
-                {
-                    MessageBox.Show("Error al obtener información del lote seleccionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                 if (loteSeleccionado == null)
+                 {
+                     MessageBox.Show("Error al obtener información del lote seleccionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                     return;
+                 }
 
-                int precioDeVenta = Convert.ToInt32(textBoxPrecioDeVenta.Text);
+                 int precioDeVenta = Convert.ToInt32(textBoxPrecioDeVenta.Text);
 
-                LoteVendido loteVendido = new LoteVendido
-                {
-                    IdRemate = idRemate,
-                    IdLote = idLote,
-                    FechaVenta = DateTime.Today,
-                    Proveedor = loteSeleccionado.proveedor_lote, // Usar el proveedor del lote seleccionado
-                    Comprador = compradorLote,
-                    PrecioDeVenta = precioDeVenta
-                };
+                 LoteVendido loteVendido = new LoteVendido
+                 {
+                     IdRemate = idRemate,
+                     IdLote = idLote,
+                     FechaVenta = DateTime.Today,
+                     Proveedor = loteSeleccionado.proveedor_lote, // Usar el proveedor del lote seleccionado
+                     Comprador = compradorLote,
+                     PrecioDeVenta = precioDeVenta
+                 };
 
-                negocioLotesRemates.MarcarLoteComoVendido(loteVendido);
+                 negocioLotesRemates.MarcarLoteComoVendido(loteVendido);
 
-                MessageBox.Show("Lote vendido exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                 MessageBox.Show("Lote vendido exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                ActualizarGrillaLotesAsignados(remateId);
+                 ActualizarGrillaLotesAsignados(remateId);
 
-                // ActualizarColoresLotesVendidos();
+                 // ActualizarColoresLotesVendidos();
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al marcar el lote como vendido: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-
-        }
-
-        public void limpiarCamposLotesAsignados()
-        {
-            textBoxPrecioDeVenta.Clear();
-            textBoxComprador.Clear();
-        }
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show("Error al marcar el lote como vendido: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+             }
 
 
+         }
+
+         public void limpiarCamposLotesAsignados()
+         {
+             textBoxPrecioDeVenta.Clear();
+             textBoxComprador.Clear();
+         }
+ */
+        /*
+        //boton quitar lista de vendidos-----------------------------------------------------------------------------------------
         private void button3_Click_1(object sender, EventArgs e)
         {
             if (dataGridViewLotesAsignados.SelectedRows.Count == 0)
@@ -350,7 +351,7 @@ namespace PRESENTACION.PRESENTACION
 
                     // Actualizar la grilla de lotes asignados y otros elementos según sea necesario
                     ActualizarGrillaLotesAsignados(remateId);
-                    //  ActualizarColoresLotesVendidos();
+                    ActualizarColoresLotesVendidos();
                 }
                 catch (Exception ex)
                 {
@@ -358,10 +359,38 @@ namespace PRESENTACION.PRESENTACION
                 }
             }
         }
-
+        */
         private void textBoxPrecioDeVenta_TextChanged(object sender, EventArgs e)
         {
 
         }
-    }
+
+        private void textBoxComprador_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si el carácter es una letra, un número o una tecla de control
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                // Cancelar la pulsación del carácter
+                e.Handled = true;
+            }
+        }
+
+        private void textBoxPrecioDeVenta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si el carácter es un número o una tecla de control
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                // Cancelar la pulsación del carácter
+                e.Handled = true;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+                                          
+            ActualizarGrillaLotesAsignados(remateId);
+            ActualizarColoresLotesVendidos();
+            gestionRematesYLotes.refresh();
+        }
+    }//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 }
