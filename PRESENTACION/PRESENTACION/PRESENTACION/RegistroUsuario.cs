@@ -109,16 +109,9 @@ namespace PRESENTACION
                         MessageBox.Show("Error al agregar el usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
-                    // Limpiar los campos de texto después de guardar el usuario
-                    textBox1.Text = string.Empty;
-                    textBox2.Text = string.Empty;
-                    textBox3.Text = string.Empty;
-                    comboBox1.Text = string.Empty;
-                    textBox4.Text = string.Empty; // Limpiar el atributo nombre
-                    textBox5.Text = string.Empty; // Limpiar el atributo apellido
-                    textBox6.Text = string.Empty; // Limpiar el atributo dirección
-                    textBox7.Text = string.Empty; // Limpiar el atributo correo
-                    textBox8.Text = string.Empty; // Limpiar el atributo celular
+                    limpiarCamposRegistro();
+
+
                 }
                 catch (Exception ex)
                 {
@@ -132,7 +125,20 @@ namespace PRESENTACION
         }
 
 
-
+        private void limpiarCamposRegistro()
+        {
+            // Limpiar los campos de texto después de guardar el usuario
+            textBox1.Text = string.Empty;
+            textBox2.Text = string.Empty;
+            textBox3.Text = string.Empty;
+            comboBox1.Text = string.Empty;
+            textBox4.Text = string.Empty; // Limpiar el atributo nombre
+            textBox5.Text = string.Empty; // Limpiar el atributo apellido
+            textBox6.Text = string.Empty; // Limpiar el atributo dirección
+            textBox7.Text = string.Empty; // Limpiar el atributo correo
+            textBox8.Text = string.Empty; // Limpiar el atributo celular
+            comboBox1.SelectedIndex = -1;
+        }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
@@ -294,6 +300,12 @@ namespace PRESENTACION
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true; // Bloquear la entrada de caracteres no numéricos
+            }
+
+            // Verificar si la longitud del texto es igual a 9 y la tecla presionada no es BackSpace
+            if (textBox8.Text.Length == 9 && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Bloquear la entrada cuando se alcanzan 9 dígitos
             }
         }
 

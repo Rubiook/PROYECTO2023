@@ -1,13 +1,20 @@
-﻿using NEGOCIO.NEGOCIO;
+﻿using MercadoPago.Client.Preference;
+using MercadoPago.Config;
+using NEGOCIO.NEGOCIO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+
+
+
 
 namespace PRESENTACION.PRESENTACION
 {
@@ -15,6 +22,8 @@ namespace PRESENTACION.PRESENTACION
     {
 
         private NegocioLotesRemates negocioLotesRemates = new NegocioLotesRemates();
+        private string preferenceId;
+
         public Preeventas()
         {
             InitializeComponent();
@@ -22,6 +31,7 @@ namespace PRESENTACION.PRESENTACION
             ConfigurarColumnasDataGridView();
             CargarPreeventasEnGrilla();
             ActualizarColoresGrillaPreeventas();
+
 
         }
 
@@ -109,6 +119,9 @@ namespace PRESENTACION.PRESENTACION
         {
 
         }
+
+        
+
 
         private void buttonVenderLote_Click(object sender, EventArgs e)
         {
@@ -228,5 +241,91 @@ namespace PRESENTACION.PRESENTACION
             CargarPreeventasEnGrilla(); // Recargar la grilla de preeventas para reflejar los cambios
             ActualizarColoresGrillaPreeventas();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Obtener el precio de venta desde la grilla
+            decimal precioVenta = ObtenerPrecioVentaDesdeGrilla();
+
+            if (precioVenta > 0)
+            {
+                try
+                {
+                    // Configura las credenciales de MercadoPago
+                    MercadoPagoConfig.AccessToken = "TEST-3746812080475118-090321-81fbd038ee20be3c52907d87665957cf-416650804";
+
+                    // Crea la preferencia de pago
+                    var request = new PreferenceRequest
+                    {
+                        Items = new List<PreferenceItemRequest>
+                {
+                    new PreferenceItemRequest
+                    {
+                        Title = "Producto de prueba",
+                        Quantity = 1,
+                        CurrencyId = "UYU",
+                        UnitPrice = precioVenta
+                    }
+                }
+                    };
+
+                    var client = new PreferenceClient();
+                    var preference = client.Create(request);
+
+                    // Obtén el ID de preferencia
+                    string preferenceId = preference.Id;
+
+                    // Abre el enlace de pago en el navegador
+                    string paymentUrl = $"https://www.mercadopago.com/checkout/v1/redirect?pref_id={preferenceId}";
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = paymentUrl,
+                        UseShellExecute = true
+                    });
+                }
+                catch (Exception ex)
+                {
+                    // Maneja errores aquí
+                    MessageBox.Show("Error al crear o abrir la preferencia de pago: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+        }
+
+
+
+        private decimal ObtenerPrecioVentaDesdeGrilla()
+        {
+            try
+            {
+                // Verificar si se ha seleccionado una fila en la grilla
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    // Obtener el índice de la fila seleccionada
+                    int filaSeleccionada = dataGridView1.SelectedRows[0].Index;
+
+                    // Obtener el valor de la celda "Precio de Venta" en la fila seleccionada
+                    string precioVentaStr = dataGridView1.Rows[filaSeleccionada].Cells["precio_de_venta"].Value.ToString();
+
+                    // Convertir el valor a decimal
+                    if (decimal.TryParse(precioVentaStr, out decimal precioVenta))
+                    {
+                        // Convertir el precio decimal a entero
+                        return Convert.ToInt32(precioVenta);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier error que pueda ocurrir al obtener el precio
+                MessageBox.Show("Error al obtener el precio de venta desde la grilla: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // Si no se pudo obtener el precio, retorna 0 o un valor predeterminado
+            return 0;
+        }
+
+
+
     }
 }

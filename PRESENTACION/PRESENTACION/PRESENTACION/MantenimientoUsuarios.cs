@@ -584,10 +584,10 @@ namespace PRESENTACION
         private void button3_MouseEnter(object sender, EventArgs e)
         {
             // Cambiar los colores al pasar el mouse sobre el botón
-            button3.BackColor = Color.FromArgb(250, 250, 250); // Rojo claro
+            button3.BackColor = Color.FromArgb(250, 250, 250); 
             button3.ForeColor = Color.FromArgb(160, 160, 160);
-            button3.FlatAppearance.BorderColor = Color.FromArgb(160, 160, 160); // Cambiar color del borde
-                                                                                // Restaurar los colores al salir el mouse del botón
+            button3.FlatAppearance.BorderColor = Color.FromArgb(160, 160, 160); 
+                                                                                
         }
 
         private void button3_MouseLeave(object sender, EventArgs e)
@@ -691,11 +691,16 @@ namespace PRESENTACION
 
         private void textBox8_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Verificar si el carácter es un número o una tecla de control
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            // Verificar si la tecla presionada es un número o la tecla BackSpace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
-                // Cancelar la pulsación del carácter
-                e.Handled = true;
+                e.Handled = true; // Bloquear la entrada de caracteres no numéricos
+            }
+
+            // Verificar si la longitud del texto es igual a 9 y la tecla presionada no es BackSpace
+            if (textBox8.Text.Length == 9 && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Bloquear la entrada cuando se alcanzan 9 dígitos
             }
         }
 

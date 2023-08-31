@@ -86,8 +86,12 @@ namespace PRESENTACION
 
 
 
+        private void limpiarCamposLogin()
+        {
+            textBox1.Clear();
+            textBox2.Clear();
+        }
 
-            
 
 
         //LINK REGISTRAR USUARIOS----------------------------------------------------------------
@@ -95,22 +99,40 @@ namespace PRESENTACION
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
-
             ventanaRegistro = new RegistroUsuario();
             ventanaRegistro.ShowDialog();
             this.Hide();
+            limpiarCamposLogin();
 
         }
 
         //BTN INGRESAR-------------------------------------------------------------------
         private void button1_Click(object sender, EventArgs e)
         {
-
-            //Evaluar Usuario y contraseña
-            Login login = new Login();
-            string nombreUsuario = this.textBox1.Text.ToUpper();
+            string nombreUsuario = this.textBox1.Text.Trim(); // Elimina espacios en blanco al principio y al final
             string pass = textBox2.Text;
+
+            // Verificar si el nombre de usuario está vacío
+            if (string.IsNullOrWhiteSpace(nombreUsuario))
+            {
+                MessageBox.Show("Ingrese su nombre de usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                textBox1.Focus();
+                return; // Salir del método para evitar la autenticación
+
+            }
+
+            // Verificar si la contraseña está vacía
+            if (string.IsNullOrWhiteSpace(pass))
+            {
+                MessageBox.Show("Ingrese su contraseña", "Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                textBox2.Focus();
+                return; // Salir del método para evitar la autenticación
+
+            }
+
+            // Continuar con la autenticación solo si ambos campos tienen valores
+            Login login = new Login();
+            nombreUsuario = nombreUsuario.ToUpper();
             string passHash = Usuario.HashPassword(pass);
 
             Usuario usr = new Usuario(nombreUsuario, passHash);
@@ -119,18 +141,22 @@ namespace PRESENTACION
             if (!correcto)
             {
                 MessageBox.Show("Usuario o contraseña incorrecto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBox2.Clear();
+                textBox2.Focus();
+                button1.BackColor = Color.Transparent;
+                button1.ForeColor = Color.White;
+                button1.FlatAppearance.BorderColor = DefaultForeColor; // Restaurar color del borde
             }
             else
             {
                 // Obtener el usuario autenticado
                 Usuario usuarioActual = login.UsuarioActual;
 
-
                 Ventana1 ventanaInicio = new Ventana1(login);
                 ventanaInicio.Login = login; // Asignar la instancia de Login al formulario Ventana1
-
+                limpiarCamposLogin();
                 this.Hide();
-                ventanaInicio.ShowDialog(); //MODAL
+                ventanaInicio.ShowDialog(); // MODAL
                 this.Close();
             }
         }
@@ -148,15 +174,28 @@ namespace PRESENTACION
                 button1.BackColor = Color.FromArgb(5, 150, 200, 255); // Fondo azul claro con opacidad
                 button1.ForeColor = Color.FromArgb(100, 0, 100, 255);
                 button1.FlatAppearance.BorderColor = Color.FromArgb(0, 25, 255); // Cambiar color del borde
-                if (!string.IsNullOrWhiteSpace(textBox2.Text))
+
+                if (!string.IsNullOrWhiteSpace(textBox1.Text))
                 {
-                    Console.WriteLine("Enter");
-                    button1.PerformClick();
-                    e.Handled = true;
+                    if (!string.IsNullOrWhiteSpace(textBox2.Text))
+                    {
+                        button1.PerformClick();
+                        e.Handled = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ingrese su contraseña", "Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                        textBox2.Focus();
+                        // Restaurar los colores al salir el mouse del botón
+                        button1.BackColor = Color.Transparent;
+                        button1.ForeColor = Color.White;
+                        button1.FlatAppearance.BorderColor = DefaultForeColor; // Restaurar color del borde
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Ingrese un usuario y contraseña válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ingrese su nombre de usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    textBox1.Focus();
                     // Restaurar los colores al salir el mouse del botón
                     button1.BackColor = Color.Transparent;
                     button1.ForeColor = Color.White;
@@ -165,36 +204,26 @@ namespace PRESENTACION
             }
         }
 
+
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+
+
+            // Verificar si la tecla presionada es una letra, un número o la tecla BackSpace
+            if (!char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
-                e.Handled = true; // Cancelar la entrada de la tecla si no es una letra
+                e.Handled = true; // Bloquear la entrada de caracteres no alfanuméricos
             }
+            else
+            {
+                e.Handled = false; // Permitir la entrada de letras, números y tecla de retroceso
+            }
+
             if (e.KeyChar == (char)Keys.Enter)
             {
-                // Cambiar los colores 
-                button1.BackColor = Color.FromArgb(5, 150, 200, 255); // Fondo azul claro con opacidad
-                button1.ForeColor = Color.FromArgb(100, 0, 100, 255);
-                button1.FlatAppearance.BorderColor = Color.FromArgb(0, 25, 255); // Cambiar color del borde
-                if (!string.IsNullOrWhiteSpace(textBox2.Text))
-                {
-
-                    Console.WriteLine("Enter");
-                    button1.PerformClick();
-                    e.Handled = true;
-                }
-                else
-                {
-                    MessageBox.Show("Ingrese un usuario y contraseña válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    // Restaurar los colores al salir el mouse del botón
-                    button1.BackColor = Color.Transparent;
-                    button1.ForeColor = Color.White;
-                    button1.FlatAppearance.BorderColor = DefaultForeColor; // Restaurar color del borde
-                }
-
-
+                textBox2.Focus(); // Enfocar el textBox2 para ingresar la contraseña
             }
+
         }
 
 
@@ -263,6 +292,11 @@ namespace PRESENTACION
         }
 
         private void button1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
 
         }

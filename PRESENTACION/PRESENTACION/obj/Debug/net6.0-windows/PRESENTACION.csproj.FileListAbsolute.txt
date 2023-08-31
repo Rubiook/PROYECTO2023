@@ -73,3 +73,6 @@ D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRES
 D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\obj\Debug\net6.0-windows\PRESENTACION.PRESENTACION.MantenimientoEmpleados.resources
 D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\obj\Debug\net6.0-windows\PRESENTACION.PRESENTACION.VerLotesDeHoy.resources
 D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\obj\Debug\net6.0-windows\PRESENTACION.PRESENTACION.Preeventas.resources
+D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\bin\Debug\net6.0-windows\nunit.framework.dll
+D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\bin\Debug\net6.0-windows\MercadoPago.dll
+D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\bin\Debug\net6.0-windows\Newtonsoft.Json.dll

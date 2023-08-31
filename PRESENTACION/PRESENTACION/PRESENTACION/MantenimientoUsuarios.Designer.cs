@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MantenimientoUsuarios));
             label1 = new Label();
             dataGridView1 = new DataGridView();
@@ -86,23 +86,23 @@
             dataGridView1.BackgroundColor = Color.FromArgb(3, 6, 3);
             dataGridView1.BorderStyle = BorderStyle.Fixed3D;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.Location = new Point(47, 348);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
@@ -276,8 +276,8 @@
             comboBox1.ForeColor = Color.White;
             comboBox1.FormattingEnabled = true;
             comboBox1.IntegralHeight = false;
-            comboBox1.Items.AddRange(new object[] { "OPERADOR", "COMPRADOR", "VENDEDOR", "REMATADOR" });
-            comboBox1.Location = new Point(503, 141);
+            comboBox1.Items.AddRange(new object[] { "OPERADOR", "COMPRADOR", "VENDEDOR", "REMATADOR", "ADMINISTRADOR" });
+            comboBox1.Location = new Point(503, 142);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(153, 29);
             comboBox1.TabIndex = 18;
@@ -290,7 +290,7 @@
             label6.BorderStyle = BorderStyle.Fixed3D;
             label6.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.White;
-            label6.Location = new Point(229, 142);
+            label6.Location = new Point(229, 143);
             label6.Name = "label6";
             label6.Size = new Size(268, 27);
             label6.TabIndex = 19;
@@ -375,7 +375,7 @@
             textBox6.BorderStyle = BorderStyle.FixedSingle;
             textBox6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             textBox6.ForeColor = SystemColors.Window;
-            textBox6.Location = new Point(784, 210);
+            textBox6.Location = new Point(784, 211);
             textBox6.Name = "textBox6";
             textBox6.Size = new Size(276, 29);
             textBox6.TabIndex = 62;
@@ -399,7 +399,7 @@
             textBox7.BorderStyle = BorderStyle.FixedSingle;
             textBox7.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             textBox7.ForeColor = SystemColors.Window;
-            textBox7.Location = new Point(762, 248);
+            textBox7.Location = new Point(762, 245);
             textBox7.Name = "textBox7";
             textBox7.Size = new Size(298, 29);
             textBox7.TabIndex = 64;
@@ -412,7 +412,7 @@
             label9.BorderStyle = BorderStyle.Fixed3D;
             label9.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             label9.ForeColor = Color.White;
-            label9.Location = new Point(675, 249);
+            label9.Location = new Point(675, 246);
             label9.Name = "label9";
             label9.Size = new Size(81, 27);
             label9.TabIndex = 63;
@@ -424,7 +424,7 @@
             textBox8.BorderStyle = BorderStyle.FixedSingle;
             textBox8.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             textBox8.ForeColor = SystemColors.Window;
-            textBox8.Location = new Point(790, 283);
+            textBox8.Location = new Point(790, 280);
             textBox8.Name = "textBox8";
             textBox8.Size = new Size(270, 29);
             textBox8.TabIndex = 66;
@@ -437,7 +437,7 @@
             label10.BorderStyle = BorderStyle.Fixed3D;
             label10.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             label10.ForeColor = Color.White;
-            label10.Location = new Point(675, 284);
+            label10.Location = new Point(675, 281);
             label10.Name = "label10";
             label10.Size = new Size(109, 27);
             label10.TabIndex = 65;

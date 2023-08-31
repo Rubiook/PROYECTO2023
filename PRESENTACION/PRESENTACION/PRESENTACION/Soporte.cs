@@ -108,9 +108,9 @@ namespace PRESENTACION.PRESENTACION
         private void CargarDatosUsuario()
         {
 
-            label1.Text = "Usuario: " + nombreUsuario;
-            label2.Text = "Rol: " + rolUsuario;
-            label3.Text = "Correo: " + correoUsuario;
+            label1.Text = nombreUsuario;
+            label2.Text = rolUsuario;
+            label3.Text = correoUsuario;
         }
 
 
@@ -176,10 +176,9 @@ namespace PRESENTACION.PRESENTACION
 
         private void button1_MouseEnter(object sender, EventArgs e)
         {
-            // Cambiar los colores al pasar el mouse sobre el botón
-            button1.BackColor = Color.FromArgb(200, 200, 200); // Rojo claro
-            button1.ForeColor = Color.FromArgb(101, 101, 101);
-            button1.FlatAppearance.BorderColor = Color.Black; // Cambiar color del borde
+            button1.BackColor = Color.FromArgb(250, 250, 250);
+            button1.ForeColor = Color.FromArgb(160, 160, 160);
+            button1.FlatAppearance.BorderColor = Color.FromArgb(160, 160, 160);
 
         }
 

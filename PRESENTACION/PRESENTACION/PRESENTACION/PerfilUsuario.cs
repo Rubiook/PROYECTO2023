@@ -44,13 +44,13 @@ namespace PRESENTACION.PRESENTACION
             if (login != null && login.UsuarioActual != null)
             {
                 Usuario usuarioActual = login.UsuarioActual;
-                label5.Text = "Nombre de usuario: " + login.ObtenerLoginUsuarioActual();
-                label2.Text = "Rol de usuario: " + login.ObtenerRolUsuarioActual();
-                label7.Text = "Nombre: " + login.ObtenerNombreUsuarioActual();
-                label6.Text = "Apellido: " + usuarioActual.apellido;
-                label8.Text = "Dirección: " + usuarioActual.direccion;
-                label9.Text = "Correo: " + usuarioActual.correo;
-                label10.Text = "Celular: " + usuarioActual.celular;
+                label5.Text = login.ObtenerLoginUsuarioActual();
+                label2.Text = login.ObtenerRolUsuarioActual();
+                label7.Text = login.ObtenerNombreUsuarioActual();
+                label6.Text = usuarioActual.apellido;
+                label8.Text = usuarioActual.direccion;
+                label9.Text = usuarioActual.correo;
+                label10.Text = usuarioActual.celular;
             }
             else
             {
@@ -77,6 +77,11 @@ namespace PRESENTACION.PRESENTACION
             {
                 MessageBox.Show("El campo de confirmacion de contraseña no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return; // Detener la ejecución del método si el login está vacío
+            }
+            if (nuevaContraseña != confirmarContraseña)
+            {
+                MessageBox.Show("Las contraseñas no coinciden", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; // Detener la ejecución del método si las contraseñas no coinciden
             }
 
             string nombreUsuarioActual = Login.ObtenerLoginUsuarioActual(); // Llama al método para obtener el nombre de usuario
@@ -138,10 +143,9 @@ namespace PRESENTACION.PRESENTACION
 
         private void button1_MouseEnter(object sender, EventArgs e)
         {
-            // Cambiar los colores al pasar el mouse sobre el botón
-            button1.BackColor = Color.FromArgb(150, 200, 255); // Fondo azul claro con opacidad
-            button1.ForeColor = Color.FromArgb(0, 100, 255);
-            button1.FlatAppearance.BorderColor = Color.FromArgb(0, 20, 255); // Cambiar color del borde
+            button1.BackColor = Color.FromArgb(250, 250, 250);
+            button1.ForeColor = Color.FromArgb(160, 160, 160);
+            button1.FlatAppearance.BorderColor = Color.FromArgb(160, 160, 160);
 
         }
 

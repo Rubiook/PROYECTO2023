@@ -57,13 +57,13 @@
             // 
             label2.BackColor = Color.FromArgb(150, 3, 6, 3);
             label2.BorderStyle = BorderStyle.FixedSingle;
-            label2.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(89, 302);
+            label2.Location = new Point(89, 294);
             label2.Name = "label2";
-            label2.Size = new Size(469, 32);
+            label2.Size = new Size(469, 40);
             label2.TabIndex = 1;
-            label2.Text = "Usuario:";
+            label2.Text = "Nombre de Usuario:";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             label2.Click += label2_Click;
             // 
@@ -71,11 +71,11 @@
             // 
             label3.BackColor = Color.FromArgb(150, 3, 6, 3);
             label3.BorderStyle = BorderStyle.FixedSingle;
-            label3.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(89, 439);
+            label3.Location = new Point(89, 431);
             label3.Name = "label3";
-            label3.Size = new Size(469, 32);
+            label3.Size = new Size(469, 40);
             label3.TabIndex = 2;
             label3.Text = "Contraseña:";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -93,6 +93,7 @@
             textBox1.TabIndex = 3;
             textBox1.TextAlign = HorizontalAlignment.Center;
             textBox1.TextChanged += textBox1_TextChanged;
+            textBox1.KeyDown += textBox1_KeyDown;
             textBox1.KeyPress += textBox1_KeyPress;
             // 
             // textBox2

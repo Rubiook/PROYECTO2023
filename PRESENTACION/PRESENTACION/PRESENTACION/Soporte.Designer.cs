@@ -73,9 +73,9 @@
             button1.FlatStyle = FlatStyle.Popup;
             button1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(111, 502);
+            button1.Location = new Point(80, 514);
             button1.Name = "button1";
-            button1.Size = new Size(369, 40);
+            button1.Size = new Size(508, 40);
             button1.TabIndex = 77;
             button1.Text = "Enviar Correo";
             button1.UseVisualStyleBackColor = false;
@@ -89,11 +89,11 @@
             textBox2.BorderStyle = BorderStyle.FixedSingle;
             textBox2.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             textBox2.ForeColor = SystemColors.Window;
-            textBox2.Location = new Point(111, 362);
+            textBox2.Location = new Point(80, 374);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.ScrollBars = ScrollBars.Vertical;
-            textBox2.Size = new Size(369, 140);
+            textBox2.Size = new Size(508, 140);
             textBox2.TabIndex = 76;
             // 
             // label4
@@ -103,7 +103,7 @@
             label4.BorderStyle = BorderStyle.FixedSingle;
             label4.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(111, 327);
+            label4.Location = new Point(80, 339);
             label4.Name = "label4";
             label4.Size = new Size(123, 34);
             label4.TabIndex = 75;
@@ -111,49 +111,49 @@
             // 
             // label2
             // 
-            label2.BackColor = Color.Transparent;
+            label2.BackColor = Color.FromArgb(50, 3, 6, 3);
             label2.BorderStyle = BorderStyle.FixedSingle;
             label2.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(111, 233);
+            label2.Location = new Point(130, 245);
             label2.Name = "label2";
-            label2.Size = new Size(369, 32);
+            label2.Size = new Size(408, 32);
             label2.TabIndex = 78;
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
-            label1.BackColor = Color.Transparent;
+            label1.BackColor = Color.FromArgb(50, 3, 6, 3);
             label1.BorderStyle = BorderStyle.FixedSingle;
             label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(111, 201);
+            label1.Location = new Point(130, 213);
             label1.Name = "label1";
-            label1.Size = new Size(369, 32);
+            label1.Size = new Size(408, 32);
             label1.TabIndex = 79;
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
-            label3.BackColor = Color.Transparent;
+            label3.BackColor = Color.FromArgb(50, 3, 6, 3);
             label3.BorderStyle = BorderStyle.FixedSingle;
             label3.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(111, 265);
+            label3.Location = new Point(130, 277);
             label3.Name = "label3";
-            label3.Size = new Size(369, 32);
+            label3.Size = new Size(408, 32);
             label3.TabIndex = 80;
             label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
-            label5.BackColor = Color.Transparent;
+            label5.BackColor = Color.FromArgb(150, 3, 6, 3);
             label5.BorderStyle = BorderStyle.FixedSingle;
             label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(111, 164);
+            label5.Location = new Point(130, 176);
             label5.Name = "label5";
-            label5.Size = new Size(225, 37);
+            label5.Size = new Size(408, 37);
             label5.TabIndex = 81;
             label5.Text = "Datos Personales:";
             label5.TextAlign = ContentAlignment.TopCenter;
@@ -168,7 +168,7 @@
             button3.FlatStyle = FlatStyle.Popup;
             button3.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(453, 609);
+            button3.Location = new Point(532, 609);
             button3.Name = "button3";
             button3.Size = new Size(125, 50);
             button3.TabIndex = 82;
@@ -181,13 +181,13 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.BackColor = Color.Transparent;
+            label6.BackColor = Color.FromArgb(50, 3, 6, 3);
             label6.BorderStyle = BorderStyle.Fixed3D;
-            label6.Font = new Font("Segoe UI", 33F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.White;
-            label6.Location = new Point(86, 43);
+            label6.Location = new Point(106, 54);
             label6.Name = "label6";
-            label6.Size = new Size(418, 62);
+            label6.Size = new Size(457, 67);
             label6.TabIndex = 83;
             label6.Text = "SOPORTE TÉCNICO";
             // 
@@ -197,7 +197,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(590, 671);
+            ClientSize = new Size(669, 671);
             Controls.Add(label6);
             Controls.Add(button3);
             Controls.Add(label5);
