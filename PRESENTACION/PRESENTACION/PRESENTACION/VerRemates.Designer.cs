@@ -45,7 +45,7 @@
             button3.FlatStyle = FlatStyle.Popup;
             button3.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(1081, 605);
+            button3.Location = new Point(765, 680);
             button3.Name = "button3";
             button3.Size = new Size(124, 48);
             button3.TabIndex = 61;
@@ -61,9 +61,9 @@
             flowLayoutPanel1.BackColor = Color.FromArgb(3, 6, 3);
             flowLayoutPanel1.BorderStyle = BorderStyle.Fixed3D;
             flowLayoutPanel1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            flowLayoutPanel1.Location = new Point(66, 122);
+            flowLayoutPanel1.Location = new Point(173, 131);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1084, 447);
+            flowLayoutPanel1.Size = new Size(555, 534);
             flowLayoutPanel1.TabIndex = 62;
             flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
@@ -74,7 +74,7 @@
             label3.BorderStyle = BorderStyle.Fixed3D;
             label3.Font = new Font("Segoe UI", 33F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(375, 40);
+            label3.Location = new Point(209, 40);
             label3.Name = "label3";
             label3.Size = new Size(466, 62);
             label3.TabIndex = 63;
@@ -106,7 +106,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1217, 665);
+            ClientSize = new Size(901, 740);
             Controls.Add(button5);
             Controls.Add(label3);
             Controls.Add(flowLayoutPanel1);

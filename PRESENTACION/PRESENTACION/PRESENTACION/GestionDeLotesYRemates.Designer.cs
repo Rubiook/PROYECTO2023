@@ -72,6 +72,8 @@
             toolTip1 = new ToolTip(components);
             comboBoxRemate = new ComboBox();
             labelTipoDeRemate = new Label();
+            btnOcultarRematesAntiguos = new Button();
+            btnOcultarLotesAsignados = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -317,7 +319,7 @@
             labelRematador.BorderStyle = BorderStyle.Fixed3D;
             labelRematador.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             labelRematador.ForeColor = Color.White;
-            labelRematador.Location = new Point(1111, 209);
+            labelRematador.Location = new Point(1111, 208);
             labelRematador.Name = "labelRematador";
             labelRematador.Size = new Size(230, 27);
             labelRematador.TabIndex = 38;
@@ -671,7 +673,7 @@
             comboBoxRemate.FormattingEnabled = true;
             comboBoxRemate.IntegralHeight = false;
             comboBoxRemate.Items.AddRange(new object[] { "GANADO", "MAQUINARIA" });
-            comboBoxRemate.Location = new Point(1388, 249);
+            comboBoxRemate.Location = new Point(1388, 250);
             comboBoxRemate.Name = "comboBoxRemate";
             comboBoxRemate.Size = new Size(155, 29);
             comboBoxRemate.TabIndex = 64;
@@ -690,6 +692,38 @@
             labelTipoDeRemate.TabIndex = 63;
             labelTipoDeRemate.Text = "Seleccione el tipo de Remate:";
             // 
+            // btnOcultarRematesAntiguos
+            // 
+            btnOcultarRematesAntiguos.BackColor = Color.Transparent;
+            btnOcultarRematesAntiguos.Cursor = Cursors.Hand;
+            btnOcultarRematesAntiguos.FlatStyle = FlatStyle.Flat;
+            btnOcultarRematesAntiguos.Font = new Font("Segoe UI Black", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnOcultarRematesAntiguos.ForeColor = Color.White;
+            btnOcultarRematesAntiguos.Location = new Point(20, 97);
+            btnOcultarRematesAntiguos.Name = "btnOcultarRematesAntiguos";
+            btnOcultarRematesAntiguos.Size = new Size(236, 33);
+            btnOcultarRematesAntiguos.TabIndex = 65;
+            btnOcultarRematesAntiguos.UseVisualStyleBackColor = false;
+            btnOcultarRematesAntiguos.Click += btnOcultarRematesAntiguos_Click;
+            btnOcultarRematesAntiguos.MouseEnter += btnOcultarRematesAntiguos_MouseEnter;
+            btnOcultarRematesAntiguos.MouseLeave += btnOcultarRematesAntiguos_MouseLeave;
+            // 
+            // btnOcultarLotesAsignados
+            // 
+            btnOcultarLotesAsignados.BackColor = Color.Transparent;
+            btnOcultarLotesAsignados.Cursor = Cursors.Hand;
+            btnOcultarLotesAsignados.FlatStyle = FlatStyle.Flat;
+            btnOcultarLotesAsignados.Font = new Font("Segoe UI Black", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnOcultarLotesAsignados.ForeColor = Color.White;
+            btnOcultarLotesAsignados.Location = new Point(22, 535);
+            btnOcultarLotesAsignados.Name = "btnOcultarLotesAsignados";
+            btnOcultarLotesAsignados.Size = new Size(234, 33);
+            btnOcultarLotesAsignados.TabIndex = 66;
+            btnOcultarLotesAsignados.UseVisualStyleBackColor = false;
+            btnOcultarLotesAsignados.Click += btnOcultarLotesAsignados_Click;
+            btnOcultarLotesAsignados.MouseEnter += btnOcultarLotesAsignados_MouseEnter;
+            btnOcultarLotesAsignados.MouseLeave += btnOcultarLotesAsignados_MouseLeave;
+            // 
             // GestionDeLotesYRemates
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -697,6 +731,8 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1582, 946);
+            Controls.Add(btnOcultarLotesAsignados);
+            Controls.Add(btnOcultarRematesAntiguos);
             Controls.Add(comboBoxRemate);
             Controls.Add(labelTipoDeRemate);
             Controls.Add(label1);
@@ -737,7 +773,7 @@
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "GestionDeLotesYRemates";
-            Text = "Gestion de Lotes y Remates";
+            Text = "Gestión de Lotes y Remates";
             Load += dateTimePicker2_ValueChanged;
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -784,5 +820,7 @@
         private ToolTip toolTip1;
         private ComboBox comboBoxRemate;
         private Label labelTipoDeRemate;
+        private Button btnOcultarRematesAntiguos;
+        private Button btnOcultarLotesAsignados;
     }
 }

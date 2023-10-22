@@ -48,7 +48,15 @@
             textBoxTareas = new TextBox();
             labelTareas = new Label();
             button5 = new Button();
+            lblTipoDeUsuario = new Label();
+            comboBoxTipoDeUsuario = new ComboBox();
+            txtNumeroDeRematador = new TextBox();
+            lblNumeroDeRematador = new Label();
+            trackBar1 = new TrackBar();
+            label1 = new Label();
+            labelIndiqueComision = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
             // buttonRegresar
@@ -61,7 +69,7 @@
             buttonRegresar.FlatStyle = FlatStyle.Popup;
             buttonRegresar.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             buttonRegresar.ForeColor = Color.White;
-            buttonRegresar.Location = new Point(1020, 596);
+            buttonRegresar.Location = new Point(1177, 648);
             buttonRegresar.Name = "buttonRegresar";
             buttonRegresar.Size = new Size(125, 50);
             buttonRegresar.TabIndex = 57;
@@ -98,7 +106,7 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Location = new Point(59, 295);
+            dataGridView1.Location = new Point(138, 350);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
@@ -117,7 +125,7 @@
             label3.BorderStyle = BorderStyle.Fixed3D;
             label3.Font = new Font("Segoe UI", 33F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(207, 48);
+            label3.Location = new Point(286, 48);
             label3.Name = "label3";
             label3.Size = new Size(743, 62);
             label3.TabIndex = 60;
@@ -130,7 +138,7 @@
             buttonRegistrarEmpleado.FlatStyle = FlatStyle.Flat;
             buttonRegistrarEmpleado.Font = new Font("Segoe UI Black", 20F, FontStyle.Regular, GraphicsUnit.Point);
             buttonRegistrarEmpleado.ForeColor = Color.White;
-            buttonRegistrarEmpleado.Location = new Point(752, 501);
+            buttonRegistrarEmpleado.Location = new Point(831, 556);
             buttonRegistrarEmpleado.Name = "buttonRegistrarEmpleado";
             buttonRegistrarEmpleado.Size = new Size(346, 56);
             buttonRegistrarEmpleado.TabIndex = 63;
@@ -147,7 +155,7 @@
             buttonModificarEmpleado.FlatStyle = FlatStyle.Flat;
             buttonModificarEmpleado.Font = new Font("Segoe UI Black", 20F, FontStyle.Regular, GraphicsUnit.Point);
             buttonModificarEmpleado.ForeColor = Color.White;
-            buttonModificarEmpleado.Location = new Point(400, 501);
+            buttonModificarEmpleado.Location = new Point(479, 556);
             buttonModificarEmpleado.Name = "buttonModificarEmpleado";
             buttonModificarEmpleado.Size = new Size(354, 56);
             buttonModificarEmpleado.TabIndex = 62;
@@ -164,7 +172,7 @@
             buttonEliminarEmpleado.FlatStyle = FlatStyle.Flat;
             buttonEliminarEmpleado.Font = new Font("Segoe UI Black", 20F, FontStyle.Regular, GraphicsUnit.Point);
             buttonEliminarEmpleado.ForeColor = Color.White;
-            buttonEliminarEmpleado.Location = new Point(59, 501);
+            buttonEliminarEmpleado.Location = new Point(138, 556);
             buttonEliminarEmpleado.Name = "buttonEliminarEmpleado";
             buttonEliminarEmpleado.Size = new Size(346, 56);
             buttonEliminarEmpleado.TabIndex = 61;
@@ -181,7 +189,7 @@
             labelElejirUsuario.BorderStyle = BorderStyle.Fixed3D;
             labelElejirUsuario.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             labelElejirUsuario.ForeColor = Color.White;
-            labelElejirUsuario.Location = new Point(160, 159);
+            labelElejirUsuario.Location = new Point(195, 208);
             labelElejirUsuario.Name = "labelElejirUsuario";
             labelElejirUsuario.Size = new Size(206, 27);
             labelElejirUsuario.TabIndex = 67;
@@ -196,8 +204,7 @@
             comboBoxElegirUsuario.ForeColor = Color.White;
             comboBoxElegirUsuario.FormattingEnabled = true;
             comboBoxElegirUsuario.IntegralHeight = false;
-            comboBoxElegirUsuario.Items.AddRange(new object[] { "OPERADOR", "COMPRADOR", "VENDEDOR", "REMATADOR" });
-            comboBoxElegirUsuario.Location = new Point(372, 159);
+            comboBoxElegirUsuario.Location = new Point(407, 207);
             comboBoxElegirUsuario.Name = "comboBoxElegirUsuario";
             comboBoxElegirUsuario.Size = new Size(216, 29);
             comboBoxElegirUsuario.TabIndex = 66;
@@ -208,7 +215,7 @@
             textBoxSueldoMensual.BorderStyle = BorderStyle.FixedSingle;
             textBoxSueldoMensual.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             textBoxSueldoMensual.ForeColor = SystemColors.Window;
-            textBoxSueldoMensual.Location = new Point(418, 194);
+            textBoxSueldoMensual.Location = new Point(948, 171);
             textBoxSueldoMensual.Name = "textBoxSueldoMensual";
             textBoxSueldoMensual.Size = new Size(170, 29);
             textBoxSueldoMensual.TabIndex = 65;
@@ -221,7 +228,7 @@
             labelSueldoMensual.BorderStyle = BorderStyle.Fixed3D;
             labelSueldoMensual.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             labelSueldoMensual.ForeColor = Color.White;
-            labelSueldoMensual.Location = new Point(160, 196);
+            labelSueldoMensual.Location = new Point(690, 172);
             labelSueldoMensual.Name = "labelSueldoMensual";
             labelSueldoMensual.Size = new Size(252, 27);
             labelSueldoMensual.TabIndex = 64;
@@ -235,7 +242,7 @@
             dateTimePickerHoraSalida.CalendarTitleForeColor = Color.Black;
             dateTimePickerHoraSalida.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             dateTimePickerHoraSalida.Format = DateTimePickerFormat.Time;
-            dateTimePickerHoraSalida.Location = new Point(513, 236);
+            dateTimePickerHoraSalida.Location = new Point(1042, 206);
             dateTimePickerHoraSalida.Name = "dateTimePickerHoraSalida";
             dateTimePickerHoraSalida.Size = new Size(75, 29);
             dateTimePickerHoraSalida.TabIndex = 71;
@@ -249,7 +256,7 @@
             dateTimePickerHoraEntrada.CalendarTitleForeColor = Color.Black;
             dateTimePickerHoraEntrada.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             dateTimePickerHoraEntrada.Format = DateTimePickerFormat.Time;
-            dateTimePickerHoraEntrada.Location = new Point(304, 235);
+            dateTimePickerHoraEntrada.Location = new Point(833, 206);
             dateTimePickerHoraEntrada.Name = "dateTimePickerHoraEntrada";
             dateTimePickerHoraEntrada.Size = new Size(75, 29);
             dateTimePickerHoraEntrada.TabIndex = 70;
@@ -261,7 +268,7 @@
             labelHoraSalida.BorderStyle = BorderStyle.Fixed3D;
             labelHoraSalida.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             labelHoraSalida.ForeColor = Color.White;
-            labelHoraSalida.Location = new Point(385, 236);
+            labelHoraSalida.Location = new Point(914, 207);
             labelHoraSalida.Name = "labelHoraSalida";
             labelHoraSalida.Size = new Size(122, 27);
             labelHoraSalida.TabIndex = 69;
@@ -274,7 +281,7 @@
             labelHoraEntrada.BorderStyle = BorderStyle.Fixed3D;
             labelHoraEntrada.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             labelHoraEntrada.ForeColor = Color.White;
-            labelHoraEntrada.Location = new Point(160, 237);
+            labelHoraEntrada.Location = new Point(689, 207);
             labelHoraEntrada.Name = "labelHoraEntrada";
             labelHoraEntrada.Size = new Size(138, 27);
             labelHoraEntrada.TabIndex = 68;
@@ -286,25 +293,25 @@
             textBoxTareas.BorderStyle = BorderStyle.FixedSingle;
             textBoxTareas.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             textBoxTareas.ForeColor = SystemColors.Window;
-            textBoxTareas.Location = new Point(622, 189);
+            textBoxTareas.Location = new Point(195, 276);
             textBoxTareas.Multiline = true;
             textBoxTareas.Name = "textBoxTareas";
             textBoxTareas.ScrollBars = ScrollBars.Vertical;
-            textBoxTareas.Size = new Size(374, 76);
+            textBoxTareas.Size = new Size(429, 67);
             textBoxTareas.TabIndex = 78;
             // 
             // labelTareas
             // 
-            labelTareas.AutoSize = true;
             labelTareas.BackColor = Color.Transparent;
             labelTareas.BorderStyle = BorderStyle.Fixed3D;
             labelTareas.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             labelTareas.ForeColor = Color.White;
-            labelTareas.Location = new Point(622, 159);
+            labelTareas.Location = new Point(195, 246);
             labelTareas.Name = "labelTareas";
-            labelTareas.Size = new Size(74, 27);
+            labelTareas.Size = new Size(429, 27);
             labelTareas.TabIndex = 79;
             labelTareas.Text = "Tareas:";
+            labelTareas.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // button5
             // 
@@ -326,13 +333,114 @@
             button5.UseVisualStyleBackColor = false;
             button5.Click += button5_Click;
             // 
+            // lblTipoDeUsuario
+            // 
+            lblTipoDeUsuario.AutoSize = true;
+            lblTipoDeUsuario.BackColor = Color.Transparent;
+            lblTipoDeUsuario.BorderStyle = BorderStyle.Fixed3D;
+            lblTipoDeUsuario.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTipoDeUsuario.ForeColor = Color.White;
+            lblTipoDeUsuario.Location = new Point(194, 173);
+            lblTipoDeUsuario.Name = "lblTipoDeUsuario";
+            lblTipoDeUsuario.Size = new Size(258, 27);
+            lblTipoDeUsuario.TabIndex = 82;
+            lblTipoDeUsuario.Text = "Seleccione Tipo de Usuario:";
+            lblTipoDeUsuario.Click += lblTipoDeUsuario_Click;
+            // 
+            // comboBoxTipoDeUsuario
+            // 
+            comboBoxTipoDeUsuario.BackColor = Color.FromArgb(3, 6, 3);
+            comboBoxTipoDeUsuario.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxTipoDeUsuario.FlatStyle = FlatStyle.Flat;
+            comboBoxTipoDeUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            comboBoxTipoDeUsuario.ForeColor = Color.White;
+            comboBoxTipoDeUsuario.FormattingEnabled = true;
+            comboBoxTipoDeUsuario.IntegralHeight = false;
+            comboBoxTipoDeUsuario.Items.AddRange(new object[] { "OPERADOR", "REMATADOR" });
+            comboBoxTipoDeUsuario.Location = new Point(458, 172);
+            comboBoxTipoDeUsuario.Name = "comboBoxTipoDeUsuario";
+            comboBoxTipoDeUsuario.Size = new Size(164, 29);
+            comboBoxTipoDeUsuario.TabIndex = 81;
+            comboBoxTipoDeUsuario.SelectedIndexChanged += comboBoxTipoDeUsuario_SelectedIndexChanged;
+            // 
+            // txtNumeroDeRematador
+            // 
+            txtNumeroDeRematador.BackColor = Color.FromArgb(3, 6, 3);
+            txtNumeroDeRematador.BorderStyle = BorderStyle.FixedSingle;
+            txtNumeroDeRematador.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            txtNumeroDeRematador.ForeColor = SystemColors.Window;
+            txtNumeroDeRematador.Location = new Point(959, 246);
+            txtNumeroDeRematador.Name = "txtNumeroDeRematador";
+            txtNumeroDeRematador.Size = new Size(159, 29);
+            txtNumeroDeRematador.TabIndex = 84;
+            txtNumeroDeRematador.TextChanged += txtNumeroDeRematador_TextChanged;
+            txtNumeroDeRematador.KeyPress += txtNumeroDeRematador_KeyPress;
+            // 
+            // lblNumeroDeRematador
+            // 
+            lblNumeroDeRematador.AutoSize = true;
+            lblNumeroDeRematador.BackColor = Color.Transparent;
+            lblNumeroDeRematador.BorderStyle = BorderStyle.Fixed3D;
+            lblNumeroDeRematador.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            lblNumeroDeRematador.ForeColor = Color.White;
+            lblNumeroDeRematador.Location = new Point(690, 246);
+            lblNumeroDeRematador.Name = "lblNumeroDeRematador";
+            lblNumeroDeRematador.Size = new Size(263, 27);
+            lblNumeroDeRematador.TabIndex = 83;
+            lblNumeroDeRematador.Text = "Ingrese el N° de Rematador:";
+            lblNumeroDeRematador.Click += lblNumeroDeRematador_Click;
+            // 
+            // trackBar1
+            // 
+            trackBar1.AutoSize = false;
+            trackBar1.BackColor = Color.FromArgb(3, 6, 3);
+            trackBar1.Location = new Point(691, 312);
+            trackBar1.Name = "trackBar1";
+            trackBar1.Size = new Size(330, 32);
+            trackBar1.TabIndex = 85;
+            trackBar1.TickStyle = TickStyle.None;
+            trackBar1.Scroll += trackBar1_Scroll;
+            // 
+            // label1
+            // 
+            label1.BackColor = Color.Transparent;
+            label1.BorderStyle = BorderStyle.Fixed3D;
+            label1.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(1027, 312);
+            label1.Name = "label1";
+            label1.Size = new Size(89, 31);
+            label1.TabIndex = 86;
+            label1.Text = " ";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // labelIndiqueComision
+            // 
+            labelIndiqueComision.BackColor = Color.Transparent;
+            labelIndiqueComision.BorderStyle = BorderStyle.Fixed3D;
+            labelIndiqueComision.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            labelIndiqueComision.ForeColor = Color.White;
+            labelIndiqueComision.Location = new Point(691, 281);
+            labelIndiqueComision.Name = "labelIndiqueComision";
+            labelIndiqueComision.Size = new Size(427, 27);
+            labelIndiqueComision.TabIndex = 87;
+            labelIndiqueComision.Text = "Indique la Comisión del Rematador:";
+            labelIndiqueComision.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // MantenimientoEmpleados
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1157, 658);
+            ClientSize = new Size(1314, 710);
+            Controls.Add(labelIndiqueComision);
+            Controls.Add(label1);
+            Controls.Add(trackBar1);
+            Controls.Add(txtNumeroDeRematador);
+            Controls.Add(lblNumeroDeRematador);
+            Controls.Add(lblTipoDeUsuario);
+            Controls.Add(comboBoxTipoDeUsuario);
             Controls.Add(button5);
             Controls.Add(labelTareas);
             Controls.Add(textBoxTareas);
@@ -355,6 +463,7 @@
             Text = "Mantenimiento de Empleados";
             Load += MantenimientoEmpleados_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -378,5 +487,12 @@
         private TextBox textBoxTareas;
         private Label labelTareas;
         private Button button5;
+        private Label lblTipoDeUsuario;
+        private ComboBox comboBoxTipoDeUsuario;
+        private TextBox txtNumeroDeRematador;
+        private Label lblNumeroDeRematador;
+        private TrackBar trackBar1;
+        private Label label1;
+        private Label labelIndiqueComision;
     }
 }

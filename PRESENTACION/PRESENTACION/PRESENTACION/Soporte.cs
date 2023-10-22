@@ -47,22 +47,22 @@ namespace PRESENTACION.PRESENTACION
             // Escapar caracteres especiales en el mensaje
             string encodedMessage = Uri.EscapeDataString(message);
 
-            // Crear el enlace de WhatsApp Business
-            string whatsappBusinessLink = $"whatsapp://send?phone={phoneNumber}&text={encodedMessage}";
+            // Crear el enlace de WhatsApp 
+            string whatsappLink = $"whatsapp://send?phone={phoneNumber}&text={encodedMessage}";
 
             // Usar el proceso para abrir el enlace en el navegador predeterminado
             try
             {
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = whatsappBusinessLink,
+                    FileName = whatsappLink,
                     UseShellExecute = true
                 });
             }
             catch (Exception ex)
             {
                 // Manejar cualquier excepción
-                MessageBox.Show("No se pudo abrir WhatsApp Business: " + ex.Message);
+                MessageBox.Show("No se pudo abrir WhatsApp: " + ex.Message);
             }
 
         }
@@ -118,7 +118,7 @@ namespace PRESENTACION.PRESENTACION
         private async Task EnviarFormulario()
         {
             string CorreoUsuario = correoUsuario;
-            string mensaje = "Soporte Técnico Remates del campo. Usuario: " + nombreUsuario + " - " + rolUsuario + "\n Mensaje: " + textBox2.Text;
+            string mensaje = "Soporte Técnico Remates del campo.\n Usuario: " + nombreUsuario + " - " + rolUsuario + "\n Mensaje: " + textBox2.Text;
 
             if (!string.IsNullOrWhiteSpace(correoUsuario) && !string.IsNullOrWhiteSpace(mensaje))
             {

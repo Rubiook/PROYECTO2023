@@ -51,7 +51,7 @@
             lblRemate.BorderStyle = BorderStyle.Fixed3D;
             lblRemate.Font = new Font("Segoe UI", 30F, FontStyle.Bold, GraphicsUnit.Point);
             lblRemate.ForeColor = Color.White;
-            lblRemate.Location = new Point(507, 56);
+            lblRemate.Location = new Point(381, 55);
             lblRemate.Name = "lblRemate";
             lblRemate.Size = new Size(2, 56);
             lblRemate.TabIndex = 57;

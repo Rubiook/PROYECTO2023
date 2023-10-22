@@ -9,7 +9,6 @@ namespace NEGOCIO.NEGOCIO
     public class Preeventa
     {
 
-        public int id { get; set; }
         public int id_lote { get; set; }
         public int id_usuario { get; set; }
         public decimal precio_de_venta { get; set; }
@@ -21,12 +20,11 @@ namespace NEGOCIO.NEGOCIO
         public int precio_base_lote { get; set; }
         public string tipo_lote { get; set; }
         public int cantidad_en_lote { get; set; }
-        public int id_remate { get; set; }
         public string descripcion_lote { get; set; }
+        public int id_remate { get; set; }
         public DateTime fecha_creacion { get; set; }
 
-
-
+        public int id { get; set; }
 
     }
 }

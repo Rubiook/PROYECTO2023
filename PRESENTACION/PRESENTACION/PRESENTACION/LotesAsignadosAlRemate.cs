@@ -17,18 +17,18 @@ namespace PRESENTACION.PRESENTACION
     public partial class LotesAsignadosAlRemate : Form
     {
         private readonly MySqlConnection _conexion;
-        private readonly NegocioLotesRemates _negocioLotesRemates;
+        private readonly NegocioBDD _negocioLotesRemates;
         private readonly int _idRemateSeleccionado;
         private int idRemateSeleccionado = -1;
         private int remateId;
-        private NegocioLotesRemates negocioLotesRemates;
+        private NegocioBDD negocioLotesRemates;
         private RepositorioUsuarios repositorioUsuarios;
         private int selectedLoteId = -1; // Inicializado con un valor que no corresponde a ningún lote
         private DataGridView dataGridView2;
         private GestionDeLotesYRemates gestionRematesYLotes;
         private DateTime FechaRemate;
         public string Proveedor { get; private set; }
-        public LotesAsignadosAlRemate(int remateId, DateTime fechaRemate, NegocioLotesRemates negocioLotesRemates, DataGridView dataGridView2, GestionDeLotesYRemates gestionRematesYLotes, string proveedor)
+        public LotesAsignadosAlRemate(int remateId, DateTime fechaRemate, NegocioBDD negocioLotesRemates, DataGridView dataGridView2, GestionDeLotesYRemates gestionRematesYLotes, string proveedor)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;

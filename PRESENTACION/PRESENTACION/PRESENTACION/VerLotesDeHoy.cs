@@ -15,7 +15,7 @@ namespace PRESENTACION.PRESENTACION
 {
     public partial class VerLotesDeHoy : Form
     {
-        private NegocioLotesRemates negocioLotesRemates = new NegocioLotesRemates();
+        private NegocioBDD negocioLotesRemates = new NegocioBDD();
         private RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
         private int remateId;
         public Login LoginInstance { get; set; }
@@ -164,7 +164,7 @@ namespace PRESENTACION.PRESENTACION
                 if (remate.Fecha.Date == fechaHoy)
                 {
                     hayRemateHoy = true;
-                    lblRemate.Text = $"Remate de hoy: {remate.Fecha.ToString("dd/MM/yyyy")}";
+                    lblRemate.Text = $"Remate de hoy: {remate.Fecha.ToString("dd/MM/yyyy")} <{remate.TipoDeRemate}>";
                     CargarLotesDeHoy(remate.Id); // Pasar el ID del remate
                     return; // Salir del bucle una vez que se encuentra el remate de hoy
                 }
@@ -235,9 +235,9 @@ namespace PRESENTACION.PRESENTACION
             textBox3.Clear();
         }
 
+        //BOTON REALIZAR PREVENTA -------------------------------------------------------------------------------
         private void button1_Click(object sender, EventArgs e)
         {
-
 
             try
             {
@@ -273,7 +273,7 @@ namespace PRESENTACION.PRESENTACION
 
                     int idRemate = negocioLotesRemates.ObtenerRemateIdPorLote(idLote);
 
-                    negocioLotesRemates.AgregarPreeventa(idLote, idUsuarioComprador, precioVenta, comprador.nombre, comprador.apellido, comprador.correo, comprador.celular, lote.proveedor_lote, lote.precio_base, lote.tipo_de_lote, lote.cantidad_en_lote, idRemate, lote.descripcion);
+                    negocioLotesRemates.AgregarPreeventa(idLote, idUsuarioComprador, precioVenta,  idRemate);
 
                     MessageBox.Show("Lote prevendido exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

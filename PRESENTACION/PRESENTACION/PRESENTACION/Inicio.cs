@@ -12,7 +12,7 @@ namespace PRESENTACION
     {
         public Login Login { get; set; } // Propiedad para almacenar la instancia de Login
         private Login loginInstance; // Esto debe ser una instancia de Login
-        private NegocioLotesRemates negocioLotesRemates;
+        private NegocioBDD negocioLotesRemates;
         private bool menuVisible = false;
         private int menuWidth = 150; // Ancho final del menú
         private int animationSpeed = 10; // Velocidad de la animación 
@@ -35,7 +35,7 @@ namespace PRESENTACION
             MostrarRolUsuario(); // Llama al método para mostrar el rol 
             MostrarNombreUsuario();
             MostrarFechaActual();
-            negocioLotesRemates = new NegocioLotesRemates();
+            negocioLotesRemates = new NegocioBDD();
 
 
 
@@ -495,6 +495,8 @@ namespace PRESENTACION
             button4.FlatAppearance.BorderColor = DefaultForeColor; // Restaurar color del borde
         }
 
+
+        //BOTON SALIR --------------------------------------------------------------------------------------------------------------------------------------
         private void button4_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("¿Seguro desea salir del programa?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -504,11 +506,23 @@ namespace PRESENTACION
             }
         }
 
+
+        //BOTON LOTES DEL PROXIMO REMATE------------------------------------------------------------------------------------------------------
         private void button8_Click(object sender, EventArgs e)
         {
-            VerLotesProximoRemate lotesProximoRemate = new VerLotesProximoRemate();
+            
+            bool hayLotes = negocioLotesRemates.HayLotesEnElProximoRemate();
 
-            lotesProximoRemate.ShowDialog(); //MODAL
+            if (hayLotes)
+            {
+                VerLotesProximoRemate lotesProximoRemate = new VerLotesProximoRemate();
+                lotesProximoRemate.ShowDialog(); // Abre la ventana de lotes del próximo remate
+            }
+            else
+            {
+                MessageBox.Show("No hay lotes en el próximo remate.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
 
         }
 
@@ -663,7 +677,7 @@ namespace PRESENTACION
             }
             else
             {
-                MessageBox.Show("No hay remate programado para hoy.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No hay lotes en el remate programado para hoy.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }

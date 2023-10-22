@@ -48,6 +48,14 @@
             "MySql.Data": {
               "target": "Package",
               "version": "[8.1.0, )"
+            },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[110.2.0, )"
+            },
+            "mercadopago-sdk": {
+              "target": "Package",
+              "version": "[2.3.3, )"
             }
           },
           "imports": [
@@ -118,6 +126,18 @@
             "NUnit": {
               "target": "Package",
               "version": "[3.13.3, )"
+            },
+            "PdfSharp": {
+              "target": "Package",
+              "version": "[1.50.5147, )"
+            },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[110.2.0, )"
+            },
+            "itext7": {
+              "target": "Package",
+              "version": "[8.0.1, )"
             },
             "mercadopago-sdk": {
               "target": "Package",

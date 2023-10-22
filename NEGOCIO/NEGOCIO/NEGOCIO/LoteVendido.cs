@@ -13,7 +13,7 @@ namespace NEGOCIO.NEGOCIO
         public int Id { get; set; }
         public int IdRemate { get; set; }
         public int IdLote { get; set; }
-
+        public int id_preventa { get; set; }
         public int IdUsuarioComprador { get; set; }
         public DateTime FechaVenta { get; set; }
         public string Proveedor { get; set; }

@@ -13,7 +13,7 @@ namespace PRESENTACION.PRESENTACION
 {
     public partial class VerRemates : Form
     {
-        private NegocioLotesRemates negocioLotesRemates = new NegocioLotesRemates();
+        private NegocioBDD negocioLotesRemates = new NegocioBDD();
         public VerRemates()
         {
             InitializeComponent();

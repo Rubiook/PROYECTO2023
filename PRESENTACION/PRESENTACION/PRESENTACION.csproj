@@ -19,8 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="itext7" Version="8.0.1" />
     <PackageReference Include="mercadopago-sdk" Version="2.3.3" />
     <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="PdfSharp" Version="1.50.5147" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,8 +11,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-
+using RestSharp;
+using RestSharp.Authenticators;
+using System.Threading.Tasks;
+using MercadoPago.Client.Payment;
+using MercadoPago.Config;
+using MercadoPago.Resource.Payment;
 
 
 
@@ -21,7 +25,7 @@ namespace PRESENTACION.PRESENTACION
     public partial class Preeventas : Form
     {
 
-        private NegocioLotesRemates negocioLotesRemates = new NegocioLotesRemates();
+        private NegocioBDD negocioLotesRemates = new NegocioBDD();
         private string preferenceId;
 
         public Preeventas()
@@ -50,22 +54,21 @@ namespace PRESENTACION.PRESENTACION
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             dataGridView1.Columns.Add("id", "ID");
-            dataGridView1.Columns.Add("id_remate", "N° REMATE");
             dataGridView1.Columns.Add("id_lote", "N° LOTE");
             dataGridView1.Columns.Add("id_usuario", "N° USUARIO");
-
+            dataGridView1.Columns.Add("precio_de_venta", "$ VENTA");
             dataGridView1.Columns.Add("nombre_usuario", "NOMBRE");
             dataGridView1.Columns.Add("apellido_usuario", "APELLIDO");
             dataGridView1.Columns.Add("correo_usuario", "CORREO");
             dataGridView1.Columns.Add("celular_usuario", "CELULAR");
             dataGridView1.Columns.Add("proveedor_lote", "PROVEEDOR LOTE");
-            dataGridView1.Columns.Add("precio_de_venta", "$ VENTA");
-            dataGridView1.Columns.Add("precio_base_lote", "PRECIO RESERVA");
+            dataGridView1.Columns.Add("precio_base_lote", "$ RESERVA");
             dataGridView1.Columns.Add("tipo_lote", "TIPO LOTE");
             dataGridView1.Columns.Add("cantidad_en_lote", "CANTIDAD");
-
             dataGridView1.Columns.Add("descripcion_lote", "DESCRIPCIÓN");
+            dataGridView1.Columns.Add("id_remate", "N° REMATE");
             dataGridView1.Columns.Add("fecha_creacion", "FECHA");
+
 
             // Ajustar tamaños de columnas según tus necesidades
             dataGridView1.Columns[0].Width = 50;
@@ -89,22 +92,21 @@ namespace PRESENTACION.PRESENTACION
                 foreach (var preventa in preeventas)
                 {
                     dataGridView1.Rows.Add(
-                        preventa.id,
-                        preventa.id_remate,
-                        preventa.id_lote,
+                          preventa.id,
+                         preventa.id_lote,
                         preventa.id_usuario,
-
+                        preventa.precio_de_venta,
                         preventa.nombre_usuario,
                         preventa.apellido_usuario,
                         preventa.correo_usuario,
                         preventa.celular_usuario,
                         preventa.proveedor_lote,
-                        preventa.precio_de_venta,
                         preventa.precio_base_lote,
                         preventa.tipo_lote,
                         preventa.cantidad_en_lote,
                         preventa.descripcion_lote,
-                        preventa.fecha_creacion
+                        preventa.id_remate,
+                        preventa.fecha_creacion.ToString("dd/MM/yyyy")
                     );
                 }
             }
@@ -120,7 +122,7 @@ namespace PRESENTACION.PRESENTACION
 
         }
 
-        
+
 
 
         private void buttonVenderLote_Click(object sender, EventArgs e)
@@ -129,27 +131,23 @@ namespace PRESENTACION.PRESENTACION
             {
                 int filaSeleccionada = dataGridView1.CurrentRow.Index;
 
-                string apellidoComprador = dataGridView1.Rows[filaSeleccionada].Cells["apellido_usuario"].Value.ToString();
-                int idUsuarioComprador = Convert.ToInt32(dataGridView1.Rows[filaSeleccionada].Cells["id_usuario"].Value);
+                // string apellidoComprador = dataGridView1.Rows[filaSeleccionada].Cells["apellido_usuario"].Value.ToString();
+                // int idUsuarioComprador = Convert.ToInt32(dataGridView1.Rows[filaSeleccionada].Cells["id_usuario"].Value);
 
-                int idRemate = Convert.ToInt32(dataGridView1.Rows[filaSeleccionada].Cells["id_remate"].Value);
+                // Obtener el id_preventa basado en el id_lote y id_remate
+
                 int idLote = Convert.ToInt32(dataGridView1.Rows[filaSeleccionada].Cells["id_lote"].Value);
-                string proveedorLote = dataGridView1.Rows[filaSeleccionada].Cells["proveedor_lote"].Value.ToString();
-                string compradorLote = dataGridView1.Rows[filaSeleccionada].Cells["nombre_usuario"].Value.ToString();
-                decimal precioVenta = Convert.ToDecimal(dataGridView1.Rows[filaSeleccionada].Cells["precio_de_venta"].Value);
+                int idPreventa = Convert.ToInt32(dataGridView1.Rows[filaSeleccionada].Cells["id"].Value);
+                int idRemate = Convert.ToInt32(dataGridView1.Rows[filaSeleccionada].Cells["id_remate"].Value);
+                // string proveedorLote = dataGridView1.Rows[filaSeleccionada].Cells["proveedor_lote"].Value.ToString();
+                // string compradorLote = dataGridView1.Rows[filaSeleccionada].Cells["nombre_usuario"].Value.ToString();
+                // decimal precioVenta = Convert.ToDecimal(dataGridView1.Rows[filaSeleccionada].Cells["precio_de_venta"].Value);
 
-                LoteVendido loteVendido = new LoteVendido
-                {
-                    IdRemate = idRemate,
-                    IdLote = idLote,
-                    IdUsuarioComprador = idUsuarioComprador,
-                    FechaVenta = DateTime.Today,
-                    Proveedor = proveedorLote,
-                    Comprador = compradorLote + " " + apellidoComprador,
-                    PrecioDeVenta = (int)precioVenta
-                };
 
-                negocioLotesRemates.MarcarLoteComoVendido(loteVendido);
+
+
+
+                negocioLotesRemates.MarcarLoteComoVendido(idLote, idRemate, idPreventa);
 
                 MessageBox.Show("Lote vendido exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -244,8 +242,12 @@ namespace PRESENTACION.PRESENTACION
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Obtener el precio de venta desde la grilla
-            decimal precioVenta = ObtenerPrecioVentaDesdeGrilla();
+
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+
+                // Obtener el precio de venta desde la grilla
+                decimal precioVenta = ObtenerPrecioVentaDesdeGrilla();
 
             if (precioVenta > 0)
             {
@@ -281,13 +283,21 @@ namespace PRESENTACION.PRESENTACION
                     {
                         FileName = paymentUrl,
                         UseShellExecute = true
-                    });
+
+                    }); MessageBox.Show("URL de pago: " + paymentUrl);
+
                 }
                 catch (Exception ex)
                 {
                     // Maneja errores aquí
                     MessageBox.Show("Error al crear o abrir la preferencia de pago: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione la venta que desea pagar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
         }
@@ -307,11 +317,10 @@ namespace PRESENTACION.PRESENTACION
                     // Obtener el valor de la celda "Precio de Venta" en la fila seleccionada
                     string precioVentaStr = dataGridView1.Rows[filaSeleccionada].Cells["precio_de_venta"].Value.ToString();
 
-                    // Convertir el valor a decimal
+                    // Convertir el valor a decimal directamente
                     if (decimal.TryParse(precioVentaStr, out decimal precioVenta))
                     {
-                        // Convertir el precio decimal a entero
-                        return Convert.ToInt32(precioVenta);
+                        return precioVenta;
                     }
                 }
             }
@@ -325,6 +334,13 @@ namespace PRESENTACION.PRESENTACION
             return 0;
         }
 
+        private void Preeventas_Load(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                dataGridView1.CurrentRow.Selected = false;
+            }
+        }
 
 
     }

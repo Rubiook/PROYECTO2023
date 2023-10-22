@@ -14,7 +14,7 @@ namespace PRESENTACION.PRESENTACION
         private RepositorioUsuarios repositorioUsuarios;
         private MySqlConnection conn;
         private Dictionary<int, List<Lote>> rematesConLotes = new Dictionary<int, List<Lote>>();
-        private readonly NegocioLotesRemates negocioLotesRemates;
+        private readonly NegocioBDD negocioLotesRemates;
         private int selectedLoteId = -1; // Inicializado con un valor que no corresponde a ningún lote
         private bool isDataGridViewSelecting = false;
         private bool updatingComboboxes = false;
@@ -33,13 +33,14 @@ namespace PRESENTACION.PRESENTACION
             InitializeDataGridView();
             InitializeConnection();
             repositorioUsuarios = new RepositorioUsuarios();
-            negocioLotesRemates = new NegocioLotesRemates();
+            negocioLotesRemates = new NegocioBDD();
             refresh();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
 
 
         }
@@ -67,14 +68,15 @@ namespace PRESENTACION.PRESENTACION
 
             DataGridViewButtonColumn btnVerLotes = new DataGridViewButtonColumn();
             btnVerLotes.Name = "VerLotes";
-            btnVerLotes.HeaderText = "LOTES DEL REMATE";
-            btnVerLotes.Text = "Gestionar Lotes";
+            btnVerLotes.HeaderText = "LOTES";
+            btnVerLotes.Text = "Ver Lotes";
             btnVerLotes.UseColumnTextForButtonValue = true;
             dataGridView1.Columns.Add(btnVerLotes);
 
             dataGridView1.Columns[0].Width = 110;
             dataGridView1.Columns[2].Width = 110;
             dataGridView1.Columns[3].Width = 100;
+            dataGridView1.Columns[6].Width = 90;
             dataGridView1.DefaultCellStyle.Font = new Font("Arial", 10);
             dataGridView1.Columns[0].DefaultCellStyle.Font = new Font("Arial", 10);
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 11, FontStyle.Bold);
@@ -309,62 +311,69 @@ namespace PRESENTACION.PRESENTACION
                 int remateId = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Id"].Value);
                 int lotesAsignados = negocioLotesRemates.ObtenerCantidadLotesAsignados(remateId);
 
-                if (lotesAsignados > 0 && lotesAsignados < 2)//1
+                if (lotesAsignados < 1)//0
+                {
+
+                    e.Value = " ";
+
+                }
+                else if (lotesAsignados > 0 && lotesAsignados < 2)//1
                 {
                     e.CellStyle.BackColor = Color.FromArgb(7, 246, 7); // Verde 1
-                    e.CellStyle.ForeColor = Color.Black;
+                    e.Value = "[ 1 ]";
 
                 }
                 else if (lotesAsignados > 1 && lotesAsignados < 3)//2
                 {
                     e.CellStyle.BackColor = Color.FromArgb(35, 218, 9); // Verde 2
-                    e.CellStyle.ForeColor = Color.Black;
+                    e.Value = "[ 2 ]";
 
                 }
                 else if (lotesAsignados > 2 && lotesAsignados < 4)//3
                 {
                     e.CellStyle.BackColor = Color.FromArgb(50, 209, 9); // Verde 3
-                    e.CellStyle.ForeColor = Color.Black;
+                    e.Value = "[ 3 ]";
 
                 }
                 else if (lotesAsignados > 3 && lotesAsignados < 5)//4
                 {
                     e.CellStyle.BackColor = Color.FromArgb(228, 246, 9); // amarillo 1 
-                    e.CellStyle.ForeColor = Color.Black;
+                    e.Value = "[ 4 ]";
 
                 }
                 else if (lotesAsignados > 4 && lotesAsignados < 6)//5
                 {
                     e.CellStyle.BackColor = Color.FromArgb(235, 210, 9); // amarillo 2 
-                    e.CellStyle.ForeColor = Color.Black;
+                    e.Value = "[ 5 ]";
 
                 }
                 else if (lotesAsignados > 5 && lotesAsignados < 7)//6
                 {
                     e.CellStyle.BackColor = Color.FromArgb(246, 189, 9); // amarillo 3 
-                    e.CellStyle.ForeColor = Color.Black;
+                    e.Value = "[ 6 ]";
 
                 }
                 else if (lotesAsignados > 6 && lotesAsignados < 8)//7
                 {
                     e.CellStyle.BackColor = Color.FromArgb(246, 163, 9); // naranja 
-                    e.CellStyle.ForeColor = Color.Black;
+                    e.Value = "[ 7 ]";
 
                 }
                 else if (lotesAsignados > 7 && lotesAsignados < 9)//8
                 {
                     e.CellStyle.BackColor = Color.FromArgb(246, 90, 9); // rojo claro
-                    e.CellStyle.ForeColor = Color.Black;
+                    e.Value = "[ 8 ]";
                 }
                 else if (lotesAsignados > 8 && lotesAsignados < 10)//9
                 {
                     e.CellStyle.BackColor = Color.FromArgb(246, 25, 9); // Rojo 
-                    e.CellStyle.ForeColor = Color.White;
+                    e.Value = "[ 9 ]";
                 }
                 else if (lotesAsignados >= 10) // Más de 10 lotes
                 {
                     e.CellStyle.BackColor = Color.FromArgb(188, 15, 15); // Rojo fuerte
                     e.CellStyle.ForeColor = Color.White;
+                    e.Value = "[ 10 ]";
                     DataGridViewButtonCell cell = (DataGridViewButtonCell)dataGridView1.Rows[e.RowIndex].Cells["VerLotes"];
                     cell.FlatStyle = FlatStyle.Popup; // 3D style
                 }
@@ -451,7 +460,7 @@ namespace PRESENTACION.PRESENTACION
             int selectedRemateId = Convert.ToInt32(selectedRemateGridRow.Cells["id"].Value);
 
             // Crear una instancia de NegocioLotesRemates
-            NegocioLotesRemates negocioLotesRemates = new NegocioLotesRemates();
+            NegocioBDD negocioLotesRemates = new NegocioBDD();
 
             if (negocioLotesRemates.ObtenerCantidadLotesAsignados(selectedRemateId) > 0)
             {
@@ -489,13 +498,15 @@ namespace PRESENTACION.PRESENTACION
             // Limpiar la grilla antes de actualizar
             dataGridView1.Rows.Clear();// Limpiar la grilla antes de actualizar
             dataGridView2.Rows.Clear();
-
+            btnOcultarRematesAntiguos.Text = "Ocultar Remates Antiguos";
+            btnOcultarLotesAsignados.Text = "Ocultar Lotes Asignados";
             LimpiarCamposRemate(); // Limpiar campos de texto
             LimpiarCamposLote();
             ActualizarGrillaRemates();
             ActualizarGrillaLotes();
             ActualizarColoresGrillaLotes();
 
+            Application.DoEvents();
             //DESASIGANR LOS LOTES ANTIGUOS QUE NO SE VENDIERON ---------------------------------------------------------------------------
             // DateTime fechaLimite = DateTime.Today.AddDays(-2); // Obtiene la fecha de ayer
             //negocioLotesRemates.DesasignarLotesNoVendidosEnRematesAntiguos(fechaLimite);
@@ -620,6 +631,7 @@ namespace PRESENTACION.PRESENTACION
             comboBoxTipoDeRemate.SelectedIndex = -1;
             textBoxDescripcion.Clear();
 
+
         }
 
 
@@ -733,7 +745,6 @@ namespace PRESENTACION.PRESENTACION
         //ELIMINAR LOTE-----------------------------------------------------------------------------------
         private void buttonEliminarLote_Click(object sender, EventArgs e)
         {
-
             if (selectedLoteGridRow == null)
             {
                 MessageBox.Show("Seleccione un lote para eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -743,17 +754,14 @@ namespace PRESENTACION.PRESENTACION
             int selectedLoteId = Convert.ToInt32(selectedLoteGridRow.Cells["id"].Value);
             bool asignado = negocioLotesRemates.VerificarLoteAsignado(selectedLoteId);
 
-
-            DialogResult result = MessageBox.Show("¿Desea eliminar este lote?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar este lote?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-
                 if (asignado)
                 {
                     MessageBox.Show("No se puede eliminar el lote porque está asignado a un remate.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return; // No proceder con la eliminación
                 }
-
 
                 try
                 {
@@ -777,6 +785,7 @@ namespace PRESENTACION.PRESENTACION
                 }
             }
         }
+
 
 
         //SOLO NUMEROS EN TEXTBOX PRECIO RESERVA ---------------------------------------------------------------------
@@ -806,7 +815,6 @@ namespace PRESENTACION.PRESENTACION
         //MODIFICAR LOTE---------------------------------------------------------------------------
         private void buttonModificarLote_Click(object sender, EventArgs e)
         {
-
             if (selectedLoteGridRow == null)
             {
                 MessageBox.Show("Seleccione un lote para modificar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -819,46 +827,50 @@ namespace PRESENTACION.PRESENTACION
                 return;
             }
 
-            try
+            DialogResult result = MessageBox.Show("¿Está seguro de que desea modificar este lote?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
-                // Obtener los nuevos valores de los campos
-                int selectedLoteId = Convert.ToInt32(selectedLoteGridRow.Cells["id"].Value);
-                string nuevoProveedorLote = textBoxProveedorLote.Text.ToUpper();
-                int nuevoPrecioBase = Convert.ToInt32(textBoxPrecioDeReserva.Text);
-                string nuevoTipoDeLote = comboBoxTipoDeLote.Text;
-                int nuevaCantidadEnLote = Convert.ToInt32(textBoxCantidadEnLote.Text);
-                string nuevaDescripcion = textBoxDescripcion.Text;
-
-                // Crear un objeto Lote con los nuevos valores
-                Lote loteModificado = new Lote
+                try
                 {
-                    id = selectedLoteId,
-                    proveedor_lote = nuevoProveedorLote,
-                    precio_base = nuevoPrecioBase,
-                    tipo_de_lote = nuevoTipoDeLote,
-                    cantidad_en_lote = nuevaCantidadEnLote,
-                    descripcion = nuevaDescripcion
-                };
+                    // Obtener los nuevos valores de los campos
+                    int selectedLoteId = Convert.ToInt32(selectedLoteGridRow.Cells["id"].Value);
+                    string nuevoProveedorLote = textBoxProveedorLote.Text.ToUpper();
+                    int nuevoPrecioBase = Convert.ToInt32(textBoxPrecioDeReserva.Text);
+                    string nuevoTipoDeLote = comboBoxTipoDeLote.Text;
+                    int nuevaCantidadEnLote = Convert.ToInt32(textBoxCantidadEnLote.Text);
+                    string nuevaDescripcion = textBoxDescripcion.Text;
 
-                // Modificar el lote en la base de datos
-                bool actualizado = repositorioUsuarios.ModificarLote(loteModificado);
+                    // Crear un objeto Lote con los nuevos valores
+                    Lote loteModificado = new Lote
+                    {
+                        id = selectedLoteId,
+                        proveedor_lote = nuevoProveedorLote,
+                        precio_base = nuevoPrecioBase,
+                        tipo_de_lote = nuevoTipoDeLote,
+                        cantidad_en_lote = nuevaCantidadEnLote,
+                        descripcion = nuevaDescripcion
+                    };
 
-                if (actualizado)
-                {
-                    MessageBox.Show("Lote modificado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    refresh();
+                    // Modificar el lote en la base de datos
+                    bool actualizado = repositorioUsuarios.ModificarLote(loteModificado);
+
+                    if (actualizado)
+                    {
+                        MessageBox.Show("Lote modificado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo modificar el lote.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("No se pudo modificar el lote.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error al modificar el lote: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al modificar el lote: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
         }
+
 
 
 
@@ -1429,6 +1441,136 @@ namespace PRESENTACION.PRESENTACION
         }
 
 
+        //BOTON OCULTAR REMATES ANTIGUOS ------------------------------------------------------------------
+        private bool mostrarRematesAntiguos = true;
+        private void btnOcultarRematesAntiguos_Click(object sender, EventArgs e)
+        {
+            if (mostrarRematesAntiguos)
+            {
+                // Ocultar remates antiguos
+                OcultarRematesAntiguos();
+                btnOcultarRematesAntiguos.Text = "Mostrar Remates Antiguos";
+            }
+            else
+            {
+                // Mostrar remates antiguos
+                MostrarRematesAntiguos();
+                btnOcultarRematesAntiguos.Text = "Ocultar Remates Antiguos";
+            }
 
+            // Cambiar el estado
+            mostrarRematesAntiguos = !mostrarRematesAntiguos;
+        }
+        private void OcultarRematesAntiguos()
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                DateTime fechaRemate = Convert.ToDateTime(row.Cells["Fecha"].Value);
+                if (fechaRemate.Date < DateTime.Now.Date)
+                {
+                    row.Visible = false;
+                }
+            }
+        }
+
+        private void MostrarRematesAntiguos()
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                DateTime fechaRemate = Convert.ToDateTime(row.Cells["Fecha"].Value);
+                if (fechaRemate.Date < DateTime.Now.Date)
+                {
+                    row.Visible = true;
+                }
+            }
+        }
+
+
+
+
+        //BOTON OCULTAR LOTES ASIGNADOS AL REMATE ---------------------------------------------------
+        private bool mostrarLotesAsignados = true;
+        private void btnOcultarLotesAsignados_Click(object sender, EventArgs e)
+        {
+            if (mostrarLotesAsignados)
+            {
+                // Ocultar lotes asignados
+                OcultarLotesAsignados();
+                btnOcultarLotesAsignados.Text = "Mostrar Lotes Asignados";
+            }
+            else
+            {
+                // Mostrar lotes asignados
+                MostrarLotesAsignados();
+                btnOcultarLotesAsignados.Text = "Ocultar Lotes Asignados";
+            }
+
+            // Cambiar el estado
+            mostrarLotesAsignados = !mostrarLotesAsignados;
+        }
+
+        private void OcultarLotesAsignados()
+        {
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                int loteId = Convert.ToInt32(row.Cells["Id"].Value);
+                bool asignado = negocioLotesRemates.VerificarLoteAsignado(loteId);
+
+                if (asignado)
+                {
+                    row.Visible = false;
+                }
+            }
+        }
+
+        private void MostrarLotesAsignados()
+        {
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                int loteId = Convert.ToInt32(row.Cells["Id"].Value);
+                bool asignado = negocioLotesRemates.VerificarLoteAsignado(loteId);
+
+                if (asignado)
+                {
+                    row.Visible = true;
+                }
+            }
+        }
+
+
+
+        private void btnOcultarRematesAntiguos_MouseEnter(object sender, EventArgs e)
+        {
+            // Cambiar los colores al pasar el mouse sobre el botón
+            btnOcultarRematesAntiguos.BackColor = Color.FromArgb(250, 250, 250); // Rojo claro
+            btnOcultarRematesAntiguos.ForeColor = Color.FromArgb(160, 160, 160);
+            btnOcultarRematesAntiguos.FlatAppearance.BorderColor = Color.FromArgb(160, 160, 160); // Cambiar color del borde
+
+        }
+
+        private void btnOcultarRematesAntiguos_MouseLeave(object sender, EventArgs e)
+        {
+            // Restaurar los colores al salir el mouse del botón
+            btnOcultarRematesAntiguos.BackColor = Color.Transparent;
+            btnOcultarRematesAntiguos.ForeColor = Color.White;
+            btnOcultarRematesAntiguos.FlatAppearance.BorderColor = Color.White; // Restaurar color del borde
+        }
+
+        private void btnOcultarLotesAsignados_MouseEnter(object sender, EventArgs e)
+        {
+            // Cambiar los colores al pasar el mouse sobre el botón
+            btnOcultarLotesAsignados.BackColor = Color.FromArgb(250, 250, 250); // Rojo claro
+            btnOcultarLotesAsignados.ForeColor = Color.FromArgb(160, 160, 160);
+            btnOcultarLotesAsignados.FlatAppearance.BorderColor = Color.FromArgb(160, 160, 160); // Cambiar color del borde
+
+        }
+
+        private void btnOcultarLotesAsignados_MouseLeave(object sender, EventArgs e)
+        {
+            // Restaurar los colores al salir el mouse del botón
+            btnOcultarLotesAsignados.BackColor = Color.Transparent;
+            btnOcultarLotesAsignados.ForeColor = Color.White;
+            btnOcultarLotesAsignados.FlatAppearance.BorderColor = Color.White; // Restaurar color del borde
+        }
     }//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 }

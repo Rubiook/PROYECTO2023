@@ -158,6 +158,7 @@ namespace PRESENTACION
             }
         }*/
 
+        //BOTON ELIMINAR USUARIO---------------------------------------------------------------------------------------
         private void button2_Click_1(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -584,10 +585,10 @@ namespace PRESENTACION
         private void button3_MouseEnter(object sender, EventArgs e)
         {
             // Cambiar los colores al pasar el mouse sobre el botón
-            button3.BackColor = Color.FromArgb(250, 250, 250); 
+            button3.BackColor = Color.FromArgb(250, 250, 250);
             button3.ForeColor = Color.FromArgb(160, 160, 160);
-            button3.FlatAppearance.BorderColor = Color.FromArgb(160, 160, 160); 
-                                                                                
+            button3.FlatAppearance.BorderColor = Color.FromArgb(160, 160, 160);
+
         }
 
         private void button3_MouseLeave(object sender, EventArgs e)

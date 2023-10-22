@@ -48,6 +48,14 @@
             "MySql.Data": {
               "target": "Package",
               "version": "[8.1.0, )"
+            },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[110.2.0, )"
+            },
+            "mercadopago-sdk": {
+              "target": "Package",
+              "version": "[2.3.3, )"
             }
           },
           "imports": [

@@ -14,7 +14,7 @@ namespace PRESENTACION.PRESENTACION
 {
     public partial class VerLotesProximoRemate : Form
     {
-        private NegocioLotesRemates negocioLotesRemates = new NegocioLotesRemates();
+        private NegocioBDD negocioLotesRemates = new NegocioBDD();
 
         public VerLotesProximoRemate()
         {
@@ -32,11 +32,11 @@ namespace PRESENTACION.PRESENTACION
 
         private void CargarDatos()
         {
-            Remate proximoRemate = ObtenerProximoRemate();
+            Remate proximoRemate = negocioLotesRemates.ObtenerProximoRemate();
 
             if (proximoRemate != null)
             {
-                lblRemate.Text = $"PRÓXIMO REMATE: {proximoRemate.Fecha.ToString("dd/MM/yyyy")}";
+                lblRemate.Text = $"PRÓXIMO REMATE: {proximoRemate.Fecha.ToString("dd/MM/yyyy")} <{proximoRemate.TipoDeRemate}> ";
                 CargarLotesProximoRemate(proximoRemate.Id);
             }
             else
@@ -165,21 +165,7 @@ namespace PRESENTACION.PRESENTACION
         }
         */
 
-        private Remate ObtenerProximoRemate()
-        {
-            List<Remate> remates = negocioLotesRemates.ObtenerRematesOrdenadosPorFecha();
-            DateTime fechaActual = DateTime.Now;
-
-            foreach (Remate remate in remates)
-            {
-                if (remate.Fecha > fechaActual)
-                {
-                    return remate;
-                }
-            }
-
-            return null;
-        }
+        
 
         private void CargarLotesProximoRemate(int remateId)
         {

@@ -2,7 +2,7 @@
 {
     partial class Preeventas
     {
-      
+
 
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,6 @@
             button3 = new Button();
             button5 = new Button();
             button1 = new Button();
-           
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -215,17 +214,10 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Preeventas";
             Text = "Preeventas";
+            Load += Preeventas_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
-
-          
-
-
-
-
-
-
         }
 
         #endregion

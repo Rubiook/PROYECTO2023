@@ -109,6 +109,7 @@ namespace PRESENTACION
         //BTN INGRESAR-------------------------------------------------------------------
         private void button1_Click(object sender, EventArgs e)
         {
+
             string nombreUsuario = this.textBox1.Text.Trim(); // Elimina espacios en blanco al principio y al final
             string pass = textBox2.Text;
 

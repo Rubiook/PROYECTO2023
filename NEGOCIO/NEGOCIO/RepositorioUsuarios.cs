@@ -92,6 +92,9 @@ namespace NEGOCIO
         }
 
 
+
+
+        /*
         public bool borrarUsuario(int idUsuario)
         {
             try
@@ -112,7 +115,34 @@ namespace NEGOCIO
                 // Manejo de excepciones
                 throw new Exception("Error al eliminar usuario: " + ex.Message);
             }
+        }*/
+
+        public bool borrarUsuario(int idUsuario)
+        {
+            try
+            {
+                using (MySqlConnection conn = Conexion.obtenerConexion())
+                {
+                    string query = "UPDATE usuarios SET activo = 0 WHERE id = @id";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", idUsuario);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones
+                throw new Exception("Error al marcar usuario como inactivo: " + ex.Message);
+            }
         }
+
+
+
+
+
 
         private void ReasignarIndices()
         {
@@ -142,7 +172,7 @@ namespace NEGOCIO
                 MySqlCommand consultaSql = new MySqlCommand();
                 MySqlDataReader resultado;
 
-                consultaSql.CommandText = "SELECT * FROM usuarios;";
+                consultaSql.CommandText = "SELECT * FROM usuarios WHERE activo = 1;";
                 consultaSql.Connection = conn;
                 resultado = consultaSql.ExecuteReader();
                 while (resultado.Read())
@@ -185,7 +215,7 @@ namespace NEGOCIO
                 conn = Conexion.obtenerConexion();
 
                 MySqlCommand consultaSql = new MySqlCommand();
-                consultaSql.CommandText = "SELECT COUNT(*) FROM usuarios WHERE login = @login";
+                consultaSql.CommandText = "SELECT COUNT(*) FROM usuarios WHERE login = @login AND activo = 1";
                 consultaSql.Connection = conn;
 
                 consultaSql.Parameters.AddWithValue("@login", login);
@@ -499,7 +529,7 @@ namespace NEGOCIO
 
             try
             {
-                string query = "SELECT id, fecha, hora_inicio, hora_fin, rematador, tipo_de_remate FROM remate";
+                string query = "SELECT id, fecha, hora_inicio, hora_fin, rematador, tipo_de_remate FROM remate WHERE activo = 1";
 
                 using (MySqlCommand command = new MySqlCommand(query, conn))
                 {
@@ -653,7 +683,7 @@ namespace NEGOCIO
                 MySqlCommand consultaSql = new MySqlCommand();
                 MySqlDataReader resultado;
 
-                consultaSql.CommandText = "SELECT * FROM lote;";
+                consultaSql.CommandText = "SELECT * FROM lote WHERE activo = 1;";
                 consultaSql.Connection = conn;
                 resultado = consultaSql.ExecuteReader();
                 while (resultado.Read())
@@ -734,7 +764,7 @@ namespace NEGOCIO
             {
                 using (MySqlConnection conn = Conexion.obtenerConexion())
                 {
-                    string query = "DELETE FROM lote WHERE id = @LoteId";
+                    string query = "UPDATE lote SET activo = 0 WHERE id = @LoteId";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -820,7 +850,7 @@ namespace NEGOCIO
         {
             using (MySqlConnection connection = Conexion.obtenerConexion())
             {
-                string query = "SELECT COUNT(*) FROM remate WHERE fecha = @fecha";
+                string query = "SELECT COUNT(*) FROM remate WHERE fecha = @fecha AND activo = 1";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {

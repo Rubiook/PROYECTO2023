@@ -2,18 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace NEGOCIO.NEGOCIO
 {
-    public class NegocioLotesRemates
+    public class NegocioBDD
     {
         private readonly RepositorioUsuarios repositorioUsuarios;
 
         private MySqlConnection _connection;
-        public NegocioLotesRemates()
+        public NegocioBDD()
         {
             repositorioUsuarios = new RepositorioUsuarios();
             _connection = Conexion.obtenerConexion();
@@ -471,17 +472,114 @@ namespace NEGOCIO.NEGOCIO
             }
         }
 
+
+        public LoteVendido ObtenerVentaPorId(int ventaId)
+        {
+            try
+            {
+                using (MySqlConnection connection = Conexion.obtenerConexion())
+                {
+                    string query = "SELECT lv.id, lv.id_remate, lv.id_lote, lv.fecha_venta, lv.id_preventa, pv.precio_de_venta " +
+                                   "FROM lotesvendidos lv " +
+                                   "INNER JOIN preeventas pv ON lv.id_preventa = pv.id " +
+                                   "WHERE lv.id = @VentaId";
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@VentaId", ventaId);
+
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                LoteVendido venta = new LoteVendido
+                                {
+                                    Id = Convert.ToInt32(reader["id"]),
+                                    IdRemate = Convert.ToInt32(reader["id_remate"]),
+                                    IdLote = Convert.ToInt32(reader["id_lote"]),
+                                    FechaVenta = Convert.ToDateTime(reader["fecha_venta"]),
+                                    id_preventa = Convert.ToInt32(reader["id_preventa"]),
+                                    PrecioDeVenta = Convert.ToInt32(reader["precio_de_venta"])
+                                    // Agrega otros atributos según tu estructura de datos
+                                };
+
+                                return venta;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception("Error al obtener detalles de la venta: " + ex.Message);
+            }
+
+            return null; // Retorna null si no se encuentra la venta con el ID especificado
+        }
+
+
+
+
+
+
+
+        /*
+                public List<LoteVendido> ObtenerLotesVendidos()
+                {
+                    List<LoteVendido> lotesVendidos = new List<LoteVendido>();
+
+                    using (MySqlConnection connection = Conexion.obtenerConexion())
+                    {
+                        string query = "SELECT lv.id, lv.id_remate, lv.id_lote, lv.fecha_venta, lv.proveedor, lv.comprador, lv.precio_de_venta, " +
+                                       "l.proveedor_lote, l.precio_base, l.tipo_de_lote, l.cantidad_en_lote, l.descripcion, " +
+                                       "lv.id_usuario_comprador " + 
+                                       "FROM lotesvendidos lv " +
+                                       "INNER JOIN lote l ON lv.id_lote = l.id";
+
+                        using (MySqlCommand command = new MySqlCommand(query, connection))
+                        {
+                            using (MySqlDataReader reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    LoteVendido loteVendido = new LoteVendido
+                                    {
+                                        Id = Convert.ToInt32(reader["id"]),
+                                        IdRemate = Convert.ToInt32(reader["id_remate"]),
+                                        IdLote = Convert.ToInt32(reader["id_lote"]),
+                                        FechaVenta = Convert.ToDateTime(reader["fecha_venta"]),
+                                        Proveedor = reader["proveedor"].ToString(),
+                                        Comprador = reader["comprador"].ToString(),
+                                        PrecioDeVenta = Convert.ToInt32(reader["precio_de_venta"]),
+                                        ProveedorLote = reader["proveedor_lote"].ToString(),
+                                        PrecioBase = Convert.ToInt32(reader["precio_base"]),
+                                        TipoDeLote = reader["tipo_de_lote"].ToString(),
+                                        CantidadEnLote = Convert.ToInt32(reader["cantidad_en_lote"]),
+                                        Descripcion = reader["descripcion"].ToString(),
+                                        IdUsuarioComprador = Convert.ToInt32(reader["id_usuario_comprador"]) 
+                                    };
+
+                                    lotesVendidos.Add(loteVendido);
+                                }
+                            }
+                        }
+                    }
+
+                    return lotesVendidos;
+                }*/
+
         public List<LoteVendido> ObtenerLotesVendidos()
         {
             List<LoteVendido> lotesVendidos = new List<LoteVendido>();
 
             using (MySqlConnection connection = Conexion.obtenerConexion())
             {
-                string query = "SELECT lv.id, lv.id_remate, lv.id_lote, lv.fecha_venta, lv.proveedor, lv.comprador, lv.precio_de_venta, " +
-                               "l.proveedor_lote, l.precio_base, l.tipo_de_lote, l.cantidad_en_lote, l.descripcion, " +
-                               "lv.id_usuario_comprador " + 
-                               "FROM lotesvendidos lv " +
-                               "INNER JOIN lote l ON lv.id_lote = l.id";
+                string query = @"
+            SELECT lv.id, lv.id_remate, lv.id_lote, lv.fecha_venta, p.id_usuario, p.precio_de_venta,
+                   l.proveedor_lote, l.precio_base, l.tipo_de_lote, l.cantidad_en_lote, l.descripcion
+            FROM lotesvendidos lv
+            INNER JOIN preeventas p ON lv.id_preventa = p.id
+            INNER JOIN lote l ON lv.id_lote = l.id";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -495,15 +593,13 @@ namespace NEGOCIO.NEGOCIO
                                 IdRemate = Convert.ToInt32(reader["id_remate"]),
                                 IdLote = Convert.ToInt32(reader["id_lote"]),
                                 FechaVenta = Convert.ToDateTime(reader["fecha_venta"]),
-                                Proveedor = reader["proveedor"].ToString(),
-                                Comprador = reader["comprador"].ToString(),
+                                IdUsuarioComprador = Convert.ToInt32(reader["id_usuario"]),
                                 PrecioDeVenta = Convert.ToInt32(reader["precio_de_venta"]),
                                 ProveedorLote = reader["proveedor_lote"].ToString(),
                                 PrecioBase = Convert.ToInt32(reader["precio_base"]),
                                 TipoDeLote = reader["tipo_de_lote"].ToString(),
                                 CantidadEnLote = Convert.ToInt32(reader["cantidad_en_lote"]),
-                                Descripcion = reader["descripcion"].ToString(),
-                                IdUsuarioComprador = Convert.ToInt32(reader["id_usuario_comprador"]) 
+                                Descripcion = reader["descripcion"].ToString()
                             };
 
                             lotesVendidos.Add(loteVendido);
@@ -553,7 +649,7 @@ namespace NEGOCIO.NEGOCIO
         {
             try
             {
-                string deleteQuery = "DELETE FROM remate WHERE id = @RemateId";
+                string deleteQuery = "UPDATE remate SET activo = 0 WHERE id = @RemateId";
 
                 using (MySqlCommand deleteCommand = new MySqlCommand(deleteQuery, connection))
                 {
@@ -580,7 +676,7 @@ namespace NEGOCIO.NEGOCIO
 
             using (MySqlConnection connection = Conexion.obtenerConexion())
             {
-                string query = "SELECT id, fecha FROM remate ORDER BY fecha";
+                string query = "SELECT id, fecha, tipo_de_remate FROM remate WHERE activo = 1 ORDER BY fecha ";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -590,11 +686,13 @@ namespace NEGOCIO.NEGOCIO
                         {
                             int remateId = Convert.ToInt32(reader["id"]);
                             DateTime fechaRemate = Convert.ToDateTime(reader["fecha"]);
+                            string tipoRemate = Convert.ToString(reader["tipo_de_remate"]);
 
                             Remate remate = new Remate
                             {
                                 Id = remateId,
-                                Fecha = fechaRemate
+                                Fecha = fechaRemate,
+                                TipoDeRemate = tipoRemate
                             };
 
                             remates.Add(remate);
@@ -606,47 +704,107 @@ namespace NEGOCIO.NEGOCIO
             return remates;
         }
 
-
-
-        public void MarcarLoteComoVendido(LoteVendido loteVendido)
+        public int ObtenerIdLotePrevendidoPorIdLote(int idLote)
         {
-            using (MySqlConnection connection = Conexion.obtenerConexion())
+            try
             {
-                try
+                using (MySqlConnection connection = Conexion.obtenerConexion())
                 {
-                    string insertQuery = "INSERT INTO lotesvendidos (id_remate, id_lote, fecha_venta, proveedor, comprador, precio_de_venta, id_usuario_comprador) VALUES (@RemateId, @LoteId, @FechaVenta, @Proveedor, @Comprador, @PrecioVenta, @IdUsuarioComprador)";
+                    string obtenerIdLoteVendidoQuery = @"SELECT id FROM lotesvendidos WHERE id_lote = @IdLote";
 
-                    using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(obtenerIdLoteVendidoQuery, connection))
                     {
-                        insertCommand.Parameters.AddWithValue("@RemateId", loteVendido.IdRemate);
-                        insertCommand.Parameters.AddWithValue("@LoteId", loteVendido.IdLote);
-                        insertCommand.Parameters.AddWithValue("@FechaVenta", loteVendido.FechaVenta);
-                        insertCommand.Parameters.AddWithValue("@Proveedor", loteVendido.Proveedor);
-                        insertCommand.Parameters.AddWithValue("@Comprador", loteVendido.Comprador);
-                        insertCommand.Parameters.AddWithValue("@PrecioVenta", loteVendido.PrecioDeVenta);
-                        insertCommand.Parameters.AddWithValue("@IdUsuarioComprador", loteVendido.IdUsuarioComprador);
-                       
+                        command.Parameters.AddWithValue("@IdLote", idLote);
+                        object result = command.ExecuteScalar();
 
-                        insertCommand.ExecuteNonQuery();
+                        if (result != null)
+                        {
+                            return Convert.ToInt32(result);
+                        }
+                        else
+                        {
+                            // Si no se encuentra un registro correspondiente, puedes manejarlo como desees.
+                            // Podrías devolver un valor predeterminado, lanzar una excepción, etc.
+                            return -1; // Por ejemplo, devolviendo -1 para indicar que no se encontró el registro.
+                        }
                     }
-
-                    // Actualizar el campo RemateId en la tabla lotes (opcional si lo deseas hacer)
-                    string updateQuery = "UPDATE lote SET id_remate = @RemateId WHERE id = @LoteId";
-
-                    using (MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection))
-                    {
-                        updateCommand.Parameters.AddWithValue("@RemateId", loteVendido.IdRemate);
-                        updateCommand.Parameters.AddWithValue("@LoteId", loteVendido.IdLote);
-
-                        updateCommand.ExecuteNonQuery();
-                    }
-                }
-                catch (MySqlException ex)
-                {
-                    throw new Exception("Error al marcar lote como vendido: " + ex.Message);
                 }
             }
+            catch (MySqlException ex)
+            {
+                throw new Exception("Error al obtener el ID de lote vendido: " + ex.Message);
+            }
         }
+
+
+        /*  public void MarcarLoteComoVendido(LoteVendido loteVendido)
+          {
+              using (MySqlConnection connection = Conexion.obtenerConexion())
+              {
+                  try
+                  {
+                      string insertQuery = "INSERT INTO lotesvendidos (id_remate, id_lote, fecha_venta, proveedor, comprador, precio_de_venta, id_usuario_comprador) VALUES (@RemateId, @LoteId, @FechaVenta, @Proveedor, @Comprador, @PrecioVenta, @IdUsuarioComprador)";
+
+                      using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
+                      {
+                          insertCommand.Parameters.AddWithValue("@RemateId", loteVendido.IdRemate);
+                          insertCommand.Parameters.AddWithValue("@LoteId", loteVendido.IdLote);
+                          insertCommand.Parameters.AddWithValue("@FechaVenta", loteVendido.FechaVenta);
+                          insertCommand.Parameters.AddWithValue("@Proveedor", loteVendido.Proveedor);
+                          insertCommand.Parameters.AddWithValue("@Comprador", loteVendido.Comprador);
+                          insertCommand.Parameters.AddWithValue("@PrecioVenta", loteVendido.PrecioDeVenta);
+                          insertCommand.Parameters.AddWithValue("@IdUsuarioComprador", loteVendido.IdUsuarioComprador);
+
+
+                          insertCommand.ExecuteNonQuery();
+                      }
+
+                      // Actualizar el campo RemateId en la tabla lotes (opcional si lo deseas hacer)
+                      string updateQuery = "UPDATE lote SET id_remate = @RemateId WHERE id = @LoteId";
+
+                      using (MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection))
+                      {
+                          updateCommand.Parameters.AddWithValue("@RemateId", loteVendido.IdRemate);
+                          updateCommand.Parameters.AddWithValue("@LoteId", loteVendido.IdLote);
+
+                          updateCommand.ExecuteNonQuery();
+                      }
+                  }
+                  catch (MySqlException ex)
+                  {
+                      throw new Exception("Error al marcar lote como vendido: " + ex.Message);
+                  }
+              }
+          }*/
+
+        public void MarcarLoteComoVendido(int idLote, int idRemate, int idPreventa)
+        {
+            try
+            {
+                
+                using (MySqlConnection connection = Conexion.obtenerConexion())
+                {
+                    // Insertar en la tabla lotesvendidos usando el id_preventa y id_lote obtenidos
+                    string insertarLoteVendidoQuery = @"INSERT INTO lotesvendidos (id_preventa, id_lote, id_remate, fecha_venta)
+                                                 VALUES (@IdPreventa, @IdLote, @IdRemate, CURRENT_DATE)";
+
+                    using (MySqlCommand command = new MySqlCommand(insertarLoteVendidoQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdPreventa", idPreventa);
+                        command.Parameters.AddWithValue("@IdLote", idLote);
+                        command.Parameters.AddWithValue("@IdRemate", idRemate);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception("Error al marcar el lote como vendido: " + ex.Message);
+            }
+        }
+
+
 
         public void QuitarLoteVendido(int idRemate, int idLote)
         {
@@ -741,7 +899,7 @@ namespace NEGOCIO.NEGOCIO
 
             using (MySqlConnection connection = Conexion.obtenerConexion())
             {
-                string query = "SELECT id, fecha, hora_inicio, hora_fin, rematador, tipo_de_remate FROM remate WHERE fecha >= @FechaLimite";
+                string query = "SELECT id, fecha, hora_inicio, hora_fin, rematador, tipo_de_remate FROM remate WHERE fecha >= @FechaLimite AND activo = 1 ORDER BY fecha";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -866,6 +1024,23 @@ namespace NEGOCIO.NEGOCIO
         }
 
 
+        public bool EsEmpleadoRegistrado(int idUsuario)
+        {
+            using (MySqlConnection connection = Conexion.obtenerConexion())
+            {
+                string query = "SELECT COUNT(*) FROM empleados WHERE id_usuario = @idUsuario AND activo = 1";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                    int count = Convert.ToInt32(command.ExecuteScalar());
+
+                    // Si count es mayor que 0, significa que el empleado ya está registrado
+                    return count > 0;
+                }
+            }
+        }
 
 
 
@@ -892,7 +1067,90 @@ namespace NEGOCIO.NEGOCIO
         }
 
 
-        public void EliminarEmpleado(int idEmpleado)
+
+        public void AgregarOperador(int idUsuario, TimeSpan horaEntrada, TimeSpan horaSalida, decimal sueldoMensual, string tareas)
+        {
+            using (MySqlConnection connection = Conexion.obtenerConexion())
+            {
+                // Insertar en la tabla empleados
+                string empleadosQuery = "INSERT INTO empleados (id_usuario, hora_entrada, hora_salida, sueldo_mensual) VALUES (@idUsuario, @horaEntrada, @horaSalida, @sueldoMensual)";
+                using (MySqlCommand empleadosCommand = new MySqlCommand(empleadosQuery, connection))
+                {
+                    empleadosCommand.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    empleadosCommand.Parameters.AddWithValue("@horaEntrada", horaEntrada);
+                    empleadosCommand.Parameters.AddWithValue("@horaSalida", horaSalida);
+                    empleadosCommand.Parameters.AddWithValue("@sueldoMensual", sueldoMensual);
+                    empleadosCommand.ExecuteNonQuery();
+                }
+
+                // Obtener el id_empleado del empleado recién insertado
+                int idEmpleado = ObtenerIdEmpleadoRecienInsertado(connection); // Implementa este método según tu lógica
+
+                // Insertar en la tabla operadores
+                string operadoresQuery = "INSERT INTO operadores (id_empleado, tareas) VALUES (@idEmpleado, @tareas)";
+                using (MySqlCommand operadoresCommand = new MySqlCommand(operadoresQuery, connection))
+                {
+                    operadoresCommand.Parameters.AddWithValue("@idEmpleado", idEmpleado);
+                    operadoresCommand.Parameters.AddWithValue("@tareas", tareas);
+                    operadoresCommand.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void AgregarRematador(int idUsuario, TimeSpan horaEntrada, TimeSpan horaSalida, decimal sueldoMensual, string numeroRematador, decimal comision)
+        {
+            using (MySqlConnection connection = Conexion.obtenerConexion())
+            {
+                // Insertar en la tabla empleados
+                string empleadosQuery = "INSERT INTO empleados (id_usuario, hora_entrada, hora_salida, sueldo_mensual) VALUES (@idUsuario, @horaEntrada, @horaSalida, @sueldoMensual)";
+                using (MySqlCommand empleadosCommand = new MySqlCommand(empleadosQuery, connection))
+                {
+                    empleadosCommand.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    empleadosCommand.Parameters.AddWithValue("@horaEntrada", horaEntrada);
+                    empleadosCommand.Parameters.AddWithValue("@horaSalida", horaSalida);
+                    empleadosCommand.Parameters.AddWithValue("@sueldoMensual", sueldoMensual);
+                    empleadosCommand.ExecuteNonQuery();
+                }
+
+                // Obtener el id_empleado del empleado recién insertado
+                int idEmpleado = ObtenerIdEmpleadoRecienInsertado(connection); // Implementa este método según tu lógica
+
+                // Insertar en la tabla rematadores
+                string rematadoresQuery = "INSERT INTO rematadores (id_empleado, n_rematador, comision) VALUES (@idEmpleado, @numeroRematador, @Comision)";
+                using (MySqlCommand rematadoresCommand = new MySqlCommand(rematadoresQuery, connection))
+                {
+                    rematadoresCommand.Parameters.AddWithValue("@idEmpleado", idEmpleado);
+                    rematadoresCommand.Parameters.AddWithValue("@numeroRematador", numeroRematador);
+                    rematadoresCommand.Parameters.AddWithValue("@Comision", comision);
+                    rematadoresCommand.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+
+        private int ObtenerIdEmpleadoRecienInsertado(MySqlConnection connection)
+        {
+            string query = "SELECT LAST_INSERT_ID()";
+            using (MySqlCommand command = new MySqlCommand(query, connection))
+            {
+                object result = command.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
+                {
+                    return Convert.ToInt32(result);
+                }
+                else
+                {
+                    throw new Exception("No se pudo obtener el id_empleado recién insertado.");
+                }
+            }
+        }
+
+
+
+
+
+        /*public void EliminarEmpleado(int idEmpleado)
         {
             try
             {
@@ -912,8 +1170,89 @@ namespace NEGOCIO.NEGOCIO
             {
                 throw new Exception("Error al eliminar el empleado: " + ex.Message);
             }
+        }*/
+        public void DarDeBajaEmpleado(int idEmpleado)
+        {
+            try
+            {
+                using (MySqlConnection connection = Conexion.obtenerConexion())
+                {
+                    // Actualizar el campo activo en la tabla empleados
+                    string darDeBajaQuery = "UPDATE empleados SET activo = 0 WHERE id = @IdEmpleado";
+                    using (MySqlCommand darDeBajaCommand = new MySqlCommand(darDeBajaQuery, connection))
+                    {
+                        darDeBajaCommand.Parameters.AddWithValue("@IdEmpleado", idEmpleado);
+                        darDeBajaCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception("Error al dar de baja al empleado: " + ex.Message);
+            }
         }
 
+        public void EliminarEmpleado(int idEmpleado)
+        {
+            try
+            {
+                using (MySqlConnection connection = Conexion.obtenerConexion())
+                {
+                    // Verificar si el empleado es un rematador
+                    string verificarRematadorQuery = "SELECT COUNT(*) FROM rematadores WHERE id_empleado = @IdEmpleado";
+                    using (MySqlCommand verificarRematadorCommand = new MySqlCommand(verificarRematadorQuery, connection))
+                    {
+                        verificarRematadorCommand.Parameters.AddWithValue("@IdEmpleado", idEmpleado);
+                        int countRematadores = Convert.ToInt32(verificarRematadorCommand.ExecuteScalar());
+
+                        // Si el empleado es un rematador, eliminar el registro correspondiente en la tabla rematadores
+                        if (countRematadores > 0)
+                        {
+                            string eliminarRematadorQuery = "DELETE FROM rematadores WHERE id_empleado = @IdEmpleado";
+                            using (MySqlCommand eliminarRematadorCommand = new MySqlCommand(eliminarRematadorQuery, connection))
+                            {
+                                eliminarRematadorCommand.Parameters.AddWithValue("@IdEmpleado", idEmpleado);
+                                eliminarRematadorCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+
+                    // Verificar si el empleado es un operador
+                    string verificarOperadorQuery = "SELECT COUNT(*) FROM operadores WHERE id_empleado = @IdEmpleado";
+                    using (MySqlCommand verificarOperadorCommand = new MySqlCommand(verificarOperadorQuery, connection))
+                    {
+                        verificarOperadorCommand.Parameters.AddWithValue("@IdEmpleado", idEmpleado);
+                        int countOperadores = Convert.ToInt32(verificarOperadorCommand.ExecuteScalar());
+
+                        // Si el empleado es un operador, eliminar el registro correspondiente en la tabla operadores
+                        if (countOperadores > 0)
+                        {
+                            string eliminarOperadorQuery = "DELETE FROM operadores WHERE id_empleado = @IdEmpleado";
+                            using (MySqlCommand eliminarOperadorCommand = new MySqlCommand(eliminarOperadorQuery, connection))
+                            {
+                                eliminarOperadorCommand.Parameters.AddWithValue("@IdEmpleado", idEmpleado);
+                                eliminarOperadorCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+
+                    // Finalmente, eliminar el empleado de la tabla empleados
+                    string eliminarEmpleadoQuery = "DELETE FROM empleados WHERE id = @IdEmpleado";
+                    using (MySqlCommand eliminarEmpleadoCommand = new MySqlCommand(eliminarEmpleadoQuery, connection))
+                    {
+                        eliminarEmpleadoCommand.Parameters.AddWithValue("@IdEmpleado", idEmpleado);
+                        eliminarEmpleadoCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception("Error al eliminar el empleado: " + ex.Message);
+            }
+        }
+
+
+        /*
         public void ModificarEmpleado(int idEmpleado, string loginUsuario, TimeSpan horaEntrada, TimeSpan horaSalida, decimal sueldoMensual, string tareas)
         {
             try
@@ -951,8 +1290,130 @@ namespace NEGOCIO.NEGOCIO
             {
                 throw new Exception("Error al modificar el empleado: " + ex.Message);
             }
+        }*/
+
+        public void ModificarRematador(int idEmpleado, string loginUsuario, TimeSpan horaEntrada, TimeSpan horaSalida, decimal sueldoMensual, string numeroRematador, decimal comision)
+        {
+            try
+            {
+                using (MySqlConnection connection = Conexion.obtenerConexion())
+                {
+                    // Obtener el usuario a partir del nombre de login
+                    Usuario usuario = repositorioUsuarios.ObtenerUsuarioPorLogin(loginUsuario);
+
+                    if (usuario != null)
+                    {
+                        int idUsuario = usuario.id; // Obtener el ID del usuario
+
+                        string query = "UPDATE empleados SET id_usuario = @IdUsuario, hora_entrada = @HoraEntrada, hora_salida = @HoraSalida, sueldo_mensual = @SueldoMensual WHERE id = @IdEmpleado";
+                        string queryRematador = "UPDATE rematadores SET n_rematador = @NumeroRematador, comision = @Comision WHERE id_empleado = @IdEmpleado";
+
+                        using (MySqlCommand command = new MySqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@IdEmpleado", idEmpleado);
+                            command.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                            command.Parameters.AddWithValue("@HoraEntrada", horaEntrada);
+                            command.Parameters.AddWithValue("@HoraSalida", horaSalida);
+                            command.Parameters.AddWithValue("@SueldoMensual", sueldoMensual);
+
+                            command.ExecuteNonQuery();
+                        }
+
+                        using (MySqlCommand command = new MySqlCommand(queryRematador, connection))
+                        {
+                            command.Parameters.AddWithValue("@IdEmpleado", idEmpleado);
+                            command.Parameters.AddWithValue("@NumeroRematador", string.IsNullOrEmpty(numeroRematador) ? DBNull.Value : (object)numeroRematador);
+                            command.Parameters.AddWithValue("@Comision", comision);
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("No se pudo obtener el usuario.");
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception("Error al modificar el rematador: " + ex.Message);
+            }
         }
 
+        public void ModificarOperador(int idEmpleado, string loginUsuario, TimeSpan horaEntrada, TimeSpan horaSalida, decimal sueldoMensual, string tareas)
+        {
+            try
+            {
+                using (MySqlConnection connection = Conexion.obtenerConexion())
+                {
+                    // Obtener el usuario a partir del nombre de login
+                    Usuario usuario = repositorioUsuarios.ObtenerUsuarioPorLogin(loginUsuario);
+
+                    if (usuario != null)
+                    {
+                        int idUsuario = usuario.id; // Obtener el ID del usuario
+
+                        string query = "UPDATE empleados SET id_usuario = @IdUsuario, hora_entrada = @HoraEntrada, hora_salida = @HoraSalida, sueldo_mensual = @SueldoMensual WHERE id = @IdEmpleado";
+                        string queryOperador = "UPDATE operadores SET tareas = @Tareas WHERE id_empleado = @IdEmpleado";
+
+                        using (MySqlCommand command = new MySqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@IdEmpleado", idEmpleado);
+                            command.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                            command.Parameters.AddWithValue("@HoraEntrada", horaEntrada);
+                            command.Parameters.AddWithValue("@HoraSalida", horaSalida);
+                            command.Parameters.AddWithValue("@SueldoMensual", sueldoMensual);
+
+                            command.ExecuteNonQuery();
+                        }
+
+                        using (MySqlCommand command = new MySqlCommand(queryOperador, connection))
+                        {
+                            command.Parameters.AddWithValue("@IdEmpleado", idEmpleado);
+                            command.Parameters.AddWithValue("@Tareas", string.IsNullOrEmpty(tareas) ? DBNull.Value : (object)tareas);
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("No se pudo obtener el usuario.");
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception("Error al modificar el operador: " + ex.Message);
+            }
+        }
+
+
+
+        public string ObtenerNombreComprador(string idUsuarioComprador)
+        {
+            string nombreCompleto = "Nombre no disponible"; // Valor predeterminado en caso de que no se pueda obtener el nombre
+
+            using (MySqlConnection connection = Conexion.obtenerConexion())
+            {
+                string query = "SELECT CONCAT(nombre, ' ', apellido) AS nombreCompleto FROM usuarios WHERE id = @idUsuarioComprador";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@idUsuarioComprador", idUsuarioComprador);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Se encontró el nombre y apellido del comprador en la base de datos
+                            nombreCompleto = reader["nombreCompleto"].ToString();
+                        }
+                    }
+                }
+            }
+
+            return nombreCompleto;
+        }
 
 
 
@@ -982,6 +1443,79 @@ namespace NEGOCIO.NEGOCIO
             return usuariosOperadores;
         }
 
+        public List<string> ObtenerUsuariosRematadores()
+        {
+            List<string> usuariosRematadores = new List<string>();
+
+            using (MySqlConnection connection = Conexion.obtenerConexion())
+            {
+                string query = "SELECT login FROM usuarios WHERE rol = 'REMATADOR'";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string login = reader["login"].ToString();
+                            usuariosRematadores.Add(login);
+                        }
+                    }
+                }
+            }
+
+            return usuariosRematadores;
+        }
+        public List<string> ObtenerUsuariosOperadoresActivos()
+        {
+            List<string> usuariosOperadoresActivos = new List<string>();
+
+            using (MySqlConnection connection = Conexion.obtenerConexion())
+            {
+                string query = "SELECT login FROM usuarios WHERE rol = 'OPERADOR' AND activo = 1";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string login = reader["login"].ToString();
+                            usuariosOperadoresActivos.Add(login);
+                        }
+                    }
+                }
+            }
+
+            return usuariosOperadoresActivos;
+        }
+
+        public List<string> ObtenerUsuariosRematadoresActivos()
+        {
+            List<string> usuariosRematadoresActivos = new List<string>();
+
+            using (MySqlConnection connection = Conexion.obtenerConexion())
+            {
+                string query = "SELECT login FROM usuarios WHERE rol = 'REMATADOR' AND activo = 1";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string login = reader["login"].ToString();
+                            usuariosRematadoresActivos.Add(login);
+                        }
+                    }
+                }
+            }
+
+            return usuariosRematadoresActivos;
+        }
+
+
+
 
         public List<Empleado> ObtenerEmpleados()
         {
@@ -992,9 +1526,12 @@ namespace NEGOCIO.NEGOCIO
                 using (MySqlConnection connection = Conexion.obtenerConexion())
                 {
                     string query = @"
-                SELECT e.*, u.login, u.nombre, u.apellido
-                FROM empleados e
-                INNER JOIN usuarios u ON e.id_usuario = u.id";
+        SELECT e.*, u.login, u.nombre, u.apellido, o.tareas, r.n_rematador, r.comision
+        FROM empleados e
+        INNER JOIN usuarios u ON e.id_usuario = u.id
+        LEFT JOIN operadores o ON e.id = o.id_empleado
+        LEFT JOIN rematadores r ON e.id = r.id_empleado
+        WHERE e.activo = 1";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
@@ -1002,6 +1539,8 @@ namespace NEGOCIO.NEGOCIO
                         {
                             while (reader.Read())
                             {
+                                Empleado empleado = null; // Inicializar la variable aquí
+
                                 int id = Convert.ToInt32(reader["id"]);
                                 int idUsuario = Convert.ToInt32(reader["id_usuario"]);
                                 string login = reader["login"].ToString();
@@ -1009,21 +1548,45 @@ namespace NEGOCIO.NEGOCIO
                                 string apellido = reader["apellido"].ToString();
                                 TimeSpan horaEntrada = TimeSpan.Parse(reader["hora_entrada"].ToString());
                                 TimeSpan horaSalida = TimeSpan.Parse(reader["hora_salida"].ToString());
-                                decimal sueldoMensual = Convert.ToDecimal(reader["sueldo_mensual"]);
-                                string tareas = reader["tareas"].ToString();
-
-                                Empleado empleado = new Empleado
+                                decimal sueldoMensual = reader["sueldo_mensual"] != DBNull.Value ? Convert.ToDecimal(reader["sueldo_mensual"]) : 0;
+                                string tareas = reader["tareas"] != DBNull.Value ? reader["tareas"].ToString() : string.Empty;
+                                string numeroRematador = reader["n_rematador"] != DBNull.Value ? reader["n_rematador"].ToString() : null; // Convierte a string
+                                decimal comision = reader["comision"] != DBNull.Value ? Convert.ToDecimal(reader["comision"]) : 0; // Obtener la comisión
+                                // Crear el objeto Empleado, Rematador u Operador según el caso
+                                if (numeroRematador != null)
                                 {
-                                    Id = id,
-                                    IdUsuario = idUsuario,
-                                    Login = login,
-                                    Nombre = nombre,
-                                    Apellido = apellido,
-                                    HoraEntrada = horaEntrada,
-                                    HoraSalida = horaSalida,
-                                    SueldoMensual = sueldoMensual,
-                                    Tareas = tareas
-                                };
+                                    empleado = new Rematador
+                                    {
+                                        Id = id,
+                                        IdUsuario = idUsuario,
+                                        Login = login,
+                                        Nombre = nombre,
+                                        Apellido = apellido,
+                                        HoraEntrada = horaEntrada,
+                                        HoraSalida = horaSalida,
+                                        SueldoMensual = sueldoMensual,
+                                        NRematador = numeroRematador,
+                                        Comision = comision
+                                    };
+                                }
+                                else
+                                {
+                                    // Verifica si es operador y asigna el valor correspondiente a Tareas
+                                    //string tareasOperador = (empleado is Operador) ? tareas : null;
+
+                                    empleado = new Operador
+                                    {
+                                        Id = id,
+                                        IdUsuario = idUsuario,
+                                        Login = login,
+                                        Nombre = nombre,
+                                        Apellido = apellido,
+                                        HoraEntrada = horaEntrada,
+                                        HoraSalida = horaSalida,
+                                        SueldoMensual = sueldoMensual,
+                                        Tareas = tareas
+                                    };
+                                }
 
                                 empleados.Add(empleado);
                             }
@@ -1041,6 +1604,9 @@ namespace NEGOCIO.NEGOCIO
 
 
 
+
+
+        //OBTENER PREVENTAS ----------------------------------------------------------------- TODOS LOS DATOS DE LA TABLA
         public List<Preeventa> ObtenerPreeventas()
         {
             List<Preeventa> preeventas = new List<Preeventa>();
@@ -1049,7 +1615,16 @@ namespace NEGOCIO.NEGOCIO
             {
                 using (MySqlConnection connection = Conexion.obtenerConexion())
                 {
-                    string query = @"SELECT * FROM preeventas";
+                    //string query = @"SELECT * FROM preeventas";
+
+                    string query = @"
+                      SELECT p.id, p.id_lote, p.id_usuario, p.precio_de_venta,
+                             u.nombre, u.apellido, u.correo, u.celular,
+                            l.proveedor_lote, l.precio_base, l.tipo_de_lote, l.cantidad_en_lote,
+                             l.descripcion, p.id_remate, p.fecha_creacion
+                     FROM preeventas p
+                     INNER JOIN lote l ON p.id_lote = l.id
+                        INNER JOIN usuarios u ON p.id_usuario = u.id;";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
@@ -1061,16 +1636,16 @@ namespace NEGOCIO.NEGOCIO
                                 int idLote = Convert.ToInt32(reader["id_lote"]);
                                 int idUsuario = Convert.ToInt32(reader["id_usuario"]);
                                 decimal precioVenta = Convert.ToDecimal(reader["precio_de_venta"]);
-                                string nombreUsuario = reader["nombre_usuario"].ToString();
-                                string apellidoUsuario = reader["apellido_usuario"].ToString();
-                                string correoUsuario = reader["correo_usuario"].ToString();
-                                string celularUsuario = reader["celular_usuario"].ToString();
+                                string nombreUsuario = reader["nombre"].ToString();
+                                string apellidoUsuario = reader["apellido"].ToString();
+                                string correoUsuario = reader["correo"].ToString();
+                                string celularUsuario = reader["celular"].ToString();
                                 string proveedorLote = reader["proveedor_lote"].ToString();
-                                int precioBaseLote = Convert.ToInt32(reader["precio_base_lote"]);
-                                string tipoLote = reader["tipo_lote"].ToString();
+                                int precioBaseLote = Convert.ToInt32(reader["precio_base"]);
+                                string tipoLote = reader["tipo_de_lote"].ToString();
                                 int cantidadEnLote = Convert.ToInt32(reader["cantidad_en_lote"]);
                                 int idRemate = Convert.ToInt32(reader["id_remate"]);
-                                string descripcionLote = reader["descripcion_lote"].ToString();
+                                string descripcionLote = reader["descripcion"].ToString();
                                 DateTime fechaCreacion = Convert.ToDateTime(reader["fecha_creacion"]);
 
                                 Preeventa preventa = new Preeventa
@@ -1109,30 +1684,21 @@ namespace NEGOCIO.NEGOCIO
 
 
 
-        public void AgregarPreeventa(int idLote, int idUsuario, decimal precioVenta, string nombreUsuario, string apellidoUsuario, string correoUsuario, string celularUsuario, string proveedorLote, int precioBaseLote, string tipoLote, int cantidadEnLote, int idRemate, string descripcionLote)
+        public void AgregarPreeventa(int idLote, int idUsuario, decimal precioVenta, int idRemate)
         {
             try
             {
                 using (MySqlConnection connection = Conexion.obtenerConexion())
                 {
-                    string query = "INSERT INTO preeventas (id_lote, id_usuario, precio_de_venta, nombre_usuario, apellido_usuario, correo_usuario, celular_usuario, proveedor_lote, precio_base_lote, tipo_lote, cantidad_en_lote, id_remate, descripcion_lote) " +
-                                   "VALUES (@IdLote, @IdUsuario, @PrecioVenta, @NombreUsuario, @ApellidoUsuario, @CorreoUsuario, @CelularUsuario, @ProveedorLote, @PrecioBaseLote, @TipoLote, @CantidadEnLote, @IdRemate, @DescripcionLote)";
+                    string query = "INSERT INTO preeventas (id_lote, id_usuario, precio_de_venta, id_remate) " +
+                                   "VALUES (@IdLote, @IdUsuario, @PrecioVenta, @IdRemate)";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@IdLote", idLote);
                         command.Parameters.AddWithValue("@IdUsuario", idUsuario);
                         command.Parameters.AddWithValue("@PrecioVenta", precioVenta);
-                        command.Parameters.AddWithValue("@NombreUsuario", nombreUsuario);
-                        command.Parameters.AddWithValue("@ApellidoUsuario", apellidoUsuario);
-                        command.Parameters.AddWithValue("@CorreoUsuario", correoUsuario);
-                        command.Parameters.AddWithValue("@CelularUsuario", celularUsuario);
-                        command.Parameters.AddWithValue("@ProveedorLote", proveedorLote);
-                        command.Parameters.AddWithValue("@PrecioBaseLote", precioBaseLote);
-                        command.Parameters.AddWithValue("@TipoLote", tipoLote);
-                        command.Parameters.AddWithValue("@CantidadEnLote", cantidadEnLote);
                         command.Parameters.AddWithValue("@IdRemate", idRemate);
-                        command.Parameters.AddWithValue("@DescripcionLote", descripcionLote);
 
                         command.ExecuteNonQuery();
                     }
@@ -1143,6 +1709,7 @@ namespace NEGOCIO.NEGOCIO
                 throw new Exception("Error al agregar la preeventa: " + ex.Message);
             }
         }
+
 
 
         public bool LoteYaPrevendido(int idLote)
@@ -1159,6 +1726,47 @@ namespace NEGOCIO.NEGOCIO
                     return count > 0;
                 }
             }
+        }
+
+        public bool HayLotesEnElProximoRemate()
+        {
+            try
+            {
+                // Obtener el próximo remate (sustituye ObtenerProximoRemate() con la lógica real para obtener el próximo remate)
+                Remate proximoRemate = ObtenerProximoRemate();
+
+                if (proximoRemate != null)
+                {
+                    // Verificar si hay lotes asignados a este remate (sustituye ObtenerLotesAsignadosPorRemate con la lógica real)
+                    List<Lote> lotes = ObtenerLotesAsignadosPorRemate(proximoRemate.Id);
+
+                    return lotes != null && lotes.Count > 0;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción según tus necesidades
+                Console.WriteLine("Error al verificar si hay lotes en el próximo remate: " + ex.Message);
+                return false;
+            }
+        }
+
+        public Remate ObtenerProximoRemate()
+        {
+            List<Remate> remates = ObtenerRematesOrdenadosPorFecha();
+            DateTime fechaActual = DateTime.Now;
+
+            foreach (Remate remate in remates)
+            {
+                if (remate.Fecha > fechaActual)
+                {
+                    return remate;
+                }
+            }
+
+            return null;
         }
 
 

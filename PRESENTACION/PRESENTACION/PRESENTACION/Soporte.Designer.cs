@@ -151,11 +151,11 @@
             label5.BorderStyle = BorderStyle.FixedSingle;
             label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(130, 176);
+            label5.Location = new Point(130, 165);
             label5.Name = "label5";
             label5.Size = new Size(408, 37);
             label5.TabIndex = 81;
-            label5.Text = "Datos Personales:";
+            label5.Text = "Mis Datos Personales:";
             label5.TextAlign = ContentAlignment.TopCenter;
             // 
             // button3
