@@ -38,51 +38,30 @@ namespace PRESENTACION.PRESENTACION
 
             if (nuevaImagenCargada)
             {
-
                 if (PictureBox1.Image != null)
                 {
-                    // Convierte la imagen a un arreglo de bytes para almacenar en la base de datos
-                    byte[] imagenData;
-                    using (MemoryStream ms = new MemoryStream())
+                    try
                     {
-                        PictureBox1.Image.Save(ms, PictureBox1.Image.RawFormat);
-                        imagenData = ms.ToArray();
-                    }
-
-                    if (imagenData.Length <= 10485760)
-                    {
-                        // Actualizar la base de datos con la imagen del lote
-                        using (MySqlConnection connection = Conexion.obtenerConexion())
-                        {
-                            string query = "UPDATE lote SET imagen = @Imagen WHERE id = @LoteId";
-
-                            using (MySqlCommand command = new MySqlCommand(query, connection))
-                            {
-                                command.Parameters.AddWithValue("@Imagen", imagenData);
-                                command.Parameters.AddWithValue("@LoteId", selectedLote.id);
-
-                                //connection.Open();
-                                command.ExecuteNonQuery();
-                            }
-                        }
+                        LotesAsignados lotesAsignados = new LotesAsignados();
+                        lotesAsignados.ActualizarImagenLote(selectedLote.id, PictureBox1.Image);
 
                         MessageBox.Show("Imagen cargada exitosamente en el lote.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         DialogResult = DialogResult.OK;
                         Close();
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("La imagen seleccionada es demasiado grande.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Seleccione una imagen antes de continuar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("La imagen es la misma, Seleccione una nueva imagen antes de continuar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
-                MessageBox.Show("La imagen es la misma, cargue una nueva antes de continuar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Cargue una imagen antes de continuar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
         }

@@ -15,18 +15,18 @@ using RestSharp;
 using RestSharp.Authenticators;
 using System.Threading.Tasks;
 using MercadoPago.Client.Payment;
-using MercadoPago.Config;
 using MercadoPago.Resource.Payment;
-
-
+using MercadoPago.Resource.Preference;
 
 namespace PRESENTACION.PRESENTACION
 {
     public partial class Preeventas : Form
     {
 
-        private NegocioBDD negocioLotesRemates = new NegocioBDD();
+        private LotesAsignados negocioLotesRemates = new LotesAsignados();
         private string preferenceId;
+       
+       
 
         public Preeventas()
         {
@@ -35,7 +35,7 @@ namespace PRESENTACION.PRESENTACION
             ConfigurarColumnasDataGridView();
             CargarPreeventasEnGrilla();
             ActualizarColoresGrillaPreeventas();
-
+            
 
         }
 
@@ -240,67 +240,77 @@ namespace PRESENTACION.PRESENTACION
             ActualizarColoresGrillaPreeventas();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+
+
+
+
+
+        //BOTON PARA ABRIR VENTANANA WEB REFERENCIADA A MERCADO PAGO ---------------------------------------------
+        private async void button1_Click(object sender, EventArgs e)
         {
+            // Configurar el token de acceso de Mercado Pago
+            MercadoPagoConfig.AccessToken = "TEST-3746812080475118-090321-81fbd038ee20be3c52907d87665957cf-416650804";
 
             if (dataGridView1.SelectedRows.Count > 0)
             {
-
-                // Obtener el precio de venta desde la grilla
                 decimal precioVenta = ObtenerPrecioVentaDesdeGrilla();
 
-            if (precioVenta > 0)
-            {
-                try
+                if (precioVenta > 0)
                 {
-                    // Configura las credenciales de MercadoPago
-                    MercadoPagoConfig.AccessToken = "TEST-3746812080475118-090321-81fbd038ee20be3c52907d87665957cf-416650804";
+                    try
+                    {
+                        // Crear preferencia de pago
+                        var preference = new PreferenceRequest
+                        {
+                            Items = new List<PreferenceItemRequest>
+                    {
+                        new PreferenceItemRequest
+                        {
+                            Title = "Producto de prueba",
+                            Quantity = 1,
+                            CurrencyId = "UYU",
+                            UnitPrice = precioVenta
+                        }
+                    }
+                        };
 
-                    // Crea la preferencia de pago
-                    var request = new PreferenceRequest
+                        var client = new PreferenceClient();
+                        Preference preferenceResponse = await client.CreateAsync(preference);
+
+                        string preferenceId = preferenceResponse.Id;
+
+                        // Mostrar alerta de inicio de preferencia
+                       // MessageBox.Show($"Preferencia creada exitosamente. Preference ID: {preferenceId}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Crear una instancia del formulario de pago y pasar el preferenceId
+                        Pago formularioPago = new Pago(preferenceId);
+
+                        // Mostrar el formulario de pago como un cuadro de diálogo modal
+                        formularioPago.ShowDialog();
+
+                        // Mostrar alerta de finalización de pago
+                        MessageBox.Show("Proceso de pago completado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
                     {
-                        Items = new List<PreferenceItemRequest>
-                {
-                    new PreferenceItemRequest
-                    {
-                        Title = "Producto de prueba",
-                        Quantity = 1,
-                        CurrencyId = "UYU",
-                        UnitPrice = precioVenta
+                        // Mostrar alerta de error
+                        MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                    };
-
-                    var client = new PreferenceClient();
-                    var preference = client.Create(request);
-
-                    // Obtén el ID de preferencia
-                    string preferenceId = preference.Id;
-
-                    // Abre el enlace de pago en el navegador
-                    string paymentUrl = $"https://www.mercadopago.com/checkout/v1/redirect?pref_id={preferenceId}";
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = paymentUrl,
-                        UseShellExecute = true
-
-                    }); MessageBox.Show("URL de pago: " + paymentUrl);
-
-                }
-                catch (Exception ex)
+                else
                 {
-                    // Maneja errores aquí
-                    MessageBox.Show("Error al crear o abrir la preferencia de pago: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // Mostrar alerta de precio no válido
+                    MessageBox.Show("El precio de venta debe ser mayor que 0", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-            }
-
             }
             else
             {
+                // Mostrar alerta de ninguna venta seleccionada
                 MessageBox.Show("Por favor, seleccione la venta que desea pagar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
         }
+
 
 
 

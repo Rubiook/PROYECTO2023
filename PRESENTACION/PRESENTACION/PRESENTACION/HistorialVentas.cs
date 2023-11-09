@@ -14,7 +14,7 @@ namespace PRESENTACION.PRESENTACION
 {
     public partial class HistorialVentas : Form
     {
-        private readonly NegocioBDD negocioLotesRemates;
+        private readonly LotesAsignados negocioLotesRemates;
 
         public HistorialVentas()
         {
@@ -24,7 +24,7 @@ namespace PRESENTACION.PRESENTACION
             this.MaximizeBox = false;
             dataGridViewHistorial.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            negocioLotesRemates = new NegocioBDD();
+            negocioLotesRemates = new LotesAsignados();
 
             dataGridViewHistorial.Columns.Add("id", "ID");
             dataGridViewHistorial.Columns.Add("idremate", "N° REMATE");
@@ -143,7 +143,7 @@ namespace PRESENTACION.PRESENTACION
                 string rutaDestino = Path.Combine(directorioDestino, nombreArchivoPDF);
 
                 // Construir la ruta al archivo FACTURA.pdf
-                string rutaPlantilla = @"D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\img\FACTURA.pdf";
+                string rutaPlantilla = @"PRESENTACION\\img\\FACTURA.pdf";
 
 
                 using (var saveFileDialog = new SaveFileDialog())

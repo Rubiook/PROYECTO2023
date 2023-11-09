@@ -11,8 +11,8 @@ namespace PRESENTACION
     public partial class Ventana1 : Form
     {
         public Login Login { get; set; } // Propiedad para almacenar la instancia de Login
-        private Login loginInstance; // Esto debe ser una instancia de Login
-        private NegocioBDD negocioLotesRemates;
+        private Login loginInstance;
+        private LotesAsignados negocioLotesRemates;
         private bool menuVisible = false;
         private int menuWidth = 150; // Ancho final del menú
         private int animationSpeed = 10; // Velocidad de la animación 
@@ -35,7 +35,7 @@ namespace PRESENTACION
             MostrarRolUsuario(); // Llama al método para mostrar el rol 
             MostrarNombreUsuario();
             MostrarFechaActual();
-            negocioLotesRemates = new NegocioBDD();
+            negocioLotesRemates = new LotesAsignados();
 
 
 
@@ -43,7 +43,7 @@ namespace PRESENTACION
             timerOpenMenu = new System.Windows.Forms.Timer();
             timerOpenMenu.Interval = animationSpeed; // Intervalo de tiempo para la animación de apertura
             timerOpenMenu.Tick += new EventHandler(timerOpenMenu_Tick);
-
+            ActualizarProximoRemateEnBoton();
 
 
         }
@@ -52,7 +52,7 @@ namespace PRESENTACION
         private void Ventana1_Load(object sender, EventArgs e)
         {
             //ActualizarProximoRemateEnLabel();
-            ActualizarProximoRemateEnBoton();
+
 
             DateTime fechaLimite = DateTime.Today.AddDays(-1); // Por ejemplo, consideramos remates antiguos de hace 30 días o más
             negocioLotesRemates.DesasignarLotesNoVendidosEnRematesAntiguos(fechaLimite);
@@ -510,7 +510,7 @@ namespace PRESENTACION
         //BOTON LOTES DEL PROXIMO REMATE------------------------------------------------------------------------------------------------------
         private void button8_Click(object sender, EventArgs e)
         {
-            
+
             bool hayLotes = negocioLotesRemates.HayLotesEnElProximoRemate();
 
             if (hayLotes)
@@ -677,7 +677,7 @@ namespace PRESENTACION
             }
             else
             {
-                MessageBox.Show("No hay lotes en el remate programado para hoy.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No hay lotes para hoy", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -700,7 +700,7 @@ namespace PRESENTACION
         }
 
 
-        private void ActualizarProximoRemateEnBoton()
+        public void ActualizarProximoRemateEnBoton()
         {
             List<Remate> remates = negocioLotesRemates.ObtenerRematesOrdenadosPorFecha();
             DateTime fechaActual = DateTime.Now;
@@ -721,7 +721,7 @@ namespace PRESENTACION
             }
 
             Console.WriteLine("No hay remates programados en el futuro.");
-            button8.Text = "No hay remates programados.";
+            button8.Text = "No hay Próximos Remates";
             MostrarFechaActual(); // Mostrar la fecha actual incluso si no hay remates programados
         }
 
@@ -747,6 +747,13 @@ namespace PRESENTACION
             button12.ForeColor = Color.White;
             button12.FlatAppearance.BorderColor = DefaultForeColor; // Restaurar color del borde
         }
+
+        private void Ventana1_Activated(object sender, EventArgs e)
+        {
+            ActualizarProximoRemateEnBoton();
+        }
+
+
 
 
 

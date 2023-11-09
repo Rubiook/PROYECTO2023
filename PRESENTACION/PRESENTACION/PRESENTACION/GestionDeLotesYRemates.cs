@@ -10,11 +10,11 @@ namespace PRESENTACION.PRESENTACION
 {
     public partial class GestionDeLotesYRemates : Form
     {
-
+      
         private RepositorioUsuarios repositorioUsuarios;
         private MySqlConnection conn;
         private Dictionary<int, List<Lote>> rematesConLotes = new Dictionary<int, List<Lote>>();
-        private readonly NegocioBDD negocioLotesRemates;
+        private readonly LotesAsignados negocioLotesRemates;
         private int selectedLoteId = -1; // Inicializado con un valor que no corresponde a ningún lote
         private bool isDataGridViewSelecting = false;
         private bool updatingComboboxes = false;
@@ -26,6 +26,8 @@ namespace PRESENTACION.PRESENTACION
         public Image icono_con_foto;
         public Image icono_sin_foto;
 
+       
+
         public GestionDeLotesYRemates()
         {
             InitializeComponent();
@@ -33,16 +35,15 @@ namespace PRESENTACION.PRESENTACION
             InitializeDataGridView();
             InitializeConnection();
             repositorioUsuarios = new RepositorioUsuarios();
-            negocioLotesRemates = new NegocioBDD();
+            negocioLotesRemates = new LotesAsignados();
             refresh();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-
-
+            
+           
         }
 
         //INICIALIZADOR DE FORMATO DE HORAS ------------------------------------------------------
@@ -173,8 +174,8 @@ namespace PRESENTACION.PRESENTACION
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
             // Cargar las imágenes desde los archivos
-            icono_con_foto = Image.FromFile("D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PRESENTACION\\PRESENTACION\\img\\conFoto.png");
-            icono_sin_foto = Image.FromFile("D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PRESENTACION\\PRESENTACION\\img\\sinFoto.png");
+            icono_con_foto = Image.FromFile("PRESENTACION\\img\\conFoto.png");
+            icono_sin_foto = Image.FromFile("PRESENTACION\\img\\sinFoto.png");
 
         }
 
@@ -298,6 +299,24 @@ namespace PRESENTACION.PRESENTACION
         }
 
 
+        private void MostrarCantidadLotesAsignados(DataGridViewCellFormattingEventArgs e)
+        {
+            int remateId = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Id"].Value);
+            int lotesAsignados = negocioLotesRemates.ObtenerCantidadLotesAsignados(remateId);
+
+            if (lotesAsignados >= 1 && lotesAsignados <= 100)
+            {
+                e.Value = string.Format("[ {0} ]", lotesAsignados);
+            }
+            else if (lotesAsignados > 100)
+            {
+                e.Value = "[ 100+ ]";
+            }
+            else
+            {
+                e.Value = " "; // Otra opción para mostrar cuando no hay lotes asignados
+            }
+        }
 
 
 
@@ -310,70 +329,70 @@ namespace PRESENTACION.PRESENTACION
             {
                 int remateId = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Id"].Value);
                 int lotesAsignados = negocioLotesRemates.ObtenerCantidadLotesAsignados(remateId);
-
+                MostrarCantidadLotesAsignados(e);
                 if (lotesAsignados < 1)//0
                 {
 
                     e.Value = " ";
 
                 }
-                else if (lotesAsignados > 0 && lotesAsignados < 2)//1
+                else if (lotesAsignados > 0 && lotesAsignados < 11)//10
                 {
                     e.CellStyle.BackColor = Color.FromArgb(7, 246, 7); // Verde 1
-                    e.Value = "[ 1 ]";
+                                                                       // e.Value = "[ 1 ]";
 
                 }
-                else if (lotesAsignados > 1 && lotesAsignados < 3)//2
+                else if (lotesAsignados > 10 && lotesAsignados < 21)//20
                 {
                     e.CellStyle.BackColor = Color.FromArgb(35, 218, 9); // Verde 2
-                    e.Value = "[ 2 ]";
+                                                                        //  e.Value = "[ 2 ]";
 
                 }
-                else if (lotesAsignados > 2 && lotesAsignados < 4)//3
+                else if (lotesAsignados > 20 && lotesAsignados < 31)//30
                 {
                     e.CellStyle.BackColor = Color.FromArgb(50, 209, 9); // Verde 3
-                    e.Value = "[ 3 ]";
+                                                                        //  e.Value = "[ 3 ]";
 
                 }
-                else if (lotesAsignados > 3 && lotesAsignados < 5)//4
+                else if (lotesAsignados > 30 && lotesAsignados < 41)//40
                 {
                     e.CellStyle.BackColor = Color.FromArgb(228, 246, 9); // amarillo 1 
-                    e.Value = "[ 4 ]";
+                                                                         //  e.Value = "[ 4 ]";
 
                 }
-                else if (lotesAsignados > 4 && lotesAsignados < 6)//5
+                else if (lotesAsignados > 40 && lotesAsignados < 51)//50
                 {
                     e.CellStyle.BackColor = Color.FromArgb(235, 210, 9); // amarillo 2 
-                    e.Value = "[ 5 ]";
+                                                                         //   e.Value = "[ 5 ]";
 
                 }
-                else if (lotesAsignados > 5 && lotesAsignados < 7)//6
+                else if (lotesAsignados > 50 && lotesAsignados < 61)//60
                 {
                     e.CellStyle.BackColor = Color.FromArgb(246, 189, 9); // amarillo 3 
-                    e.Value = "[ 6 ]";
+                                                                         // e.Value = "[ 6 ]";
 
                 }
-                else if (lotesAsignados > 6 && lotesAsignados < 8)//7
+                else if (lotesAsignados > 60 && lotesAsignados < 71)//70
                 {
                     e.CellStyle.BackColor = Color.FromArgb(246, 163, 9); // naranja 
-                    e.Value = "[ 7 ]";
+                                                                         // e.Value = "[ 7 ]";
 
                 }
-                else if (lotesAsignados > 7 && lotesAsignados < 9)//8
+                else if (lotesAsignados > 70 && lotesAsignados < 81)//80
                 {
                     e.CellStyle.BackColor = Color.FromArgb(246, 90, 9); // rojo claro
-                    e.Value = "[ 8 ]";
+                                                                        // e.Value = "[ 8 ]";
                 }
-                else if (lotesAsignados > 8 && lotesAsignados < 10)//9
+                else if (lotesAsignados > 80 && lotesAsignados < 91)//90
                 {
                     e.CellStyle.BackColor = Color.FromArgb(246, 25, 9); // Rojo 
-                    e.Value = "[ 9 ]";
+                                                                        //  e.Value = "[ 9 ]";
                 }
-                else if (lotesAsignados >= 10) // Más de 10 lotes
+                else if (lotesAsignados >= 100) // Más de 100 lotes
                 {
                     e.CellStyle.BackColor = Color.FromArgb(188, 15, 15); // Rojo fuerte
                     e.CellStyle.ForeColor = Color.White;
-                    e.Value = "[ 10 ]";
+                    //   e.Value = "[ 10 ]";
                     DataGridViewButtonCell cell = (DataGridViewButtonCell)dataGridView1.Rows[e.RowIndex].Cells["VerLotes"];
                     cell.FlatStyle = FlatStyle.Popup; // 3D style
                 }
@@ -383,6 +402,11 @@ namespace PRESENTACION.PRESENTACION
                     e.CellStyle.ForeColor = dataGridView1.DefaultCellStyle.ForeColor;
                 }
             }
+
+
+
+
+
 
             //MOSTRAR FECHA SIN LA HORA--------------------------------------------------------------------
             if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView1.Columns["Fecha"].Index)
@@ -460,7 +484,7 @@ namespace PRESENTACION.PRESENTACION
             int selectedRemateId = Convert.ToInt32(selectedRemateGridRow.Cells["id"].Value);
 
             // Crear una instancia de NegocioLotesRemates
-            NegocioBDD negocioLotesRemates = new NegocioBDD();
+            LotesAsignados negocioLotesRemates = new LotesAsignados();
 
             if (negocioLotesRemates.ObtenerCantidadLotesAsignados(selectedRemateId) > 0)
             {
@@ -894,12 +918,12 @@ namespace PRESENTACION.PRESENTACION
         {
             updatingComboboxes = true;
 
-            if (tipoDeLote == "OVINO" || tipoDeLote == "BOVINO" || tipoDeLote == "PORCINO" || tipoDeLote == "EQUINO")
+            if (tipoDeLote == "OVINO" || tipoDeLote == "BOVINO" || tipoDeLote == "PORCINO" || tipoDeLote == "EQUINO" || tipoDeLote == "CAPRINO" || tipoDeLote == "CAMELIDO" || tipoDeLote == "AVE" || tipoDeLote == "OTRO")
             {
                 comboBoxTipoDeRemate.SelectedItem = "GANADO";
                 comboBoxTipoDeLote.SelectedItem = tipoDeLote;
             }
-            else if (tipoDeLote == "MAQUINA 1" || tipoDeLote == "MAQUINA 2" || tipoDeLote == "MAQUINA 3")
+            else if (tipoDeLote == "TRACTOR" || tipoDeLote == "COSECHADOR" || tipoDeLote == "SEMBRADOR" || tipoDeLote == "AFRADO" || tipoDeLote == "TRILLADOR" || tipoDeLote == "EMPACADOR" || tipoDeLote == "RASTRILLO" || tipoDeLote == "PULVERIZADOR" || tipoDeLote == "ORDEÑO" || tipoDeLote == "OTRO")
             {
                 comboBoxTipoDeRemate.SelectedItem = "MAQUINARIA";
                 comboBoxTipoDeLote.SelectedItem = tipoDeLote;
@@ -949,9 +973,6 @@ namespace PRESENTACION.PRESENTACION
         private void button1_Click_1(object sender, EventArgs e)
         {
 
-
-
-
             if (selectedRemateGridRow == null || selectedLoteGridRow == null)
             {
                 MessageBox.Show("Seleccione un remate y el lote que desea cargar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -966,25 +987,35 @@ namespace PRESENTACION.PRESENTACION
 
 
             int lotesAsignados = negocioLotesRemates.ObtenerCantidadLotesAsignados(remateId);
-            if (lotesAsignados >= 10)
+            if (lotesAsignados >= 100)
             {
-                MessageBox.Show("El remate ya tiene cargados 10 lotes. No se puede cargar más lotes a este remate.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El remate ya tiene cargados 100 lotes. No se puede cargar más lotes a este remate.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Obtener el tipo de lote del lote seleccionado (ya obtenido en el evento de selección de la grilla de lotes)
             string tipoLoteSeleccionado = ObtenerTipoLoteSeleccionado();
+
             if (negocioLotesRemates.LoteYaAsignado(loteId))
             {
                 MessageBox.Show("Este lote ya está cargado en un remate.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                refresh();
                 return;
             }
             // Verificar y mostrar mensajes según el tipo de remate y tipo de lote
-            if ((tipoRemateSeleccionado == "MAQUINARIA" && (tipoLoteSeleccionado == "MAQUINA 1" || tipoLoteSeleccionado == "MAQUINA 2" || tipoLoteSeleccionado == "MAQUINA 3")) ||
-                (tipoRemateSeleccionado == "GANADO" && (tipoLoteSeleccionado == "OVINO" || tipoLoteSeleccionado == "BOVINO" || tipoLoteSeleccionado == "PORCINO" || tipoLoteSeleccionado == "EQUINO")))
+            if ((tipoRemateSeleccionado == "MAQUINARIA" && (tipoLoteSeleccionado == "TRACTOR" || tipoLoteSeleccionado == "COSECHADOR" || tipoLoteSeleccionado == "SEMBRADOR" || tipoLoteSeleccionado == "AFRADO" || tipoLoteSeleccionado == "TRILLADOR" || tipoLoteSeleccionado == "EMPACADOR" || tipoLoteSeleccionado == "RASTRILLO" || tipoLoteSeleccionado == "PULVERIZADOR" || tipoLoteSeleccionado == "ORDEÑO" || tipoLoteSeleccionado == "OTRO")) ||
+                (tipoRemateSeleccionado == "GANADO" && (tipoLoteSeleccionado == "OVINO" || tipoLoteSeleccionado == "BOVINO" || tipoLoteSeleccionado == "PORCINO" || tipoLoteSeleccionado == "EQUINO" || tipoLoteSeleccionado == "CAPRINO" || tipoLoteSeleccionado == "CAMELIDO" || tipoLoteSeleccionado == "AVE" || tipoLoteSeleccionado == "OTRO")))
             {
                 // Puedes cargar el lote al remate
                 negocioLotesRemates.AsignarLoteARemate(remateId, loteId);
+
+                if (!negocioLotesRemates.ReVerificarLoteAsignado(loteId))
+                {
+                    MessageBox.Show("Intente nuevamente, hubo un error al cargar el lote.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+
 
                 ActualizarGrillaLotesAsignados(remateId);
                 refresh();
@@ -996,10 +1027,6 @@ namespace PRESENTACION.PRESENTACION
                 MessageBox.Show("El tipo de lote y el tipo de remate no coinciden.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-
-
-
         }
 
 
@@ -1073,7 +1100,10 @@ namespace PRESENTACION.PRESENTACION
 
         private void button1_Click_2(object sender, EventArgs e)
         {
+            
+            
             this.Close();
+           
         }
 
         private void button1_MouseEnter(object sender, EventArgs e)
@@ -1193,12 +1223,23 @@ namespace PRESENTACION.PRESENTACION
                 comboBoxTipoDeLote.Items.Add("BOVINO");
                 comboBoxTipoDeLote.Items.Add("PORCINO");
                 comboBoxTipoDeLote.Items.Add("EQUINO");
+                comboBoxTipoDeLote.Items.Add("CAPRINO");
+                comboBoxTipoDeLote.Items.Add("CAMELIDO");
+                comboBoxTipoDeLote.Items.Add("AVE");
+                comboBoxTipoDeLote.Items.Add("OTRO");
             }
             else if (tipoRemateSeleccionado == "MAQUINARIA")
             {
-                comboBoxTipoDeLote.Items.Add("MAQUINA 1");
-                comboBoxTipoDeLote.Items.Add("MAQUINA 2");
-                comboBoxTipoDeLote.Items.Add("MAQUINA 3");
+                comboBoxTipoDeLote.Items.Add("TRACTOR");
+                comboBoxTipoDeLote.Items.Add("COSECHADOR");
+                comboBoxTipoDeLote.Items.Add("SEMBRADOR");
+                comboBoxTipoDeLote.Items.Add("AFRADO");
+                comboBoxTipoDeLote.Items.Add("TRILLADOR");
+                comboBoxTipoDeLote.Items.Add("EMPACADOR");
+                comboBoxTipoDeLote.Items.Add("RASTRILLO");
+                comboBoxTipoDeLote.Items.Add("PULVERIZADOR");
+                comboBoxTipoDeLote.Items.Add("ORDEÑO");
+                comboBoxTipoDeLote.Items.Add("OTRO");
             }
 
             if (comboBoxTipoDeLote.Items.Count > 0)

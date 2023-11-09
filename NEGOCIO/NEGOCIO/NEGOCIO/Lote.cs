@@ -26,5 +26,15 @@ namespace NEGOCIO.NEGOCIO
         public byte[] imagen { get; set; } // Cambiado a byte[] para almacenar datos binarios de la imagen
 
 
+
+
+
+
     }
+
+
+
+
+
+
 }

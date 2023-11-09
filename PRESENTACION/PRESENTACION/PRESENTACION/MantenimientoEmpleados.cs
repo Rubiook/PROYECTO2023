@@ -17,7 +17,7 @@ namespace PRESENTACION.PRESENTACION
 {
     public partial class MantenimientoEmpleados : Form
     {
-        private readonly NegocioBDD negocioLotesRemates;
+        private readonly LotesAsignados negocioLotesRemates;
         private readonly RepositorioUsuarios repositorioUsuarios;
         public MantenimientoEmpleados()
         {
@@ -28,7 +28,7 @@ namespace PRESENTACION.PRESENTACION
             this.FormBorderStyle = FormBorderStyle.FixedSingle; //No Redimensionar
             this.MaximizeBox = false;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            negocioLotesRemates = new NegocioBDD();
+            negocioLotesRemates = new LotesAsignados();
             repositorioUsuarios = new RepositorioUsuarios();
 
             // Agregar columnas al DataGridView
@@ -164,10 +164,7 @@ namespace PRESENTACION.PRESENTACION
                     }
                     else
                     {
-                        // Cancelar la modificación y revertir los cambios realizados antes de la confirmación
-                        // Puedes implementar la lógica específica para revertir los cambios aquí si es necesario
-                        // Por ejemplo, recargar los datos originales del empleado en los controles de la interfaz
-                        // y deshacer cualquier modificación hecha antes de la confirmación
+                        // no hacer nada
                     }
                 }
                 else
@@ -187,8 +184,6 @@ namespace PRESENTACION.PRESENTACION
             {
                 return false;
             }
-
-            // Puedes agregar más verificaciones según tus requisitos aquí
 
             return true;
         }
@@ -305,7 +300,7 @@ namespace PRESENTACION.PRESENTACION
             trackBar1.Visible = false;
             label1.Visible = false;
             labelIndiqueComision.Visible = false;
-           
+
             if (dataGridView1.CurrentRow != null)
             {
                 dataGridView1.CurrentRow.Selected = false;

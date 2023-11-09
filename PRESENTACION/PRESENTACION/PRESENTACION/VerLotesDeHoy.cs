@@ -15,7 +15,7 @@ namespace PRESENTACION.PRESENTACION
 {
     public partial class VerLotesDeHoy : Form
     {
-        private NegocioBDD negocioLotesRemates = new NegocioBDD();
+        private LotesAsignados negocioLotesRemates = new LotesAsignados();
         private RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
         private int remateId;
         public Login LoginInstance { get; set; }

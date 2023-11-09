@@ -114,12 +114,12 @@ namespace PRESENTACION.PRESENTACION
             if (showPassword)
             {
                 textBox2.UseSystemPasswordChar = true; // Ocultar el carácter de contraseña
-                button5.BackgroundImage = Image.FromFile("D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PRESENTACION\\PRESENTACION\\img\\show.png"); // Cambiar la imagen a "Mostrar contraseña"
+                button5.BackgroundImage = Image.FromFile("PRESENTACION\\img\\show.png"); // Cambiar la imagen a "Mostrar contraseña"
             }
             else
             {
                 textBox2.UseSystemPasswordChar = false; // Mostrar el carácter de contraseña
-                button5.BackgroundImage = Image.FromFile("D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PRESENTACION\\PRESENTACION\\img\\hide.png");  // Cambiar la imagen a "ocultar pass"
+                button5.BackgroundImage = Image.FromFile("PRESENTACION\\img\\hide.png");  // Cambiar la imagen a "ocultar pass"
             }
 
             showPassword = !showPassword; // Alternar el valor de la variable de control
@@ -130,12 +130,12 @@ namespace PRESENTACION.PRESENTACION
             if (showPassword)
             {
                 textBox3.UseSystemPasswordChar = true; // Ocultar el carácter de contraseña
-                button2.BackgroundImage = Image.FromFile("D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PRESENTACION\\PRESENTACION\\img\\show.png");  // Cambiar la imagen a "Mostrar contraseña"
+                button2.BackgroundImage = Image.FromFile("PRESENTACION\\img\\show.png");  // Cambiar la imagen a "Mostrar contraseña"
             }
             else
             {
                 textBox3.UseSystemPasswordChar = false; // Mostrar el carácter de contraseña
-                button2.BackgroundImage = Image.FromFile("D:\\francisco\\Documents\\David Rodriguez\\Visual Estudio\\PROYECTO\\PRESENTACION\\PRESENTACION\\img\\hide.png");  // Cambiar la imagen a "ocultar pass"
+                button2.BackgroundImage = Image.FromFile("PRESENTACION\\img\\hide.png");  // Cambiar la imagen a "ocultar pass"
             }
 
             showPassword = !showPassword; // Alternar el valor de la variable de control

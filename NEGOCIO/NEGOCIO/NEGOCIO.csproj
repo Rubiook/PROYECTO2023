@@ -12,5 +12,10 @@
     <PackageReference Include="RestSharp" Version="110.2.0" />
   </ItemGroup>
 
-
+	<Target Name="EmbedUIFiles" BeforeTargets="BeforeResGen">
+		<ItemGroup>
+			<EmbeddedResource Include="PRESENTACION/img/*" Type ="Non-Resx" Withculture ="false" />
+		</ItemGroup>
+    </Target>
+		
 </Project>

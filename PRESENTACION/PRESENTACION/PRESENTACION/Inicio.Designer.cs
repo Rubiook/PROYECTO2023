@@ -136,7 +136,7 @@
             button12.Name = "button12";
             button12.Size = new Size(220, 42);
             button12.TabIndex = 76;
-            button12.Text = "Preeventas";
+            button12.Text = "Preventas";
             button12.UseVisualStyleBackColor = false;
             button12.Click += button12_Click;
             button12.MouseEnter += button12_MouseEnter;
@@ -442,6 +442,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Ventana1";
             Text = "Inicio";
+            Activated += Ventana1_Activated;
             Load += Ventana1_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

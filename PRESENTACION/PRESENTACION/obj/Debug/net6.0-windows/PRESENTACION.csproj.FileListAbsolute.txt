@@ -100,3 +100,9 @@ D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRES
 D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\bin\Debug\net6.0-windows\Microsoft.Extensions.Options.dll
 D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\bin\Debug\net6.0-windows\Microsoft.Extensions.Primitives.dll
 D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\bin\Debug\net6.0-windows\RestSharp.dll
+D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\obj\Debug\net6.0-windows\PRESENTACION.PRESENTACION.Pago.resources
+D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\bin\Debug\net6.0-windows\PRESENTACION\img\conFoto.png
+D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\bin\Debug\net6.0-windows\PRESENTACION\img\FACTURA.pdf
+D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\bin\Debug\net6.0-windows\PRESENTACION\img\hide.png
+D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\bin\Debug\net6.0-windows\PRESENTACION\img\show.png
+D:\francisco\Documents\David Rodriguez\Visual Estudio\PROYECTO\PRESENTACION\PRESENTACION\bin\Debug\net6.0-windows\PRESENTACION\img\sinFoto.png

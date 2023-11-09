@@ -14,7 +14,7 @@ namespace PRESENTACION.PRESENTACION
 {
     public partial class VerLotesProximoRemate : Form
     {
-        private NegocioBDD negocioLotesRemates = new NegocioBDD();
+        private LotesAsignados negocioLotesRemates = new LotesAsignados();
 
         public VerLotesProximoRemate()
         {

@@ -7,6 +7,9 @@
     <Compile Update="PRESENTACION\HistorialVentas.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="PRESENTACION\Pago.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="PRESENTACION\Preeventas.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -342,9 +342,9 @@
             lblTipoDeUsuario.ForeColor = Color.White;
             lblTipoDeUsuario.Location = new Point(194, 173);
             lblTipoDeUsuario.Name = "lblTipoDeUsuario";
-            lblTipoDeUsuario.Size = new Size(258, 27);
+            lblTipoDeUsuario.Size = new Size(250, 27);
             lblTipoDeUsuario.TabIndex = 82;
-            lblTipoDeUsuario.Text = "Seleccione Tipo de Usuario:";
+            lblTipoDeUsuario.Text = "Seleccione Tipo Empleado:";
             lblTipoDeUsuario.Click += lblTipoDeUsuario_Click;
             // 
             // comboBoxTipoDeUsuario
@@ -357,9 +357,9 @@
             comboBoxTipoDeUsuario.FormattingEnabled = true;
             comboBoxTipoDeUsuario.IntegralHeight = false;
             comboBoxTipoDeUsuario.Items.AddRange(new object[] { "OPERADOR", "REMATADOR" });
-            comboBoxTipoDeUsuario.Location = new Point(458, 172);
+            comboBoxTipoDeUsuario.Location = new Point(450, 172);
             comboBoxTipoDeUsuario.Name = "comboBoxTipoDeUsuario";
-            comboBoxTipoDeUsuario.Size = new Size(164, 29);
+            comboBoxTipoDeUsuario.Size = new Size(172, 29);
             comboBoxTipoDeUsuario.TabIndex = 81;
             comboBoxTipoDeUsuario.SelectedIndexChanged += comboBoxTipoDeUsuario_SelectedIndexChanged;
             // 

@@ -13,7 +13,7 @@ namespace PRESENTACION.PRESENTACION
 {
     public partial class VerRemates : Form
     {
-        private NegocioBDD negocioLotesRemates = new NegocioBDD();
+        private LotesAsignados negocioLotesRemates = new LotesAsignados();
         public VerRemates()
         {
             InitializeComponent();
@@ -100,23 +100,6 @@ namespace PRESENTACION.PRESENTACION
                 CrearCardRemate(idRemate, fechaRemate, horaInicio, horaFin, rematador, tipoRemate);
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
